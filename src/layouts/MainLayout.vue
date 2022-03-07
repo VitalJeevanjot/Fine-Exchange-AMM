@@ -1,21 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header style="background-color: #071013" class="q-pa-sm">
-      <q-toolbar>
-
-        <q-avatar rounded style="width: 89px; height: 45px;">
-          <img src="fine_exchange_smaller.png" alt="Fine Exchange Small Logo">
-        </q-avatar>
-
-        <q-space/>
-
-        <q-btn flat round dense icon="whatshot" />
-        <q-btn flat round dense icon="whatshot" />
-        <q-btn class="q-mr-xl" flat round dense icon="whatshot" />
-
-
-      </q-toolbar>
-    </q-header>
+    <fel-header
+      v-bind="header_logo"
+    />
 
     <!-- <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
@@ -42,69 +29,74 @@
 
 
 // const linksList = [
-//   {
-//     title: "Docs",
+  //   {
+    //     title: "Docs",
 //     caption: "quasar.dev",
 //     icon: "school",
 //     link: "https://quasar.dev",
 //   },
 //   {
-//     title: "Github",
+  //     title: "Github",
 //     caption: "github.com/quasarframework",
 //     icon: "code",
 //     link: "https://github.com/quasarframework",
 //   },
 //   {
-//     title: "Discord Chat Channel",
+  //     title: "Discord Chat Channel",
 //     caption: "chat.quasar.dev",
 //     icon: "chat",
 //     link: "https://chat.quasar.dev",
 //   },
 //   {
-//     title: "Forum",
+  //     title: "Forum",
 //     caption: "forum.quasar.dev",
 //     icon: "record_voice_over",
 //     link: "https://forum.quasar.dev",
 //   },
 //   {
-//     title: "Twitter",
+  //     title: "Twitter",
 //     caption: "@quasarframework",
 //     icon: "rss_feed",
 //     link: "https://twitter.quasar.dev",
 //   },
 //   {
-//     title: "Facebook",
+  //     title: "Facebook",
 //     caption: "@QuasarFramework",
 //     icon: "public",
 //     link: "https://facebook.quasar.dev",
 //   },
 //   {
-//     title: "Quasar Awesome",
+  //     title: "Quasar Awesome",
 //     caption: "Community Quasar projects",
 //     icon: "favorite",
 //     link: "https://awesome.quasar.dev",
 //   },
 // ];
 
-// import { defineComponent, ref } from "vue";
+import felHeader from "components/fel-header.vue"
+import { defineComponent, ref } from "vue";
 
-// export default defineComponent({
-//   name: "MainLayout",
+const _logo_src = { logo_src: "fine_exchange_smaller.png" }
 
-//   components: {
-//     EssentialLink
-//   },
+export default defineComponent({
+  name: "MainLayout",
 
-//   setup() {
-//     const leftDrawerOpen = ref(false);
+  components: {
+    felHeader
+    // EssentialLink
+  },
 
-//     return {
-//       essentialLinks: linksList,
-//       leftDrawerOpen,
-//       toggleLeftDrawer() {
-//         leftDrawerOpen.value = !leftDrawerOpen.value;
-//       },
-//     };
-//   },
-// });
+  setup() {
+    // const leftDrawerOpen = ref(false);
+
+    return {
+      // essentialLinks: linksList,
+      header_logo: _logo_src
+      // leftDrawerOpen,
+      // toggleLeftDrawer() {
+      //   leftDrawerOpen.value = !leftDrawerOpen.value;
+      // },
+    };
+  },
+});
 </script>
