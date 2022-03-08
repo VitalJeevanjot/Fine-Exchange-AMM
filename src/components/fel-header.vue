@@ -7,6 +7,8 @@
         </q-avatar>
 
         <q-space />
+
+        <felAppPinManager />
         <felCreateTaskModal />
         <felSettingsModal />
         <felUserModal />
@@ -27,6 +29,9 @@ import felHelpModal from "components/level1/fel-help-modal.vue"
 import felSettingsModal from "components/level1/fel-settings-modal.vue"
 import felUserModal from "components/level1/fel-user-modal.vue"
 import felCreateTaskModal from "components/level1/fel-create-task-modal.vue"
+import felAppPinManager from "components/level1/fel-app-pin-manager.vue"
+
+
 
 export default defineComponent ({
   name: 'felHeader',
@@ -34,7 +39,8 @@ export default defineComponent ({
     felHelpModal,
     felSettingsModal,
     felUserModal,
-    felCreateTaskModal
+    felCreateTaskModal,
+    felAppPinManager
   },
   props: {
     logo_src: {
@@ -43,11 +49,15 @@ export default defineComponent ({
     }
   },
   setup () {
-    
-
     return {
     
     }
+  },
+  mounted() {
+    
+    // console.log(window.crypto.randomUUID())
+    // const id = window.crypto.randomBytes(16).toString("hex"); 
+    // console.log(id);
   }
 })
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-btn flat round dense icon="add_circle" class="q-mr-sm" />
+    <q-btn flat round dense icon="add_circle" class="q-mr-sm" @click="create_new_task" />
   </div>
 
 </template>
@@ -9,7 +9,11 @@
 export default {
   name: 'felCreateTaskModal',
   setup () {
-    return {}
+    return {
+      create_new_task () {
+        console.log("new task created!")
+      }
+    }
   }
 }
 </script>

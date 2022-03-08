@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center" style="background-color: #CFCFCF">
 
-    <h2>Hello</h2>
+    <h2>No tasks Yet!</h2>
 
   </q-page>
 </template>

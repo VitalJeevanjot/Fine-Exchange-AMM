@@ -24,6 +24,12 @@
   </q-layout>
 </template>
 
+<style lang="sass">
+body
+  font-family: montserratAlternates-medium
+
+</style>
+
 <script>
 // import EssentialLink from "components/EssentialLink.vue";
 

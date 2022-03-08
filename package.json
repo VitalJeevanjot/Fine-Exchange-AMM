@@ -31,6 +31,7 @@
     "@quasar/quasar-app-extension-testing": "^2.0.2",
     "@quasar/quasar-app-extension-testing-unit-jest": "^3.0.0-alpha.8",
     "electron": "^17.1.0",
+    "electron-packager": "^15.2.0",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-jest": "^25.2.2",
