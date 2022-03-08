@@ -1,6 +1,17 @@
 <template>
+
+  <div>
+    <q-btn
+      @click="toggleFelHelpDialog"
+      flat
+      round
+      dense
+      icon="help"
+      class="q-mr-md"
+    />
+
   <!-- Fine Exchange Limited (fel) -->
-  <q-dialog :model-value="modal_open" @update:modelValue="$emit('update:modal_open', $event)">
+  <q-dialog v-model="felHeaderDialog">
       <q-card>
         <q-card-section class="row items-center q-pb-none">
           <div class="text-h6">Close icon</div>
@@ -11,25 +22,26 @@
         <q-card-section>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
         </q-card-section>
+
       </q-card>
     </q-dialog>
+
+
+  </div>
 
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { ref } from "vue";
 
 export default {
   name: 'felHelpModal',
-  props: {
-    modal_open: {
-      type: Boolean,
-      required: true
-    }
-  },
-  emits:['update:modal_open'],
   setup () {
+    const felHeaderDialog = ref(false);
     return {
+      felHeaderDialog,
+      toggleFelHelpDialog() { felHeaderDialog.value = !felHeaderDialog.value },
+      
     }
   }
 }

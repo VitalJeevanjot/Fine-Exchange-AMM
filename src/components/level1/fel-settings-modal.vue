@@ -1,9 +1,11 @@
 <template>
-  <h1>hello</h1>
+  <div>
+    <q-btn flat round dense icon="settings" class="q-mr-sm" />
+
+  </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
 
 export default {
   name: 'felSettingsModal',

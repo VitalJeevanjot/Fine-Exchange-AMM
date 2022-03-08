@@ -1,9 +1,13 @@
 <template>
-  <div>My component</div>
+  <div>
+    <q-btn flat round dense icon="account_circle" class="q-mr-sm" />
+
+  </div>
+
+
 </template>
 
 <script>
-import { defineComponent } from "vue";
 
 export default {
   name: 'felUserModal',
