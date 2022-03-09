@@ -22,6 +22,13 @@
 
 </template>
 
+<style lang="sass">
+.card-in-level-2-dialog
+  background-color: #ECECEC
+  border-radius: 40px !important
+</style>
+
+
 <script>
 import { defineComponent, ref } from "vue";
 
@@ -29,7 +36,8 @@ import felHelpModal from "components/level1/fel-help-modal.vue"
 import felSettingsModal from "components/level1/fel-settings-modal.vue"
 import felUserModal from "components/level1/fel-user-modal.vue"
 import felCreateTaskModal from "components/level1/fel-create-task-modal.vue"
-import felAppPinManager from "components/level1/fel-app-pin-manager.vue"
+
+import felAppPinManager from "components/level2/fel-app-pin-manager.vue"
 
 
 
