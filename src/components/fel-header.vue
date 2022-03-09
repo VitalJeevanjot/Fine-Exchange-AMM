@@ -26,6 +26,9 @@
 .card-in-level-2-dialog
   background-color: #ECECEC
   border-radius: 40px !important
+
+.btn-disabled
+  background-color: #828282
 </style>
 
 

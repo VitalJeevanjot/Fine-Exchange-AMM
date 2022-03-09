@@ -45,7 +45,7 @@
           </div>
 
           <div class="q-gutter-md row justify-center q-pa-md">
-            <q-btn label="enter" :disable="enter_button_disable" id="enter_btn" @click="enter_app" rounded class="text-white shadow-up-1" style="background-color: #58B39A" icon="check_circle"/>
+            <q-btn label="enter" :disable="enter_button_disable" id="enterBtn" @click="enter_app" rounded class="text-white shadow-up-1 btn-disabled" icon="check_circle"/>
           </div>
 
           <div class="row q-pb-md">
@@ -57,7 +57,6 @@
     </q-card>
   </q-dialog>
 </template>
-
 
 
 
@@ -77,27 +76,31 @@ export default {
     const confirm_pic_error_msg = ref('')
     const confirm_pic_err = ref(false)
     watchEffect(() => {
-      if(!pic.value || pic.value.replace(pic_regex, '').length < 4) {
+      if(!pic.value || pic.value.replace(pic_regex.value, '').length < 4) {
+        enter_button_disable.value = true
+        if(document.getElementById('enterBtn')) {
+          document.getElementById('enterBtn').style.backgroundColor = '#828282'
+        }
         return
       }
+      document.getElementById('enterBtn').style.backgroundColor = '#828282'
+      confirm_pic_err.value = true 
+      enter_button_disable.value = true
       let k = confirm_pic.value.replace(pic_regex.value, '').length == 4; 
       let _k = confirm_pic.value == pic.value;
       if(!k) {
-        confirm_pic_err.value = true
-        enter_button_disable.value = true
         confirm_pic_error_msg.value = 'Fill all the characters!';
         return true
       }
       else if(!_k) {
-        confirm_pic_err.value = true
-        enter_button_disable.value = true
         confirm_pic_error_msg.value = 'Both inputs must match!';
         return true;
       } else {
         confirm_pic_err.value = false
         enter_button_disable.value = false
-        return false
       }
+      document.getElementById('enterBtn').style.backgroundColor = 'rgb(88,179,154)'
+
     });
 
     return {
@@ -110,12 +113,7 @@ export default {
       confirm_pic_error_msg,
       confirm_pic_err,
       enter_app() {
-        console.log(pic)
-        if (pic.value.hasError || confirm_pic.value.hasError) {
-          // form has error
-          console.log("ERRRRR")
-          return
-        }
+        console.log("ENTRRRR")
 
         // console.log(pic.value)
         // console.log(confirm_pic.value)
