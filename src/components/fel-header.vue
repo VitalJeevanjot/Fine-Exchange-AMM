@@ -74,10 +74,16 @@ export default defineComponent ({
     }
   },
   mounted() {
-    
+  //     window.crypto.subtle.generateKey(
+  //   {
+  //       name: "AES-CTR",
+  //       length: 256
+  //   },
+  //   true,
+  //   ["encrypt", "decrypt"]
+  // ).then((key) => { console.log(key) })
     // console.log(window.crypto.randomUUID())
-    // const id = window.crypto.randomBytes(16).toString("hex"); 
-    // console.log(id);
+    // console.log(window.crypto.getRandomValues(new Uint8Array(16)))
   }
 })
 </script>

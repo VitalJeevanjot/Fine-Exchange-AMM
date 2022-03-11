@@ -1,6 +1,6 @@
 <template>
 <div>
-  <q-btn icon='key' flat dense>
+  <q-btn icon='key' flat dense @click="felApiManagementDialog = true">
     <q-tooltip>
       API(s) Management
     </q-tooltip>
@@ -33,14 +33,18 @@
 </template>
 
 <script>
-import felAddNewApi from 'components/level3/fel-add-new-api.vue'
+import felAddNewApi from 'components/level3/fel-add-new-api.vue';
+import { ref } from "vue";
 export default {
-  name: 'FelApiManagement',
+  name: 'felApiManagement',
   components: {
     felAddNewApi
   },
   setup () {
-    return {}
+    const felApiManagementDialog = ref(false)
+    return {
+      felApiManagementDialog
+    }
   }
 }
 </script>

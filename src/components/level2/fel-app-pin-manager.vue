@@ -18,11 +18,11 @@
               outlined
               rounded
               v-model="pic"
-              style="max-width: 200px"
+              style="max-width: 20vw"
               label="P.I.C."
               mask="X-X-X-X"
               hint="Format: (X = 0-9/A-Z) X-X-X-X"
-              :rules="[val => val.replace(pic_regex, '').length == 4 || 'Fill all the characters !']"
+              :rules='[val => val.replace(pic_regex, "").length == 4 || "Fill all the characters !"]'
             />
           </div>
 
@@ -32,7 +32,7 @@
               v-model="confirm_pic"
               type="password"
               rounded
-              style="max-width: 200px"
+              style="max-width: 20vw"
               label="Confirm P.I.C."
               bottom-slots
               mask="X-X-X-X"
@@ -122,9 +122,31 @@ export default {
           return
         }
 
-        felAppPinManagerDialog.value = false
+        window.crypto.subtle.generateKey(
+        {
+            name: "AES-CTR",
+            length: 256
+        },
+        true,
+        ["encrypt", "decrypt"]
+        ).then(async (key) => { 
+          // console.log(key) 
+          felAppPinManagerDialog.value = false 
+          try {
+            const enc = new TextEncoder(); // 66696e65 (Fine in bytes)
+            const algorithm = { name: "AES-CTR", counter: enc.encode(confirm_pic.value + "-66696e65"), length: 64 } 
+            const _uid = window.crypto.randomUUID();
+            const encoded_uid = enc.encode(_uid) 
+            const encrypted_val = await window.crypto.subtle.encrypt(algorithm, key, encoded_uid)
+            const edec = new TextDecoder();
+            const encrypted_decoded_text = edec.decode(encrypted_val) // To save it
+            qs.localStorage.set('important_welcome_edec', encrypted_decoded_text)
+          } catch (err) {
+            console.log(err)
+            // TODO: Show error through notification for longer time
+          }
+        })
 
-        qs.localStorage.set('hello', confirm_pic.value)
         // console.log(pic.value)
         // console.log(confirm_pic.value)
         // console.log(pic.value.replace(pic_regex.value, ""))
@@ -134,12 +156,17 @@ export default {
   },
 
   mounted() {
+    // TODO: Add `enter/return` key as clickable for  ok/enter/confirm buttons, `esc.` key for other if required
+    // TODO: If failed to decrypt the UID then ask for correct P.I.C or app reset.
+    // TODO: Add an error to save keys only and not value to test below...
+    // TODO: If no value in `important_welcome` key then delete it and ask for correct P.I.C or app reset.
+    // TODO: ask user to add P.I.C. or reset the app (if other keys exists and 'important_welcome' not) as now the data cannot be decrypted
 
-
-    if(this.qs.localStorage.has("hello")) {
-      console.log("found the key!")
-      console.log(this.qs.localStorage.getItem('hello'))
-    } else {
+    if(this.qs.localStorage.has("important_welcome_edec")) {
+      console.log("found the encrypted decoded key!")
+      console.log(this.qs.localStorage.getItem('important_welcome_edec'))
+    } 
+    else {
       this.felAppPinManagerDialog = true
     }
   }
