@@ -83,8 +83,8 @@ export default {
         }
         return
       }
-      document.getElementById('enterBtn').style.backgroundColor = '#828282'
       confirm_pic_err.value = true 
+      document.getElementById('enterBtn').style.backgroundColor = '#828282'
       enter_button_disable.value = true
       let k = confirm_pic.value.replace(pic_regex.value, '').length == 4; 
       let _k = confirm_pic.value == pic.value;
@@ -104,10 +104,10 @@ export default {
     });
 
     return {
+      felAppPinManagerDialog,
       pic,
       confirm_pic,
       qs,
-      felAppPinManagerDialog,
       pic_regex,
       enter_button_disable,
       confirm_pic_error_msg,
@@ -115,6 +115,16 @@ export default {
       enter_app() {
         console.log("ENTRRRR")
 
+        if(confirm_pic_err.value == true) {
+          // if user tries to enable enter_button through other way
+          // not tackling if user clears the whole dialog (other way)
+          qs.notify("No cheating!")
+          return
+        }
+
+        felAppPinManagerDialog.value = false
+
+        qs.localStorage.set('hello', confirm_pic.value)
         // console.log(pic.value)
         // console.log(confirm_pic.value)
         // console.log(pic.value.replace(pic_regex.value, ""))
@@ -125,9 +135,10 @@ export default {
 
   mounted() {
 
-    // console.log(this.$q.localStorage)
+
     if(this.qs.localStorage.has("hello")) {
       console.log("found the key!")
+      console.log(this.qs.localStorage.getItem('hello'))
     } else {
       this.felAppPinManagerDialog = true
     }

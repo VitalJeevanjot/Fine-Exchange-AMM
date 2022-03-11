@@ -10,8 +10,8 @@
       class="q-mr-md"
     />
 
-  <!-- Fine Exchange Limited (fel) -->
-  <q-dialog v-model="felHeaderDialog">
+  <!-- Fine Exchange Limited (fel) or fel = Fine Exchange Limited -->
+  <q-dialog v-model="felHeaderDialog" persistent>
       <q-card>
         <q-card-section class="row items-center q-pb-none">
           <div class="text-h6">Close icon</div>

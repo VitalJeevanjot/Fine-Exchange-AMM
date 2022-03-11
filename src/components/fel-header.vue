@@ -23,8 +23,17 @@
 </template>
 
 <style lang="sass">
+.card-in-level-1-dialog
+  background-color: #f2f2f2
+  border-radius: 40px !important
+
 .card-in-level-2-dialog
   background-color: #ECECEC
+  border-radius: 40px !important
+
+.card-in-level-3-dialog
+  background-color: #E0E0E0 
+
   border-radius: 40px !important
 
 .btn-disabled
