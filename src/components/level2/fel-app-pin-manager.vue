@@ -18,7 +18,7 @@
               outlined
               rounded
               v-model="pic"
-              style="max-width: 20vw"
+              style="width: 30vw"
               label="P.I.C."
               mask="X-X-X-X"
               hint="Format: (X = 0-9/A-Z) X-X-X-X"
@@ -32,7 +32,7 @@
               v-model="confirm_pic"
               type="password"
               rounded
-              style="max-width: 20vw"
+              style="width: 30vw"
               label="Confirm P.I.C."
               bottom-slots
               mask="X-X-X-X"
@@ -103,6 +103,19 @@ export default {
 
     });
 
+    function strToArrayBuffer(str) {
+        var buf = new ArrayBuffer(str.length * 2);
+        var bufView = new Uint16Array(buf);
+
+        for (var i = 0, strLen = str.length; i < strLen; i++) {
+          bufView[i] = str.charCodeAt(i);
+        }
+        return buf;
+    }
+    function arrayBufferToString(buf) {
+      return String.fromCharCode.apply(null, new Uint16Array(buf));
+    }
+
     return {
       felAppPinManagerDialog,
       pic,
@@ -112,7 +125,9 @@ export default {
       enter_button_disable,
       confirm_pic_error_msg,
       confirm_pic_err,
-      enter_app() {
+      strToArrayBuffer,
+      arrayBufferToString,
+      async enter_app() {
         console.log("ENTRRRR")
 
         if(confirm_pic_err.value == true) {
@@ -122,31 +137,56 @@ export default {
           return
         }
 
-        window.crypto.subtle.generateKey(
-        {
-            name: "AES-CTR",
-            length: 256
-        },
-        true,
-        ["encrypt", "decrypt"]
-        ).then(async (key) => { 
-          // console.log(key) 
-          felAppPinManagerDialog.value = false 
-          try {
-            const enc = new TextEncoder(); // 66696e65 (Fine in bytes)
-            const algorithm = { name: "AES-CTR", counter: enc.encode(confirm_pic.value + "-66696e65"), length: 64 } 
-            const _uid = window.crypto.randomUUID();
-            const encoded_uid = enc.encode(_uid) 
-            const encrypted_val = await window.crypto.subtle.encrypt(algorithm, key, encoded_uid)
-            const edec = new TextDecoder();
-            const encrypted_decoded_text = edec.decode(encrypted_val) // To save it
-            qs.localStorage.set('important_welcome_edec', encrypted_decoded_text)
-          } catch (err) {
-            console.log(err)
-            // TODO: Show error through notification for longer time
-          }
-        })
+         
+        // console.log(key) 
+        try {
+          const tenc = new TextEncoder(); 
+          const tdec = new TextDecoder();
 
+          const _uid = window.crypto.randomUUID(); // replacable
+
+          const _key = await window.crypto.subtle.generateKey(
+            {
+                name: "AES-GCM",
+                length: 256
+            },
+            true,
+            ["encrypt", "decrypt"]
+          )
+          const exported = await window.crypto.subtle.exportKey( "raw", _key );
+          const exportedKeyBuffer = new Uint8Array(exported);
+          // console.log(exportedKeyBuffer)
+          qs.localStorage.set('important_welcome_key', exportedKeyBuffer)
+          console.log(qs.localStorage.getItem('important_welcome_key'))
+
+          const _algo = { 
+            name: "AES-GCM", 
+            iv: tenc.encode(confirm_pic.value + "-66696e65").buffer, // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
+          }
+          const encrypted_val = await window.crypto.subtle.encrypt(
+            _algo,
+            _key, 
+            strToArrayBuffer(_uid)
+          );
+
+          var _to_save = _algo
+          _to_save.iv = arrayBufferToString(_to_save.iv)
+
+          // store 'important_welcome_algo'
+          qs.localStorage.set('important_welcome_algo', _to_save)
+
+          // console.log(encrypted_val)
+          const encrypted_decoded_text = arrayBufferToString(encrypted_val) // To save it (convert it to string)
+          // store 'important_welcome_edec' (edec = encrypted decoded text)
+          qs.localStorage.set('important_welcome_edec', encrypted_decoded_text)
+
+          felAppPinManagerDialog.value = false
+
+        } catch (err) {
+          felAppPinManagerDialog.value = true
+          console.log(err)
+          // TODO: Show error through notification for longer time
+        }
         // console.log(pic.value)
         // console.log(confirm_pic.value)
         // console.log(pic.value.replace(pic_regex.value, ""))
@@ -155,16 +195,53 @@ export default {
     }
   },
 
-  mounted() {
+  async mounted() {
+    const tenc = new TextEncoder()
+    const tdec = new TextDecoder()
+    // if(!this.qs.localStorage.getItem('important_welcome_uid')) {
+    //   const _uid = window.crypto.randomUUID();
+    //   this.qs.localStorage.set('important_welcome_uid', _uid)
+    // } if decrypt with wrong key doesn't bring error then use this as reference to encrypt other things later
+
+    // TODO: `algo` is not something to store at all...
+    // TODO: If 'important_welcome_key' or algo is not available then will some of below TODO works?
     // TODO: Add `enter/return` key as clickable for  ok/enter/confirm buttons, `esc.` key for other if required
     // TODO: If failed to decrypt the UID then ask for correct P.I.C or app reset.
     // TODO: Add an error to save keys only and not value to test below...
     // TODO: If no value in `important_welcome` key then delete it and ask for correct P.I.C or app reset.
     // TODO: ask user to add P.I.C. or reset the app (if other keys exists and 'important_welcome' not) as now the data cannot be decrypted
 
-    if(this.qs.localStorage.has("important_welcome_edec")) {
-      console.log("found the encrypted decoded key!")
-      console.log(this.qs.localStorage.getItem('important_welcome_edec'))
+    if(this.qs.localStorage.has("important_welcome_edec") && 
+      this.qs.localStorage.has("important_welcome_algo") &&
+      this.qs.localStorage.has("important_welcome_key")
+    ) {
+      // console.log("found the encrypted decoded key!")
+      // console.log(this.qs.localStorage.getItem('important_welcome_edec'))
+
+      // console.log("Decrypted form of above is as below: ")
+
+      let _algo = this.qs.localStorage.getItem("important_welcome_algo")
+      _algo.iv = this.strToArrayBuffer(_algo.iv)
+
+      let key_stored = this.qs.localStorage.getItem("important_welcome_key")
+      let vlk = []
+      vlk = Object.values(key_stored)
+
+      let imported_key = await window.crypto.subtle.importKey(
+        'raw',
+        new Uint8Array(vlk),
+        'AES-GCM',
+        true,
+        ['encrypt', 'decrypt']
+      )
+
+
+      let decrypted = await window.crypto.subtle.decrypt(
+        _algo, 
+        imported_key,
+        this.strToArrayBuffer(this.qs.localStorage.getItem("important_welcome_edec"))
+      );
+      console.log(this.arrayBufferToString(decrypted))
     } 
     else {
       this.felAppPinManagerDialog = true
