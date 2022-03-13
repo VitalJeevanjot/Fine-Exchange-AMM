@@ -138,9 +138,9 @@ export default {
         }
 
          
-        // console.log(key) 
         try {
-          const _uid = window.crypto.randomUUID(); // replacable
+          const _uid = window.crypto.randomUUID(); 
+          // keep _uid & _key in storage as encrypted form to use right values each time for new encryption & decryption
 
           const _key = await window.crypto.subtle.generateKey(
             {
@@ -152,9 +152,8 @@ export default {
           )
           const exported = await window.crypto.subtle.exportKey( "raw", _key );
           const exportedKeyBuffer = new Uint8Array(exported);
-          // console.log(exportedKeyBuffer)
           qs.localStorage.set('important_welcome_key', exportedKeyBuffer)
-
+          
           const _algo = { 
             name: "AES-GCM", 
             iv: strToArrayBuffer(confirm_pic.value + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
@@ -168,10 +167,9 @@ export default {
 
           _algo.iv = arrayBufferToString(_algo.iv)
 
-          // store 'important_welcome_algo'
-          qs.localStorage.set('important_welcome_algo', _algo)
+          // store 'important_welcome_algo' for testing (iv is value to be given by user)
+          // qs.localStorage.set('important_welcome_algo', _algo)
 
-          // console.log(encrypted_val)
           const encrypted_decoded_text = arrayBufferToString(encrypted_val) // To save it (convert it to string)
           // store 'important_welcome_edec' (edec = encrypted decoded text)
           qs.localStorage.set('important_welcome_edec', encrypted_decoded_text)
@@ -205,42 +203,53 @@ export default {
     // TODO: If no value in `important_welcome` key then delete it and ask for correct P.I.C or app reset.
     // TODO: ask user to add P.I.C. or reset the app (if other keys exists and 'important_welcome' not) as now the data cannot be decrypted
 
-    if(this.qs.localStorage.has("important_welcome_edec") && 
-      this.qs.localStorage.has("important_welcome_algo") &&
-      this.qs.localStorage.has("important_welcome_key")
-    ) {
-      // console.log("found the encrypted decoded key!")
-      // console.log(this.qs.localStorage.getItem('important_welcome_edec'))
-
-      // console.log("Decrypted form of above is as below: ")
-
-      let _algo = this.qs.localStorage.getItem("important_welcome_algo")
-      console.log(_algo)
-      _algo.iv = this.strToArrayBuffer(_algo.iv)
-
-      let key_stored = this.qs.localStorage.getItem("important_welcome_key")
-      let vlk = []
-      vlk = Object.values(key_stored)
-
-      let imported_key = await window.crypto.subtle.importKey(
-        'raw',
-        new Uint8Array(vlk),
-        'AES-GCM',
-        true,
-        ['encrypt', 'decrypt']
-      )
-
-
-      let decrypted = await window.crypto.subtle.decrypt(
-        _algo, 
-        imported_key,
-        this.strToArrayBuffer(this.qs.localStorage.getItem("important_welcome_edec"))
-      );
-      console.log(this.arrayBufferToString(decrypted))
-    } 
-    else {
+    if(!this.qs.localStorage.has("important_welcome_edec") || 
+      !this.qs.localStorage.has("important_welcome_key")) 
+    {
       this.felAppPinManagerDialog = true
     }
+
+    // for testing
+    // if(this.qs.localStorage.has("important_welcome_edec") && 
+    //   this.qs.localStorage.has("important_welcome_algo") &&
+    //   this.qs.localStorage.has("important_welcome_key")
+    // ) {
+    //   // console.log("found the encrypted decoded key!")
+    //   // console.log(this.qs.localStorage.getItem('important_welcome_edec'))
+
+    //   // console.log("Decrypted form of above is as below: ")
+
+    //   let _algo = this.qs.localStorage.getItem("important_welcome_algo")
+    //   _algo.iv = _algo.iv
+    //   console.log(_algo)
+    //   _algo.iv = this.strToArrayBuffer(_algo.iv)
+
+    //   let key_stored = this.qs.localStorage.getItem("important_welcome_key")
+    //   let vlk = []
+    //   vlk = Object.values(key_stored)
+      
+    //   let imported_key = await window.crypto.subtle.importKey(
+    //     'raw',
+    //     new Uint8Array(vlk),
+    //     'AES-GCM',
+    //     true,
+    //     ['encrypt', 'decrypt']
+    //   )
+
+    //   try {
+    //     let decrypted = await window.crypto.subtle.decrypt(
+    //       _algo, 
+    //       imported_key,
+    //       this.strToArrayBuffer(this.qs.localStorage.getItem("important_welcome_edec"))
+    //     );
+    //     console.log(this.arrayBufferToString(decrypted))
+    //   } catch (e) {
+    //     console.log(e)
+    //   }
+    // }
+    // else {
+    //   this.felAppPinManagerDialog = true
+    // }
   }
 }
 </script>
