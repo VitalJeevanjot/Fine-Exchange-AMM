@@ -140,9 +140,6 @@ export default {
          
         // console.log(key) 
         try {
-          const tenc = new TextEncoder(); 
-          const tdec = new TextDecoder();
-
           const _uid = window.crypto.randomUUID(); // replacable
 
           const _key = await window.crypto.subtle.generateKey(
@@ -157,23 +154,22 @@ export default {
           const exportedKeyBuffer = new Uint8Array(exported);
           // console.log(exportedKeyBuffer)
           qs.localStorage.set('important_welcome_key', exportedKeyBuffer)
-          console.log(qs.localStorage.getItem('important_welcome_key'))
 
           const _algo = { 
             name: "AES-GCM", 
-            iv: tenc.encode(confirm_pic.value + "-66696e65").buffer, // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
+            iv: strToArrayBuffer(confirm_pic.value + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
           }
+          
           const encrypted_val = await window.crypto.subtle.encrypt(
             _algo,
             _key, 
             strToArrayBuffer(_uid)
           );
 
-          var _to_save = _algo
-          _to_save.iv = arrayBufferToString(_to_save.iv)
+          _algo.iv = arrayBufferToString(_algo.iv)
 
           // store 'important_welcome_algo'
-          qs.localStorage.set('important_welcome_algo', _to_save)
+          qs.localStorage.set('important_welcome_algo', _algo)
 
           // console.log(encrypted_val)
           const encrypted_decoded_text = arrayBufferToString(encrypted_val) // To save it (convert it to string)
@@ -196,8 +192,6 @@ export default {
   },
 
   async mounted() {
-    const tenc = new TextEncoder()
-    const tdec = new TextDecoder()
     // if(!this.qs.localStorage.getItem('important_welcome_uid')) {
     //   const _uid = window.crypto.randomUUID();
     //   this.qs.localStorage.set('important_welcome_uid', _uid)
@@ -221,6 +215,7 @@ export default {
       // console.log("Decrypted form of above is as below: ")
 
       let _algo = this.qs.localStorage.getItem("important_welcome_algo")
+      console.log(_algo)
       _algo.iv = this.strToArrayBuffer(_algo.iv)
 
       let key_stored = this.qs.localStorage.getItem("important_welcome_key")
