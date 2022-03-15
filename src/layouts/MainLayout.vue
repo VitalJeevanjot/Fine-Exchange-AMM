@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <fel-header
-      v-bind="header_logo"
+      v-bind="value_bind"
     />
 
     <!-- <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
@@ -82,7 +82,6 @@ body
 import felHeader from "components/fel-header.vue"
 import { defineComponent, ref } from "vue";
 
-const _logo_src = { logo_src: "fine_exchange_smaller.png" }
 
 export default defineComponent({
   name: "MainLayout",
@@ -94,15 +93,16 @@ export default defineComponent({
 
   setup() {
     // const leftDrawerOpen = ref(false);
-
+    const value_bind = ref({ logo_src: "fine_exchange_smaller.png" })
     return {
       // essentialLinks: linksList,
-      header_logo: _logo_src
+      value_bind
       // leftDrawerOpen,
       // toggleLeftDrawer() {
       //   leftDrawerOpen.value = !leftDrawerOpen.value;
       // },
     };
   },
+
 });
 </script>

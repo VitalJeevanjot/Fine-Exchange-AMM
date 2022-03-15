@@ -63,6 +63,10 @@
             </q-input>
         </div>
 
+        <div class="row">
+          <felAppAddDataAskPin/>
+        </div>
+
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -71,8 +75,12 @@
 
 <script>
 import { ref } from "vue"
+import felAppAddDataAskPin from 'components/level3/fel-app-add-data-ask-pin.vue'
 export default {
   name: 'felAddNewApi',
+  components: {
+    felAppAddDataAskPin,
+  },
   setup () {
     const felAddNewApiDialog = ref(false)
 

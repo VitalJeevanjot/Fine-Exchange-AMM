@@ -14,7 +14,11 @@
           </div>
 
           <div class="q-gutter-md row justify-center q-pb-md">
-            <q-input
+            <felInput 
+            v-model:_input_val="pic" 
+            v-bind="val_binding_pic" />
+
+            <!-- <q-input
               outlined
               rounded
               v-model="pic"
@@ -23,11 +27,11 @@
               mask="X-X-X-X"
               hint="Format: (X = 0-9/A-Z) X-X-X-X"
               :rules='[val => val.replace(pic_regex, "").length == 4 || "Fill all the characters !"]'
-            />
+            /> -->
           </div>
 
           <div class="q-gutter-md row justify-center">
-            <q-input
+            <!-- <q-input
               outlined
               v-model="confirm_pic"
               type="password"
@@ -40,7 +44,11 @@
             >
               <template v-slot:error>{{confirm_pic_error_msg}}</template>
 
-            </q-input>
+            </q-input> -->
+            <felInput 
+            v-model:_input_val="confirm_pic"
+            v-bind="val_binding_confirm_pic"
+            />
 
           </div>
 
@@ -63,9 +71,13 @@
 <script>
 import { useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
+import felInput from 'components/level4/fel-input.vue'
 
 export default {
   name: 'felAppPinManager',
+  components: {
+    felInput
+  },
   setup () {
     const qs = useQuasar()
     const felAppPinManagerDialog = ref(false)
@@ -73,8 +85,28 @@ export default {
     const confirm_pic = ref('')
     const pic_regex = ref(/_|-/gi)
     const enter_button_disable = ref(true)
-    const confirm_pic_error_msg = ref('')
     const confirm_pic_err = ref(false)
+    const confirm_pic_error_msg = ref('')
+
+    const val_binding_pic = ref({
+      _style: 'width: 30vw', 
+      _mask: 'X-X-X-X',
+      _label: 'P.I.C.',
+      _hint: 'Format: (X = 0-9/A-Z) X-X-X-X',
+      _show_error: false,
+      _error_msg: '',
+      _rules: [val => val.replace(pic_regex.value, "").length == 4 || "Fill all the characters !"]
+    })
+
+    const val_binding_confirm_pic = ref({
+      _style: 'width: 30vw', 
+      _mask: 'X-X-X-X',
+      _label: 'Confirm P.I.C.',
+      _hint: 'Format: (X = 0-9/A-Z) X-X-X-X',
+      _show_error: confirm_pic_err,
+      _error_msg: confirm_pic_error_msg,
+      _rules: []
+    })
     watchEffect(() => {
       if(!pic.value || pic.value.replace(pic_regex.value, '').length < 4) {
         enter_button_disable.value = true
@@ -127,6 +159,8 @@ export default {
       confirm_pic_err,
       strToArrayBuffer,
       arrayBufferToString,
+      val_binding_confirm_pic,
+      val_binding_pic,
       async enter_app() {
         console.log("ENTRRRR")
 
