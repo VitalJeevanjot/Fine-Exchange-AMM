@@ -9,15 +9,19 @@
 
   <q-dialog v-model="felAddNewApiDialog" persistent>
     <q-card class="card-in-level-3-dialog">
-      <q-card-section class="row justify-center">
+      <q-card-section>
         Add new API key/secret
         <q-space/>
         <q-btn icon='close' flat dense v-close-popup/>
       </q-card-section>
 
       <q-card-section>
-        <div class="row">
-          <q-input
+        <div class="row justify-center">
+          <felInput 
+            v-model:_input_val="api_name"
+            v-bind="val_binding_api_name"
+          />
+          <!-- <q-input
               outlined
               v-model="api_name"
               type="text"
@@ -29,11 +33,15 @@
             >
             <template v-slot:error>{{api_name_err_msg}}</template>
 
-            </q-input>
+            </q-input> -->
         </div>
 
-        <div class="row">
-          <q-input
+        <div class="row justify-center">
+          <felInput 
+            v-model:_input_val="api_key"
+            v-bind="val_binding_api_key"
+          />
+          <!-- <q-input
               outlined
               v-model="api_key"
               type="password"
@@ -44,26 +52,19 @@
             >
             <template v-slot:error>{{api_key_err_msg}}</template>
 
-            </q-input>
+            </q-input> -->
         </div>
 
 
-        <div class="row">
-          <q-input
-              outlined
-              v-model="api_secret"
-              type="password"
-              rounded
-              label="API Secret"
-              bottom-slots
-              :error="api_secret_err"
-            >
-            <template v-slot:error>{{api_secret_err_msg}}</template>
+        <div class="row justify-center">
+          <felInput 
+            v-model:_input_val="api_secret"
+            v-bind="val_binding_api_secret"
+          />
 
-            </q-input>
         </div>
 
-        <div class="row">
+        <div class="row justify-center">
           <felAppAddDataAskPin/>
         </div>
 
@@ -76,10 +77,12 @@
 <script>
 import { ref } from "vue"
 import felAppAddDataAskPin from 'components/level3/fel-app-add-data-ask-pin.vue'
+import felInput from 'components/level4/fel-input.vue'
 export default {
   name: 'felAddNewApi',
   components: {
     felAppAddDataAskPin,
+    felInput
   },
   setup () {
     const felAddNewApiDialog = ref(false)
@@ -88,25 +91,49 @@ export default {
     const api_key = ref('')
     const api_secret = ref('')
 
-    const api_name_err = ref(false)
-    const api_key_err = ref(false)
-    const api_secret_err = ref(false)
 
-    const api_name_err_msg = ref('')
-    const api_key_err_msg = ref('')
-    const api_secret_err_msg = ref('')
+    const val_binding_api_name = ref({
+      _style: 'max-width: 70vw',
+      _mask: '',
+      _label: 'API Name',
+      _hint: 'Enter name for Key/Secret',
+      _show_error: false,
+      _error_msg: '',
+      _rules: [val => val.length >= 4 || "Add some good name to remind yourself!"],
+      _class: 'q-pt-sm'
+    })
+
+    const val_binding_api_key = ref({
+      _style: 'max-width: 70vw',
+      _mask: '',
+      _label: 'API Key',
+      _hint: 'The API Key',
+      _show_error: false,
+      _error_msg: '',
+      _rules: [val => val.length >= 1 || "Please add api key !"],
+      _class: 'q-pt-md'
+    })
+
+    const val_binding_api_secret = ref({
+      _style: 'max-width: 70vw',
+      _mask: '',
+      _label: 'API Secret',
+      _hint: 'The API Secret',
+      _show_error: false,
+      _error_msg: '',
+      _rules: [val => val.length >= 1 || "Please add api secret!"],
+      _class: 'q-pt-sm'
+    })
+
 
     return {
       felAddNewApiDialog,
       api_name,
       api_key,
       api_secret,
-      api_name_err,
-      api_key_err,
-      api_secret_err,
-      api_name_err_msg,
-      api_key_err_msg,
-      api_secret_err_msg
+      val_binding_api_name,
+      val_binding_api_key,
+      val_binding_api_secret
     }
   }
 }

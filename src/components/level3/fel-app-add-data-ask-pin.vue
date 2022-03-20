@@ -1,7 +1,10 @@
 <template>
-  <q-div>
+  <div>
 
-  <q-btn dense flat icon="done" class="bg-green text-grey-3" round/>
+  <div class="row justify-center">
+  <q-btn flat icon="add" class="bg-green text-grey-3 q-mt-md" label="Add" rounded/>
+  </div>
+
   <q-dialog v-model="felAppPinManagerDialog" persistent>
     <q-card class="card-in-level-2-dialog">
       <q-card-section class="row justify-center q-pb-none">
@@ -59,7 +62,7 @@
 
     </q-card>
   </q-dialog>
-  </q-div>
+  </div>
 </template>
 
 

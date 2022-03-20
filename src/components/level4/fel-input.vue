@@ -11,7 +11,9 @@
       bottom-slots
       :hint="_hint"
       :error="_show_error"
-      :rules='_rules'
+      :rules="_rules"
+      :type="_type"
+      :class="_class"
     >
     <template v-slot:error>{{_error_msg}}</template>
 
@@ -24,7 +26,7 @@
 import { ref, defineComponent } from "vue"
 export default defineComponent({
   name: 'felInput',
-  props: ["_input_val", "_style", "_label", "_mask", "_hint", "_show_error", "_rules", "_error_msg"],
+  props: ["_input_val", "_style", "_label", "_mask", "_hint", "_show_error", "_rules", "_error_msg", "_type", "_class"],
   emits: ['update:_input_val'],
   setup () {
     return {}

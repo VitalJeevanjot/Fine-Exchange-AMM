@@ -33,8 +33,8 @@
 
 .card-in-level-3-dialog
   background-color: #E0E0E0 
-
   border-radius: 40px !important
+  min-width: 70vw
 
 .btn-disabled
   background-color: #828282

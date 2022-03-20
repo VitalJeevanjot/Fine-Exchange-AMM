@@ -162,7 +162,6 @@ export default {
       val_binding_confirm_pic,
       val_binding_pic,
       async enter_app() {
-        console.log("ENTRRRR")
 
         if(confirm_pic_err.value == true) {
           // if user tries to enable enter_button through other way
