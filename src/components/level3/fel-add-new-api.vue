@@ -10,9 +10,8 @@
   <q-dialog v-model="felAddNewApiDialog" persistent>
     <q-card class="card-in-level-3-dialog">
       <q-card-section>
+        <q-btn icon='las la-angle-left' flat dense v-close-popup/>
         Add new API key/secret
-        <q-space/>
-        <q-btn icon='close' flat dense v-close-popup/>
       </q-card-section>
 
       <q-card-section>
@@ -64,8 +63,8 @@
 
         </div>
 
-        <div class="row justify-center">
-          <felAppAddDataAskPin/>
+        <div class="row justify-center" v-show="show_add_button">
+          <felAppAddDataAskPin v-bind="data_to_save_binding"/>
         </div>
 
       </q-card-section>
@@ -75,7 +74,7 @@
 </template>
 
 <script>
-import { ref } from "vue"
+import { ref, watchEffect } from "vue"
 import felAppAddDataAskPin from 'components/level3/fel-app-add-data-ask-pin.vue'
 import felInput from 'components/level4/fel-input.vue'
 export default {
@@ -91,6 +90,13 @@ export default {
     const api_key = ref('')
     const api_secret = ref('')
 
+    const show_add_button = ref(false)
+
+    const data_to_save_binding = ref({
+      'data1': api_name,
+      'data2': api_key,
+      'data3': api_secret
+    })
 
     const val_binding_api_name = ref({
       _style: 'max-width: 70vw',
@@ -125,12 +131,22 @@ export default {
       _class: 'q-pt-sm'
     })
 
+    watchEffect(() => {
+      if(api_name.value.length < 4 || !api_key.value || !api_secret.value) {
+        show_add_button.value = false
+      } else {
+        show_add_button.value = true
+      }
+    })
+
 
     return {
       felAddNewApiDialog,
       api_name,
       api_key,
       api_secret,
+      data_to_save_binding,
+      show_add_button,
       val_binding_api_name,
       val_binding_api_key,
       val_binding_api_secret

@@ -2,7 +2,7 @@
   <div>
 
   <div class="row justify-center">
-  <q-btn flat icon="add" class="bg-green text-grey-3 q-mt-md" label="Add" rounded/>
+    <q-btn flat icon="add" class="bg-green text-grey-3 q-mt-md" label="Add" rounded @click="getData"/>
   </div>
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
@@ -20,34 +20,10 @@
           </div>
 
           <div class="q-gutter-md row justify-center q-pb-md">
-            <q-input
-              outlined
-              rounded
-              v-model="pic"
-              style="width: 30vw"
-              label="P.I.C."
-              mask="X-X-X-X"
-              hint="Format: (X = 0-9/A-Z) X-X-X-X"
-              :rules='[val => val.replace(pic_regex, "").length == 4 || "Fill all the characters !"]'
-            />
-          </div>
-
-          <div class="q-gutter-md row justify-center">
-            <q-input
-              outlined
-              v-model="confirm_pic"
-              type="password"
-              rounded
-              style="width: 30vw"
-              label="Confirm P.I.C."
-              bottom-slots
-              mask="X-X-X-X"
-              :error="confirm_pic_err"
-            >
-              <template v-slot:error>{{confirm_pic_error_msg}}</template>
-
-            </q-input>
-
+            <felInput
+              v-model:_input_val="pic"
+              v-bind="val_binding_pic"
+             />
           </div>
 
           <div class="q-gutter-md row justify-center q-pa-md">
@@ -71,44 +47,30 @@
 import { useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
 
+import felInput from 'components/level4/fel-input.vue'
+
 export default {
   name: 'felAppAddDataAskPin',
+  components: {
+    felInput
+  },
+  props: ['data1', 'data2', 'data3', 'data4', 'data5'],
   setup () {
     const qs = useQuasar()
     const felAppPinManagerDialog = ref(false)
     const pic = ref('')
-    const confirm_pic = ref('')
     const pic_regex = ref(/_|-/gi)
     const enter_button_disable = ref(true)
-    const confirm_pic_error_msg = ref('')
-    const confirm_pic_err = ref(false)
-    watchEffect(() => {
-      if(!pic.value || pic.value.replace(pic_regex.value, '').length < 4) {
-        enter_button_disable.value = true
-        if(document.getElementById('enterBtn')) {
-          document.getElementById('enterBtn').style.backgroundColor = '#828282'
-        }
-        return
-      }
-      confirm_pic_err.value = true 
-      document.getElementById('enterBtn').style.backgroundColor = '#828282'
-      enter_button_disable.value = true
-      let k = confirm_pic.value.replace(pic_regex.value, '').length == 4; 
-      let _k = confirm_pic.value == pic.value;
-      if(!k) {
-        confirm_pic_error_msg.value = 'Fill all the characters!';
-        return true
-      }
-      else if(!_k) {
-        confirm_pic_error_msg.value = 'Both inputs must match!';
-        return true;
-      } else {
-        confirm_pic_err.value = false
-        enter_button_disable.value = false
-      }
-      document.getElementById('enterBtn').style.backgroundColor = 'rgb(88,179,154)'
 
-    });
+    const val_binding_pic = ref({
+      _style: 'width: 30vw', 
+      _mask: 'X-X-X-X',
+      _label: 'P.I.C.',
+      _hint: 'Format: (X = 0-9/A-Z) X-X-X-X',
+      _show_error: false,
+      _error_msg: '',
+      _rules: [val => val.replace(pic_regex.value, "").length == 4 || "Input must be valid !"]
+    })
 
     function strToArrayBuffer(str) {
         var buf = new ArrayBuffer(str.length * 2);
@@ -122,16 +84,15 @@ export default {
     function arrayBufferToString(buf) {
       return String.fromCharCode.apply(null, new Uint16Array(buf));
     }
+    
 
     return {
       felAppPinManagerDialog,
       pic,
-      confirm_pic,
       qs,
       pic_regex,
+      val_binding_pic,
       enter_button_disable,
-      confirm_pic_error_msg,
-      confirm_pic_err,
       strToArrayBuffer,
       arrayBufferToString,
       async enter_app() {
@@ -194,6 +155,16 @@ export default {
         // console.log(confirm_pic.value.replace(pic_regex.value, "").length)
       }
     }
+  },
+
+  methods: {
+    getData() {
+        console.log(this.data1)
+        console.log(this.data2)
+        console.log(this.data3)
+        console.log(this.data4)
+        console.log(this.data5)
+      },
   },
 
   async mounted() {

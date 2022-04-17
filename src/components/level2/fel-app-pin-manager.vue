@@ -18,33 +18,9 @@
             v-model:_input_val="pic" 
             v-bind="val_binding_pic" />
 
-            <!-- <q-input
-              outlined
-              rounded
-              v-model="pic"
-              style="width: 30vw"
-              label="P.I.C."
-              mask="X-X-X-X"
-              hint="Format: (X = 0-9/A-Z) X-X-X-X"
-              :rules='[val => val.replace(pic_regex, "").length == 4 || "Fill all the characters !"]'
-            /> -->
           </div>
 
           <div class="q-gutter-md row justify-center">
-            <!-- <q-input
-              outlined
-              v-model="confirm_pic"
-              type="password"
-              rounded
-              style="width: 30vw"
-              label="Confirm P.I.C."
-              bottom-slots
-              mask="X-X-X-X"
-              :error="confirm_pic_err"
-            >
-              <template v-slot:error>{{confirm_pic_error_msg}}</template>
-
-            </q-input> -->
             <felInput 
             v-model:_input_val="confirm_pic"
             v-bind="val_binding_confirm_pic"
