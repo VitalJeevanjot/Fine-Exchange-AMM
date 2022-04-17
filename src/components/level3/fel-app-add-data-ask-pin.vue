@@ -54,7 +54,16 @@ export default {
   components: {
     felInput
   },
-  props: ['data1', 'data2', 'data3', 'data4', 'data5'],
+  props: ['key1', 
+  'value1', 
+  'key2', 
+  'value2', 
+  'key3', 
+  'value3', 
+  'key4', 
+  'value4', 
+  'key5', 
+  'value5'],
   setup () {
     const qs = useQuasar()
     const felAppPinManagerDialog = ref(false)
@@ -159,11 +168,16 @@ export default {
 
   methods: {
     getData() {
-        console.log(this.data1)
-        console.log(this.data2)
-        console.log(this.data3)
-        console.log(this.data4)
-        console.log(this.data5)
+        console.log(this.key1)
+        console.log(this.value1)
+        console.log(this.key2)
+        console.log(this.value2)
+        console.log(this.key3)
+        console.log(this.value3)
+        console.log(this.key4)
+        console.log(this.value4)
+        console.log(this.key5)
+        console.log(this.value5)
       },
   },
 

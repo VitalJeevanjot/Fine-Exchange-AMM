@@ -93,9 +93,16 @@ export default {
     const show_add_button = ref(false)
 
     const data_to_save_binding = ref({
-      'data1': api_name,
-      'data2': api_key,
-      'data3': api_secret
+      'key1': 'api_name',
+      'value2': api_name,
+      'key2': 'api_key',
+      'value2': api_key,
+      'key3': 'api_secret',
+      'value3': api_secret,
+      'key4': 'index',
+      'value4': window.crypto.randomUUID(),
+      'key5': 'type',
+      'value5': 'api_data'
     })
 
     const val_binding_api_name = ref({
