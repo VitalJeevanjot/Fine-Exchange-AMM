@@ -2,7 +2,7 @@
   <div>
 
   <div class="row justify-center">
-    <q-btn flat icon="add" class="bg-green text-grey-3 q-mt-md" label="Add" rounded @click="getData"/>
+    <q-btn flat icon="add" :disable="disable_btn" class="bg-green text-grey-3 q-mt-md" label="Add" rounded @click="getData"/>
   </div>
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
@@ -63,7 +63,8 @@ export default {
   'key4', 
   'value4', 
   'key5', 
-  'value5'],
+  'value5',
+  'disable_btn'],
   setup () {
     const qs = useQuasar()
     const felAppPinManagerDialog = ref(false)
@@ -168,8 +169,8 @@ export default {
 
   methods: {
     getData() {
-        console.log(this.key1)
-        console.log(this.value1)
+        console.log(this["key1"])
+        console.log(this["value1"])
         console.log(this.key2)
         console.log(this.value2)
         console.log(this.key3)
