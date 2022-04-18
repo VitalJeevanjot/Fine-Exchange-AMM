@@ -34,7 +34,7 @@
 
           <div class="row q-pb-md">
             <div class="col-2 text-center"><q-icon name="warning_amber" size="1.5em"/></div>
-            <div class="col-10 q-pr-md">If you forgot your <span style="font-size: 0.7em">P.I.C.</span> then you will need to reset this app which will remove all the local stored data.</div>
+            <div class="col-10 q-pr-md">If you forgot your <span style="font-size: 0.7em">P.I.C.</span> then you will need to reset this app which will remove all the local stored data & any running processes.</div>
           </div>
         </q-card-section>
 

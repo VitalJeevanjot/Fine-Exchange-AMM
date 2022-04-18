@@ -8,7 +8,7 @@
     style="min-width: 300px"
     rounded
     :options="options" 
-    label="Select exchange" />
+    label="Select Exchange" />
   </div>
 </template>
 
