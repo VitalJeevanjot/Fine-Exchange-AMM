@@ -130,7 +130,21 @@ export default {
         console.log(this.key5)
         console.log(this.value5)
       },
-    async check_pic() {
+    async check_pic(_algo, imported_key) {
+      try {
+        let decrypted = await window.crypto.subtle.decrypt(
+          _algo, 
+          imported_key,
+          this.strToArrayBuffer(this.qs.localStorage.getItem("important_welcome_edec"))
+        );
+        console.log(this.arrayBufferToString(decrypted))
+      } catch (e) {
+        console.log(e)
+        return false
+      }
+      return true
+    },
+    async encrypt_data() {
       const _algo = { 
         name: "AES-GCM", 
         iv: this.strToArrayBuffer(this.pic + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
@@ -148,25 +162,30 @@ export default {
         ['encrypt', 'decrypt']
       )
 
-      try {
-        let decrypted = await window.crypto.subtle.decrypt(
-          _algo, 
-          imported_key,
-          this.strToArrayBuffer(this.qs.localStorage.getItem("important_welcome_edec"))
-        );
-        console.log(this.arrayBufferToString(decrypted))
-      } catch (e) {
-        console.log(e)
-        return false
-      }
-      console.log('hllo')
-      return true
-    },
-    async encrypt_data() {
-      if(!this.check_pic(this.pic)) {
-          // print something, show something
+
+      if(!await this.check_pic(_algo, imported_key)) {
+          // print something, show something that PIC is incorrect
           return
       }
+      for (let index = 1; index <= 5; index++) {
+        if(!!this['key'+index] && !!this['value'+index]) {
+          var __algo = {}
+          Object.assign(__algo, _algo)
+          const encrypted_val = await window.crypto.subtle.encrypt(
+              __algo,
+              imported_key, 
+              this.strToArrayBuffer(this['value'+index])
+            );
+  
+          __algo.iv = this.arrayBufferToString(__algo.iv)
+  
+          const encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
+
+          this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
+        }
+        
+      }
+      console.log('hllo')
     }
   },
 

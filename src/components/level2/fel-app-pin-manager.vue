@@ -176,7 +176,7 @@ export default {
 
           _algo.iv = arrayBufferToString(_algo.iv)
 
-          // store 'important_welcome_algo' for testing (iv is value to be given by user)
+          // not store 'important_welcome_algo' for testing (iv is value to be given by user)
           // qs.localStorage.set('important_welcome_algo', _algo)
 
           const encrypted_decoded_text = arrayBufferToString(encrypted_val) // To save it (convert it to string)
