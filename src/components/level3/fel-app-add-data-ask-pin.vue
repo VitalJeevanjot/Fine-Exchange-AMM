@@ -27,7 +27,7 @@
           </div>
 
           <div class="q-gutter-md row justify-center q-pa-md">
-            <q-btn label="enter" :disable="enter_button_disable" id="enterBtn" @click="enter_app" rounded class="text-white shadow-up-1 btn-disabled" icon="check_circle"/>
+            <q-btn label="enter" :disable="enter_button_disable" id="enterBtn" @click="encrypt_data" rounded class="text-white shadow-up-1 btn-disabled" icon="check_circle"/>
           </div>
 
           <div class="row q-pb-md">
@@ -101,11 +101,23 @@ export default {
       qs,
       pic_regex,
       val_binding_pic,
-      enter_button_disable,
+      enter_button_disable
     }
   },
 
   methods: {
+    strToArrayBuffer(str) {
+        var buf = new ArrayBuffer(str.length * 2);
+        var bufView = new Uint16Array(buf);
+
+        for (var i = 0, strLen = str.length; i < strLen; i++) {
+          bufView[i] = str.charCodeAt(i);
+        }
+        return buf;
+    },
+    arrayBufferToString(buf) {
+      return String.fromCharCode.apply(null, new Uint16Array(buf));
+    },
     getData() {
         console.log(this["key1"])
         console.log(this["value1"])
@@ -118,6 +130,44 @@ export default {
         console.log(this.key5)
         console.log(this.value5)
       },
+    async check_pic() {
+      const _algo = { 
+        name: "AES-GCM", 
+        iv: this.strToArrayBuffer(this.pic + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
+      }
+
+      let key_stored = this.qs.localStorage.getItem("important_welcome_key")
+      let vlk = []
+      vlk = Object.values(key_stored)
+
+      let imported_key = await window.crypto.subtle.importKey(
+        'raw',
+        new Uint8Array(vlk),
+        'AES-GCM',
+        true,
+        ['encrypt', 'decrypt']
+      )
+
+      try {
+        let decrypted = await window.crypto.subtle.decrypt(
+          _algo, 
+          imported_key,
+          this.strToArrayBuffer(this.qs.localStorage.getItem("important_welcome_edec"))
+        );
+        console.log(this.arrayBufferToString(decrypted))
+      } catch (e) {
+        console.log(e)
+        return false
+      }
+      console.log('hllo')
+      return true
+    },
+    async encrypt_data() {
+      if(!this.check_pic(this.pic)) {
+          // print something, show something
+          return
+      }
+    }
   },
 
   async mounted() {
