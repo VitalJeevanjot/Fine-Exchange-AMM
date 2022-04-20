@@ -7,7 +7,7 @@
   </q-btn>
 
 
-  <q-dialog v-model="felAddNewApiDialog" persistent>
+  <q-dialog v-model="felAddNewApiDialog" persistent v-on:savedApiData="dataSaved">
     <q-card class="card-in-level-3-dialog">
       <q-card-section>
         <q-btn icon='las la-angle-left' flat dense v-close-popup/>
@@ -143,6 +143,17 @@ export default {
       val_binding_api_name,
       val_binding_api_key,
       val_binding_api_secret
+    }
+  },
+  methods: {
+    dataSaved() {
+      console.log('data saved got rannn')
+      this.api_name = ''
+      this.api_key = ''
+      this.api_secret = ''
+      this.api_name = ''
+      // keep recently selected exchange until setup run again
+      this.felAddNewApiDialog = false
     }
   }
 }

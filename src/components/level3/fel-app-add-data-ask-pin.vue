@@ -8,7 +8,8 @@
   <q-dialog v-model="felAppPinManagerDialog" persistent>
     <q-card class="card-in-level-2-dialog">
       <q-card-section class="row justify-center q-pb-none">
-          <div class="text-h6">Encrypt With <span class="text-subtitle1">P.I.C.</span> (Personal Identification Characters)</div>
+          
+          <div class="text-h6"><q-btn icon='las la-angle-left' flat dense v-close-popup/> Encrypt With <span class="text-subtitle1">P.I.C.</span> (Personal Identification Characters)</div>
         </q-card-section>
 
         <q-card-section>
@@ -79,6 +80,7 @@ export default {
       _hint: 'Format: (X = 0-9/A-Z) X-X-X-X',
       _show_error: false,
       _error_msg: '',
+      _type: 'password',
       _rules: [val => val.replace(pic_regex.value, "").length == 4 || "Input must be valid !"]
     })
 
@@ -165,6 +167,11 @@ export default {
 
       if(!await this.check_pic(_algo, imported_key)) {
           // print something, show something that PIC is incorrect
+          this.qs.notify({
+            message: 'Please enter correct Code !',
+            color: 'red-7',
+            icon: 'warning'
+          })
           return
       }
       for (let index = 1; index <= 5; index++) {
@@ -185,7 +192,9 @@ export default {
         }
         
       }
-      console.log('hllo')
+      this.pic = ''
+      this.felAppPinManagerDialog = false
+      this.$emit('savedApiData')
     }
   },
 
