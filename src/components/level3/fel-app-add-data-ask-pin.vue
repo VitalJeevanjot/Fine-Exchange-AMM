@@ -170,24 +170,27 @@ export default {
           this.qs.notify({
             message: 'Please enter correct Code !',
             color: 'red-7',
-            icon: 'warning'
+            icon: 'warning',
+            timeout: 2500
           })
           return
       }
       for (let index = 1; index <= 5; index++) {
+        var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
-          var __algo = {}
-          Object.assign(__algo, _algo)
-          const encrypted_val = await window.crypto.subtle.encrypt(
-              __algo,
-              imported_key, 
-              this.strToArrayBuffer(this['value'+index])
-            );
-  
-          __algo.iv = this.arrayBufferToString(__algo.iv)
-  
-          const encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
-
+          if(!(this['key'+index].includes('plain_'))) {
+            var __algo = {}
+            Object.assign(__algo, _algo)
+            const encrypted_val = await window.crypto.subtle.encrypt(
+                __algo,
+                imported_key, 
+                this.strToArrayBuffer(this['value'+index])
+              );
+    
+            __algo.iv = this.arrayBufferToString(__algo.iv)
+    
+            encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
+          }
           this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
         }
         

@@ -79,13 +79,13 @@ export default {
     
     const random_val_as_id = window.crypto.randomUUID()
     const data_to_save_binding = ref({
-      'key1': `api_data_api_name_${random_val_as_id}`,
+      'key1': `api_data_api_name_plain_pretext_${random_val_as_id}`,
       'value1': api_name,
-      'key2': `api_data_api_key_${random_val_as_id}`,
+      'key2': `api_data_api_key_pretext_${random_val_as_id}`,
       'value2': api_key,
-      'key3': `api_data_api_secret_${random_val_as_id}`,
+      'key3': `api_data_api_secret_pretext_${random_val_as_id}`,
       'value3': api_secret,
-      'key4': `api_data_exchange_name_${random_val_as_id}`,
+      'key4': `api_data_exchange_name_pretext_${random_val_as_id}`,
       'value4': exchange_name,
       'disable_btn': disable_add_button
     })
