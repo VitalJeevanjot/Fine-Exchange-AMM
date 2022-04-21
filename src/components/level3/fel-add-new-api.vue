@@ -7,7 +7,7 @@
   </q-btn>
 
 
-  <q-dialog v-model="felAddNewApiDialog" persistent v-on:savedApiData="dataSaved">
+  <q-dialog v-model="felAddNewApiDialog" persistent>
     <q-card class="card-in-level-3-dialog">
       <q-card-section>
         <q-btn icon='las la-angle-left' flat dense v-close-popup/>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="row justify-center">
-          <felAppAddDataAskPin v-bind="data_to_save_binding"/>
+          <felAppAddDataAskPin v-bind="data_to_save_binding" @savedApiData="dataSaved"/>
         </div>
 
       </q-card-section>
