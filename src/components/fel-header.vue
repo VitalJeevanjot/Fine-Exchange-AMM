@@ -30,6 +30,8 @@
 .card-in-level-2-dialog
   background-color: #ECECEC
   border-radius: 30px !important
+  min-width: 300px !important
+  width: 70vw !important
 
 .card-in-level-3-dialog
   background-color: #E0E0E0 
