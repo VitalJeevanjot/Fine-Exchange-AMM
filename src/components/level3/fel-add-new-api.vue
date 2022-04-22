@@ -78,20 +78,9 @@ export default {
 
     const disable_add_button = ref(false)
     
-    const random_val_as_id = window.crypto.randomUUID()
-    const data_to_save_binding = ref({
-      'key1': `api_data_api_name_plain_pretext_${random_val_as_id}`,
-      'value1': api_name,
-      'key2': `api_data_api_key_pretext_${random_val_as_id}`,
-      'value2': api_key,
-      'key3': `api_data_api_secret_pretext_${random_val_as_id}`,
-      'value3': api_secret,
-      'key4': `api_data_exchange_name_pretext_${random_val_as_id}`,
-      'value4': exchange_name,
-      'key5': `api_data_date_plain_pretext_${random_val_as_id}`,
-      'value5': updated_date,
-      'disable_btn': disable_add_button
-    })
+    const random_val_as_id = ref(null)
+    
+    const data_to_save_binding = ref(null)
 
     const val_binding_api_name = ref({
       _style: 'max-width: 70vw; min-width: 300px;',
@@ -132,6 +121,21 @@ export default {
         updated_date.value = new Date().toLocaleString('en-GB'); // update date here
       } else {
         disable_add_button.value = false
+
+        random_val_as_id.value = window.crypto.randomUUID()
+        data_to_save_binding.value = {
+          'key1': `api_data_api_name_plain_pretext_${random_val_as_id.value}`,
+          'value1': api_name,
+          'key2': `api_data_api_key_pretext_${random_val_as_id.value}`,
+          'value2': api_key,
+          'key3': `api_data_api_secret_pretext_${random_val_as_id.value}`,
+          'value3': api_secret,
+          'key4': `api_data_exchange_name_pretext_${random_val_as_id.value}`,
+          'value4': exchange_name,
+          'key5': `api_data_date_plain_pretext_${random_val_as_id.value}`,
+          'value5': updated_date,
+          'disable_btn': disable_add_button
+        }
       }
     })
 
@@ -139,6 +143,7 @@ export default {
     return {
       felAddNewApiDialog,
       exchange_name,
+      random_val_as_id,
       api_name,
       api_key,
       api_secret,
@@ -152,7 +157,7 @@ export default {
   },
   methods: {
     dataSaved() {
-      console.log('data saved got rannn')
+      console.log('data saved ran')
       this.api_name = ''
       this.api_key = ''
       this.api_secret = ''
