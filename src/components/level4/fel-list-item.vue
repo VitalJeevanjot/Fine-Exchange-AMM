@@ -3,7 +3,7 @@
     style="height: 50vh; min-height: 400px; max-width: 100vw;"
     > 
     <q-list>
-      <q-item-label header>Saved API Credentials</q-item-label>
+      <q-item-label header>Saved API Credentials ({{saved_data.length}})</q-item-label>
       <q-item clickable style="border-radius: 10px; margin-right: 1rem;" v-for="(data, index) in saved_data" :key="index">
         <q-item-section top>
           <q-item-label lines="1">
