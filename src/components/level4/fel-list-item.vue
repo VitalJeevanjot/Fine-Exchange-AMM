@@ -12,7 +12,7 @@
           </q-item-label>
         </q-item-section>
         <q-tem-section top side v-show="show_delete">
-          <felAppDeleteDataAskPin v-bind="val_binding = {unique_id: data.api_unique_id}"/>
+          <felAppDeleteDataAskPin v-bind="val_binding = {unique_id: data.api_unique_id}" @afterAPIDeletion="$emit('commandToUpdate')"/>
         </q-tem-section>
       </q-item>
     </q-list>
@@ -34,6 +34,8 @@ export default {
     return {
       val_binding
     }
+  },
+  methods: {
   }
 }
 </script>

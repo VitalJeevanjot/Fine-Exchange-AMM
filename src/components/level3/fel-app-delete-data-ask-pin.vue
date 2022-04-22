@@ -158,36 +158,18 @@ export default {
           return
       }
       
-      this.$emit('beforeSavingData')
+      var get_saved_all_keys = this.qs.localStorage.getAllKeys()
 
-      for (let index = 1; index <= 5; index++) {
-        var encrypted_decoded_text = this['value'+index]
-        if(!!this['key'+index] && !!this['value'+index]) {
-          if(!(this['key'+index].includes('plain_'))) {
-            var __algo = {}
-            Object.assign(__algo, _algo)
-            const encrypted_val = await window.crypto.subtle.encrypt(
-                __algo,
-                imported_key, 
-                this.strToArrayBuffer(this['value'+index])
-              );
-    
-            __algo.iv = this.arrayBufferToString(__algo.iv)
-    
-            encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
-          }
-          this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
+      for (let index = 0; index < get_saved_all_keys.length; index++) {
+        if(get_saved_all_keys[index].includes(this.unique_id)) {
+          this.qs.localStorage.remove(get_saved_all_keys[index])
         }
-        
       }
+
       this.pic = ''
       this.felAppPinManagerDialog = false
-      this.$emit('savedApiData')
+      this.$emit('afterAPIDeletion')
     }
   },
-
-  async mounted() {
-
-  }
 }
 </script>

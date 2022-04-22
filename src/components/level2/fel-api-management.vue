@@ -20,7 +20,7 @@
             
         </q-bar>
         <q-card-section>
-            <felListItem v-bind="val_list_data_binding"/>
+            <felListItem v-bind="val_list_data_binding" @commandToUpdate="updateData"/>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -67,12 +67,12 @@ export default {
   },
   data () {
     return {
-      val_list_data_binding: this.updateData()
+      val_list_data_binding: ''
     }
   },
   methods: {
     updateData() {
-      return {saved_data: this.get_saved_api_data(), show_delete: true}
+      this.val_list_data_binding = {saved_data: this.get_saved_api_data(), show_delete: true}
     }
   }
 }
