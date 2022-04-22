@@ -159,6 +159,8 @@ export default {
       this.api_name = ''
       // keep recently selected exchange until setup run again
       this.felAddNewApiDialog = false
+
+      this.$emit('reloadApiManagement')
     },
     updateDate() {
       this.updated_date = new Date().toLocaleString('en-GB'); // update date here

@@ -8,7 +8,7 @@
   <q-dialog v-model="felApiManagementDialog" persistent>
       <q-card class="card-in-level-2-dialog" style="min-width: 300px">
         <q-bar>
-          <felAddNewApi/>
+          <felAddNewApi @reloadApiManagement="updateData"/>
           <!-- <q-btn name="folder_delete" dense flat>
             <q-tooltip>
               Delete All API(s) (Irreversible Operation)
@@ -70,5 +70,10 @@ export default {
       val_list_data_binding: {saved_data: this.get_saved_api_data(), show_delete: true}
     }
   },
+  methods: {
+    updateData() {
+      this.val_list_data_binding = {saved_data: this.get_saved_api_data(), show_delete: true}
+    }
+  }
 }
 </script>
