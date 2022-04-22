@@ -61,7 +61,10 @@ export default {
             })
           }
         }
-        return api_name_keys
+
+        return api_name_keys.sort(function(a,b){
+          return a.api_update_date.localeCompare(b.api_update_date);
+        }).reverse();
       }
     }
   },
