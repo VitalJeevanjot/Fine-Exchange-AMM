@@ -130,7 +130,7 @@ export default {
           'value2': api_key,
           'key3': `api_data_api_secret_pretext_${random_val_as_id.value}`,
           'value3': api_secret,
-          'key4': `api_data_exchange_name_pretext_${random_val_as_id.value}`,
+          'key4': `api_data_exchange_name_plain_pretext_${random_val_as_id.value}`,
           'value4': exchange_name,
           'key5': `api_data_date_plain_pretext_${random_val_as_id.value}`,
           'value5': updated_date,

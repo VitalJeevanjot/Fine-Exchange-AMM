@@ -9,8 +9,11 @@
           <q-item-label lines="1">
             <span class="text-weight-medium">{{data.api_name}}</span>
           </q-item-label>
+          <q-item-label lines="1">
+            <span class="text-grey-9 text-caption">{{data.api_exchange_name}}</span>
+          </q-item-label>
           <q-item-label caption lines="1">
-            <span class="text-grey-8">{{data.api_update_date}}</span>
+            <span class="text-grey-6">{{data.api_update_date}}</span>
           </q-item-label>
         </q-item-section>
         <q-tem-section top side v-show="show_delete">
