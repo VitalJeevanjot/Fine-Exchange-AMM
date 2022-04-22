@@ -12,7 +12,7 @@
           </q-item-label>
         </q-item-section>
         <q-tem-section top side v-show="show_delete">
-          <felAppDeleteDataAskPin/>
+          <felAppDeleteDataAskPin v-bind="val_binding = {unique_id: data.api_unique_id}"/>
         </q-tem-section>
       </q-item>
     </q-list>
@@ -30,7 +30,10 @@ export default {
   components: {felAppDeleteDataAskPin},
   props: ['saved_data', 'show_delete'],
   setup () {
-    return {}
+    const val_binding = {unique_id: 'hello'}
+    return {
+      val_binding
+    }
   }
 }
 </script>

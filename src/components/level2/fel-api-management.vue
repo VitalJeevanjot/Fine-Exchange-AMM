@@ -56,7 +56,8 @@ export default {
             let uniq_id = all_keys[i].replace('api_data_api_name_plain_pretext_', '')
             api_name_keys.push({
               api_name: qs.localStorage.getItem(all_keys[i]),
-              api_update_date: qs.localStorage.getItem('api_data_date_plain_pretext_' + uniq_id)
+              api_update_date: qs.localStorage.getItem('api_data_date_plain_pretext_' + uniq_id),
+              api_unique_id: uniq_id
             })
           }
         }

@@ -3,7 +3,6 @@
 
   <div class="row justify-center">
     <q-btn icon="delete" round size="0.9rem" @click="felAppPinManagerDialog=true"/>
-    <!-- <q-btn flat icon="add" :disable="disable_btn" class="bg-green text-grey-3 q-mt-md" label="Add" rounded @click="felAppPinManagerDialog=true"/> -->
   </div>
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
@@ -29,7 +28,7 @@
           </div>
 
           <div class="q-gutter-md row justify-center q-pa-md">
-            <q-btn label="delete" :disable="enter_button_disable" id="enterBtn" @click="encrypt_data" rounded class="text-white shadow-up-1 btn-disabled" icon="check_circle"/>
+            <q-btn label="delete" :disable="enter_button_disable" id="enterBtn" @click="delete_encrypted_data" rounded class="text-white shadow-up-1 btn-disabled" icon="check_circle"/>
           </div>
 
           <div class="row q-pb-md">
@@ -56,17 +55,7 @@ export default {
   components: {
     felInput
   },
-  props: ['key1', 
-  'value1', 
-  'key2', 
-  'value2', 
-  'key3', 
-  'value3', 
-  'key4', 
-  'value4', 
-  'key5', 
-  'value5',
-  'disable_btn'],
+  props: ['unique_id'],
   emits: ['savedApiData'],
   setup () {
     const qs = useQuasar()
@@ -136,7 +125,10 @@ export default {
       }
       return true
     },
-    async encrypt_data() {
+    async delete_encrypted_data() {
+      // console.log("uniqueIDD")
+      // console.log(this.unique_id)
+      // console.log("uniqueIDD//")
       const _algo = { 
         name: "AES-GCM", 
         iv: this.strToArrayBuffer(this.pic + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
