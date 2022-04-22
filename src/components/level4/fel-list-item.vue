@@ -12,7 +12,7 @@
           </q-item-label>
         </q-item-section>
         <q-tem-section top side v-show="show_delete">
-          <q-btn icon="delete" round size="0.7rem" flat/>
+          <felAppDeleteDataAskPin/>
         </q-tem-section>
       </q-item>
     </q-list>
@@ -20,8 +20,14 @@
 </template>
 
 <script>
+import { useQuasar } from "quasar"
+import { ref } from "vue"
+
+import felAppDeleteDataAskPin from 'components/level3/fel-app-delete-data-ask-pin.vue'
+
 export default {
   name: 'felListItem',
+  components: {felAppDeleteDataAskPin},
   props: ['saved_data', 'show_delete'],
   setup () {
     return {}

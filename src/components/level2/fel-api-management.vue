@@ -6,7 +6,7 @@
     </q-tooltip>
   </q-btn>
   <q-dialog v-model="felApiManagementDialog" persistent>
-      <q-card class="card-in-level-2-dialog" style="min-width: 300px">
+      <q-card class="card-in-level-2-dialog" style="min-width: 300px;">
         <q-bar>
           <felAddNewApi @reloadApiManagement="updateData"/>
           <!-- <q-btn name="folder_delete" dense flat>
@@ -60,19 +60,18 @@ export default {
             })
           }
         }
-        console.log(api_name_keys)
         return api_name_keys
       }
     }
   },
   data () {
     return {
-      val_list_data_binding: {saved_data: this.get_saved_api_data(), show_delete: true}
+      val_list_data_binding: this.updateData()
     }
   },
   methods: {
     updateData() {
-      this.val_list_data_binding = {saved_data: this.get_saved_api_data(), show_delete: true}
+      return {saved_data: this.get_saved_api_data(), show_delete: true}
     }
   }
 }

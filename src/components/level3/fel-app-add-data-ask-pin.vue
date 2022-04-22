@@ -7,7 +7,7 @@
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
     <q-card class="card-in-level-2-dialog">
-      <q-card-section class="row justify-center q-pb-none">
+      <q-card-section class="row q-pb-none">
           
           <div class="text-h6"><q-btn icon='las la-angle-left' flat dense v-close-popup/> Encrypt With <span class="text-subtitle1">P.I.C.</span> (Personal Identification Characters)</div>
         </q-card-section>
@@ -15,7 +15,7 @@
         <q-card-section>
           <div class="row q-pb-md">
             <div class="col-2 text-center"><q-icon name="info_outline" size="1.5em"/></div>
-            <div class="col-10 q-pr-sm">Personal Indentification Characters will encrypt & 
+            <div class="col-10 q-pr-sm">Personal Indentification Characters or Code will encrypt & 
               secure the local data used by this app to some extent. DO NOT FORGET THESE 4 CHARACTERS! 
               The characters are hidden & each appended with one extra character (-). </div>
           </div>
@@ -121,18 +121,6 @@ export default {
     arrayBufferToString(buf) {
       return String.fromCharCode.apply(null, new Uint16Array(buf));
     },
-    getData() {
-        console.log(this["key1"])
-        console.log(this["value1"])
-        console.log(this.key2)
-        console.log(this.value2)
-        console.log(this.key3)
-        console.log(this.value3)
-        console.log(this.key4)
-        console.log(this.value4)
-        console.log(this.key5)
-        console.log(this.value5)
-      },
     async check_pic(_algo, imported_key) {
       try {
         let decrypted = await window.crypto.subtle.decrypt(

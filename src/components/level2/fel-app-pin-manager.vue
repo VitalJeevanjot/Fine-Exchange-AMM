@@ -8,7 +8,7 @@
         <q-card-section>
           <div class="row q-pb-md">
             <div class="col-2 text-center"><q-icon name="info_outline" size="1.5em"/></div>
-            <div class="col-10 q-pr-sm">Personal Indentification Characters will encrypt & 
+            <div class="col-10 q-pr-sm">Personal Indentification Characters or Code will encrypt & 
               secure the local data used by this app to some extent. DO NOT FORGET THESE 4 CHARACTERS! 
               The characters are hidden & each appended with one extra character (-). </div>
           </div>
