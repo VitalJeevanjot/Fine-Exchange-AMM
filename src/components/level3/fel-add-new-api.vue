@@ -74,6 +74,7 @@ export default {
     const api_name = ref('')
     const api_key = ref('')
     const api_secret = ref('')
+    const updated_date = ref(null);
 
     const disable_add_button = ref(false)
     
@@ -87,6 +88,8 @@ export default {
       'value3': api_secret,
       'key4': `api_data_exchange_name_pretext_${random_val_as_id}`,
       'value4': exchange_name,
+      'key5': `api_data_date_plain_pretext_${random_val_as_id}`,
+      'value5': updated_date,
       'disable_btn': disable_add_button
     })
 
@@ -126,6 +129,7 @@ export default {
     watchEffect(() => {
       if(api_name.value.length < 4 || !api_key.value || !api_secret.value) {
         disable_add_button.value = true
+        updated_date.value = new Date().toLocaleString('en-GB'); // update date here
       } else {
         disable_add_button.value = false
       }
@@ -138,6 +142,7 @@ export default {
       api_name,
       api_key,
       api_secret,
+      updated_date,
       data_to_save_binding,
       disable_add_button,
       val_binding_api_name,

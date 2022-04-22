@@ -6,7 +6,7 @@
     </q-tooltip>
   </q-btn>
   <q-dialog v-model="felApiManagementDialog" persistent>
-      <q-card class="card-in-level-2-dialog">
+      <q-card class="card-in-level-2-dialog" style="min-width: 300px">
         <q-bar>
           <felAddNewApi/>
           <!-- <q-btn name="folder_delete" dense flat>
@@ -20,9 +20,7 @@
             
         </q-bar>
         <q-card-section>
-          <div class="row justify-center">
-            Hello
-          </div>
+            <felListItem/>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -34,11 +32,13 @@
 
 <script>
 import felAddNewApi from 'components/level3/fel-add-new-api.vue';
+import felListItem from 'components/level4/fel-list-item.vue'
 import { ref } from "vue";
 export default {
   name: 'felApiManagement',
   components: {
-    felAddNewApi
+    felAddNewApi,
+    felListItem
   },
   setup () {
     const felApiManagementDialog = ref(false)

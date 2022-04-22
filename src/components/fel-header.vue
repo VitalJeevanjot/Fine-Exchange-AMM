@@ -29,7 +29,7 @@
 
 .card-in-level-2-dialog
   background-color: #ECECEC
-  border-radius: 40px !important
+  border-radius: 30px !important
 
 .card-in-level-3-dialog
   background-color: #E0E0E0 
