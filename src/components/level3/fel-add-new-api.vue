@@ -45,7 +45,7 @@
         </div>
 
         <div class="row justify-center">
-          <felAppAddDataAskPin v-bind="data_to_save_binding" @savedApiData="dataSaved"/>
+          <felAppAddDataAskPin v-bind="data_to_save_binding" @savedApiData="dataSaved" @beforeSavingData="updateDate"/>
         </div>
 
       </q-card-section>
@@ -159,6 +159,9 @@ export default {
       this.api_name = ''
       // keep recently selected exchange until setup run again
       this.felAddNewApiDialog = false
+    },
+    updateDate() {
+      this.updated_date = new Date().toLocaleString('en-GB'); // update date here
     }
   }
 }

@@ -176,6 +176,9 @@ export default {
           })
           return
       }
+      
+      this.$emit('beforeSavingData')
+
       for (let index = 1; index <= 5; index++) {
         var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
