@@ -67,7 +67,7 @@ export default {
   },
   data () {
     return {
-      val_list_data_binding: ''
+      val_list_data_binding: {saved_data: this.get_saved_api_data(), show_delete: true}
     }
   },
   methods: {
