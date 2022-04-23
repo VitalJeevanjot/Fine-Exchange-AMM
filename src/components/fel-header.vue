@@ -9,7 +9,7 @@
         <q-space />
 
         <felAppPinManager />
-        <felCreateTaskModal />
+        <felCreateTaskModal v-bind="val_bind_create_task" />
         <felSettingsModal />
         <felUserModal />
         <felHelpModal />
@@ -71,8 +71,9 @@ export default defineComponent ({
     }
   },
   setup () {
+    const val_bind_create_task = ref({show_in_header: true})
     return {
-    
+      val_bind_create_task
     }
   },
   mounted() {
