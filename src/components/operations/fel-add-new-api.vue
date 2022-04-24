@@ -84,16 +84,7 @@ export default {
     const data_to_save_binding = ref(null)
 
     const val_binding_exchanges_dropdown = ref({
-      options: [
-        {
-          value: 'https://base1/v2',
-          label: 'Fine Exchanges Mainnet'
-        },
-        {
-          value: 'https://base/v2',
-          label: 'Fine Exchanges Testnet'
-        }
-      ]
+      options: 'Exchanges'
     })
 
     const val_binding_api_name = ref({
