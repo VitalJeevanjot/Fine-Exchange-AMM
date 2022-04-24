@@ -16,8 +16,9 @@
 
       <q-card-section>
         <div class="row justify-center">
-          <felDropdownExchanges 
+          <felDropdown 
             v-model:model="exchange_name"
+            v-bind="val_binding_exchanges_dropdown"
           />
         </div>
 
@@ -58,13 +59,13 @@
 import { ref, watchEffect } from "vue"
 import felApiAddDataAskPin from 'src/components/level3/fel-api-add-data-ask-pin.vue'
 import felInput from 'components/level4/fel-input.vue'
-import felDropdownExchanges from 'components/level4/fel-dropdown-exchanges'
+import felDropdown from 'components/level4/fel-dropdown'
 export default {
   name: 'felAddNewApi',
   components: {
     felApiAddDataAskPin,
     felInput,
-    felDropdownExchanges
+    felDropdown
   },
   setup () {
     const felAddNewApiDialog = ref(false)
@@ -81,6 +82,19 @@ export default {
     const random_val_as_id = ref(null)
     
     const data_to_save_binding = ref(null)
+
+    const val_binding_exchanges_dropdown = ref({
+      options: [
+        {
+          value: 'https://base1/v2',
+          label: 'Fine Exchanges Mainnet'
+        },
+        {
+          value: 'https://base/v2',
+          label: 'Fine Exchanges Testnet'
+        }
+      ]
+    })
 
     const val_binding_api_name = ref({
       _style: 'max-width: 70vw; min-width: 300px;',
@@ -114,6 +128,7 @@ export default {
       _rules: [val => val.length >= 1 || "Please add api secret!"],
       _class: 'q-pt-sm'
     })
+    
 
     watchEffect(() => {
       if(api_name.value.length < 4 || !api_key.value || !api_secret.value) {
@@ -150,6 +165,7 @@ export default {
       updated_date,
       data_to_save_binding,
       disable_add_button,
+      val_binding_exchanges_dropdown,
       val_binding_api_name,
       val_binding_api_key,
       val_binding_api_secret
