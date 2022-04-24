@@ -17,16 +17,17 @@ import { ref } from 'vue'
 
 export default {
   name: 'felDropdownExchanges',
-  props: ['model'],
+  props: ['model', 'options'],
   emits: ['update:model'],
   setup () {
     return {
-      options: [
-        'Fine Exchanges Mainnet', 'Fine Exchanges Testnet'
-      ]
+      // options: [
+      //   'Fine Exchanges Mainnet', 'Fine Exchanges Testnet'
+      // ]
+
       // options: [
       //   {
-      //     value: 'https://base/v2',
+      //     value: 'https://base1/v2',
       //     label: 'Fine Exchanges Mainnet'
       //   },
       //   {

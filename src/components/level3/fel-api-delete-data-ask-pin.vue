@@ -51,7 +51,7 @@ import { ref, watchEffect } from "vue"
 import felInput from 'components/level4/fel-input.vue'
 
 export default {
-  name: 'felAppDeleteDataAskPin',
+  name: 'felApiDeleteDataAskPin',
   components: {
     felInput
   },

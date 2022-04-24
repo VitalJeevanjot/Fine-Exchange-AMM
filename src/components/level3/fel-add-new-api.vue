@@ -45,7 +45,7 @@
         </div>
 
         <div class="row justify-center">
-          <felAppAddDataAskPin v-bind="data_to_save_binding" @savedApiData="dataSaved" @beforeSavingData="updateDate"/>
+          <felApiAddDataAskPin v-bind="data_to_save_binding" @savedApiData="dataSaved" @beforeSavingData="updateDate"/>
         </div>
 
       </q-card-section>
@@ -56,13 +56,13 @@
 
 <script>
 import { ref, watchEffect } from "vue"
-import felAppAddDataAskPin from 'components/level3/fel-app-add-data-ask-pin.vue'
+import felApiAddDataAskPin from 'src/components/level3/fel-api-add-data-ask-pin.vue'
 import felInput from 'components/level4/fel-input.vue'
 import felDropdownExchanges from 'components/level4/fel-dropdown-exchanges'
 export default {
   name: 'felAddNewApi',
   components: {
-    felAppAddDataAskPin,
+    felApiAddDataAskPin,
     felInput,
     felDropdownExchanges
   },

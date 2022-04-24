@@ -16,14 +16,14 @@
             </span>
           </q-item-label>
           <q-item-label>
-            <span class="text-grey-9 text-caption">{{data.api_exchange_name}}</span>
+            <span class="text-grey-9 text-caption">{{data.api_exchange_name.label}}</span>
           </q-item-label>
           <q-item-label caption>
             <span class="text-grey-6">{{data.api_update_date}}</span>
           </q-item-label>
         </q-item-section>
         <q-tem-section top side v-show="show_delete">
-          <felAppDeleteDataAskPin v-bind="val_binding = {unique_id: data.api_unique_id}" @afterAPIDeletion="$emit('commandToUpdate')"/>
+          <felApiDeleteDataAskPin v-bind="val_binding = {unique_id: data.api_unique_id}" @afterAPIDeletion="$emit('commandToUpdate')"/>
         </q-tem-section>
       </q-item>
     </q-list>
@@ -34,11 +34,11 @@
 import { useQuasar } from "quasar"
 import { ref } from "vue"
 
-import felAppDeleteDataAskPin from 'components/level3/fel-app-delete-data-ask-pin.vue'
+import felApiDeleteDataAskPin from 'src/components/level3/fel-api-delete-data-ask-pin.vue'
 
 export default {
   name: 'felListItem',
-  components: {felAppDeleteDataAskPin},
+  components: {felApiDeleteDataAskPin},
   props: ['saved_data', 'show_delete'],
   setup () {
     const val_binding = {unique_id: 'hello'}
