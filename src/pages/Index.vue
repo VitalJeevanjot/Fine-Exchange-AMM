@@ -12,7 +12,7 @@
 
 <script>
 import { ref, defineComponent } from "vue";
-import felCreateTaskModal from "components/level1/fel-create-task-modal.vue"
+import felCreateTaskModal from "src/components/operations/fel-create-task-modal.vue"
 
 
 export default defineComponent({

@@ -32,8 +32,8 @@
 
 <script>
 import { useQuasar } from "quasar"
-import felAddNewApi from 'components/level3/fel-add-new-api.vue';
-import felListItem from 'components/level4/fel-list-item.vue'
+import felAddNewApi from 'components/operations/fel-add-new-api.vue';
+import felListItem from 'components/rawElements/fel-list-item.vue'
 import { ref } from "vue";
 export default {
   name: 'felApiManagement',

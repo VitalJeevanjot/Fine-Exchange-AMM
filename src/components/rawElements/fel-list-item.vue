@@ -34,7 +34,7 @@
 import { useQuasar } from "quasar"
 import { ref } from "vue"
 
-import felApiDeleteDataAskPin from 'src/components/level3/fel-api-delete-data-ask-pin.vue'
+import felApiDeleteDataAskPin from 'src/components/pinManagers/fel-api-delete-data-ask-pin.vue'
 
 export default {
   name: 'felListItem',

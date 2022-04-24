@@ -19,7 +19,7 @@
 
 <script>
 
-import felApiManagement from 'components/level2/fel-api-management.vue';
+import felApiManagement from 'components/operations/fel-api-management.vue';
 import { ref } from "vue";
 
 export default {

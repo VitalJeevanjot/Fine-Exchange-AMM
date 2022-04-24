@@ -11,7 +11,7 @@
         <felAppPinManager />
         <felCreateTaskModal v-bind="val_bind_create_task" />
         <felSettingsModal />
-        <felUserModal />
+        <felUserAccountModal />
         <felHelpModal />
 
 
@@ -46,12 +46,12 @@
 <script>
 import { defineComponent, ref } from "vue";
 
-import felHelpModal from "components/level1/fel-help-modal.vue"
-import felSettingsModal from "components/level1/fel-settings-modal.vue"
-import felUserModal from "components/level1/fel-user-modal.vue"
-import felCreateTaskModal from "components/level1/fel-create-task-modal.vue"
+import felHelpModal from "components/miscellaneous/fel-help-modal.vue"
+import felSettingsModal from "src/components/operations/fel-settings-modal.vue"
+import felUserAccountModal from "src/components/information/fel-user-account-modal.vue"
+import felCreateTaskModal from "src/components/operations/fel-create-task-modal.vue"
 
-import felAppPinManager from "components/level2/fel-app-pin-manager.vue"
+import felAppPinManager from "src/components/pinManagers/fel-app-pin-manager.vue"
 
 
 
@@ -60,7 +60,7 @@ export default defineComponent ({
   components: {
     felHelpModal,
     felSettingsModal,
-    felUserModal,
+    felUserAccountModal,
     felCreateTaskModal,
     felAppPinManager
   },

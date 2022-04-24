@@ -10,7 +10,7 @@
 <script>
 
 export default {
-  name: 'felUserModal',
+  name: 'felUserAccountModal',
   setup () {
     return {}
   }

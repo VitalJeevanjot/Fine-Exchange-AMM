@@ -57,9 +57,9 @@
 
 <script>
 import { ref, watchEffect } from "vue"
-import felApiAddDataAskPin from 'src/components/level3/fel-api-add-data-ask-pin.vue'
-import felInput from 'components/level4/fel-input.vue'
-import felDropdown from 'components/level4/fel-dropdown'
+import felApiAddDataAskPin from 'components/pinManagers/fel-api-add-data-ask-pin.vue'
+import felInput from 'components/rawElements/fel-input.vue'
+import felDropdown from 'components/rawElements/fel-dropdown'
 export default {
   name: 'felAddNewApi',
   components: {

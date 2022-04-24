@@ -2,14 +2,14 @@
   <div>
 
   <div class="row justify-center">
-    <q-btn flat icon="add" :disable="disable_btn" class="bg-green text-grey-3 q-mt-md" label="Add" rounded @click="felAppPinManagerDialog=true"/>
+    <q-btn icon="delete" flat round size="0.9rem" @click="felAppPinManagerDialog=true"/>
   </div>
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
     <q-card class="card-in-level-2-dialog">
       <q-card-section class="row q-pb-none">
           
-          <div class="text-h6"><q-btn icon='las la-angle-left' flat dense v-close-popup/> Encrypt With <span class="text-subtitle1">P.I.C.</span> (Personal Identification Characters)</div>
+          <div class="text-h6"><q-btn icon='las la-angle-left' flat dense v-close-popup/> Confirm Your <span class="text-subtitle1">P.I.C.</span> To Delete It</div>
         </q-card-section>
 
         <q-card-section>
@@ -28,7 +28,7 @@
           </div>
 
           <div class="q-gutter-md row justify-center q-pa-md">
-            <q-btn label="enter" :disable="enter_button_disable" id="enterBtn" @click="encrypt_data" rounded class="text-white shadow-up-1 btn-disabled" icon="check_circle"/>
+            <q-btn label="delete" :disable="enter_button_disable" id="enterBtn" @click="delete_encrypted_data" rounded class="text-white shadow-up-1 btn-disabled" icon="check_circle"/>
           </div>
 
           <div class="row q-pb-md">
@@ -48,24 +48,14 @@
 import { useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
 
-import felInput from 'components/level4/fel-input.vue'
+import felInput from 'components/rawElements/fel-input.vue'
 
 export default {
-  name: 'felApiAddDataAskPin',
+  name: 'felApiDeleteDataAskPin',
   components: {
     felInput
   },
-  props: ['key1', 
-  'value1', 
-  'key2', 
-  'value2', 
-  'key3', 
-  'value3', 
-  'key4', 
-  'value4', 
-  'key5', 
-  'value5',
-  'disable_btn'],
+  props: ['unique_id'],
   emits: ['savedApiData'],
   setup () {
     const qs = useQuasar()
@@ -94,7 +84,7 @@ export default {
         return
       }
       enter_button_disable.value = false
-      document.getElementById('enterBtn').style.backgroundColor = 'rgb(88,179,154)'
+      document.getElementById('enterBtn').style.backgroundColor = 'rgb(215,89,89)'
 
     });
 
@@ -135,7 +125,10 @@ export default {
       }
       return true
     },
-    async encrypt_data() {
+    async delete_encrypted_data() {
+      // console.log("uniqueIDD")
+      // console.log(this.unique_id)
+      // console.log("uniqueIDD//")
       const _algo = { 
         name: "AES-GCM", 
         iv: this.strToArrayBuffer(this.pic + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
@@ -165,36 +158,18 @@ export default {
           return
       }
       
-      this.$emit('beforeSavingData')
+      var get_saved_all_keys = this.qs.localStorage.getAllKeys()
 
-      for (let index = 1; index <= 5; index++) {
-        var encrypted_decoded_text = this['value'+index]
-        if(!!this['key'+index] && !!this['value'+index]) {
-          if(!(this['key'+index].includes('plain_'))) {
-            var __algo = {}
-            Object.assign(__algo, _algo)
-            const encrypted_val = await window.crypto.subtle.encrypt(
-                __algo,
-                imported_key, 
-                this.strToArrayBuffer(this['value'+index])
-              );
-    
-            __algo.iv = this.arrayBufferToString(__algo.iv)
-    
-            encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
-          }
-          this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
+      for (let index = 0; index < get_saved_all_keys.length; index++) {
+        if(get_saved_all_keys[index].includes(this.unique_id)) {
+          this.qs.localStorage.remove(get_saved_all_keys[index])
         }
-        
       }
+
       this.pic = ''
       this.felAppPinManagerDialog = false
-      this.$emit('savedApiData')
+      this.$emit('afterAPIDeletion')
     }
   },
-
-  async mounted() {
-
-  }
 }
 </script>
