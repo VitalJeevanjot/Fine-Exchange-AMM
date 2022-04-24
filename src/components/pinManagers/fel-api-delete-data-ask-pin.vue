@@ -9,7 +9,7 @@
     <q-card class="card-in-level-2-dialog">
       <q-card-section class="row q-pb-none">
           
-          <div class="text-h6"><q-btn icon='las la-angle-left' flat dense v-close-popup/> Confirm Your <span class="text-subtitle1">P.I.C.</span> To Delete It</div>
+          <div class="text-h6"><q-btn icon='las la-angle-left' flat dense v-close-popup @click="pic=''"/> Confirm Your <span class="text-subtitle1">P.I.C.</span> To Delete It</div>
         </q-card-section>
 
         <q-card-section>

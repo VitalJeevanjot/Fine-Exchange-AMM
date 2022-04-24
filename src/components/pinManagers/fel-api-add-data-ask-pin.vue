@@ -9,7 +9,7 @@
     <q-card class="card-in-level-2-dialog">
       <q-card-section class="row q-pb-none">
           
-          <div class="text-h6"><q-btn icon='las la-angle-left' flat dense v-close-popup/> Encrypt With <span class="text-subtitle1">P.I.C.</span> (Personal Identification Characters)</div>
+          <div class="text-h6"><q-btn icon='las la-angle-left' flat dense v-close-popup @click="pic=''"/> Encrypt With <span class="text-subtitle1">P.I.C.</span> (Personal Identification Characters)</div>
         </q-card-section>
 
         <q-card-section>
