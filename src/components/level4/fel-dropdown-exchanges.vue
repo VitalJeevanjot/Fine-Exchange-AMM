@@ -26,12 +26,12 @@ export default {
       ]
       // options: [
       //   {
-      //     id: 'https://base/v2',
-      //     desc: 'Fine Exchanges Mainnet'
+      //     value: 'https://base/v2',
+      //     label: 'Fine Exchanges Mainnet'
       //   },
       //   {
-      //     id: 'https://base/v2',
-      //     desc: 'Fine Exchanges Testnet'
+      //     value: 'https://base/v2',
+      //     label: 'Fine Exchanges Testnet'
       //   }
       // ]
     }

@@ -4,9 +4,11 @@
     <q-btn
       @click="toggleFelHelpDialog"
       flat
-      round
+      rounded
       dense
-      icon="help"
+      icon="help_outline"
+      size="0.7rem"
+      label="help"
       class="q-mr-md"
     />
 

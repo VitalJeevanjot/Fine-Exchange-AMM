@@ -1,18 +1,24 @@
 <template>
   <q-scroll-area
-    style="height: 50vh; min-height: 400px; max-width: 100vw;"
+    style="height: 70vh; min-height: 400px; max-width: 100vw;"
     > 
     <q-list>
       <q-item-label header>Saved API Credentials ({{saved_data.length}})</q-item-label>
       <q-item clickable style="border-radius: 10px; margin-right: 1rem;" v-for="(data, index) in saved_data" :key="index">
         <q-item-section top>
-          <q-item-label lines="1">
-            <span class="text-weight-medium">{{data.api_name}}</span>
+          <q-item-label style="
+              width: 15rem;
+              white-space: nowrap; 
+              overflow: hidden;
+              text-overflow: ellipsis;">
+            <span class="text-weight-medium">
+              {{data.api_name}}
+            </span>
           </q-item-label>
-          <q-item-label lines="1">
+          <q-item-label>
             <span class="text-grey-9 text-caption">{{data.api_exchange_name}}</span>
           </q-item-label>
-          <q-item-label caption lines="1">
+          <q-item-label caption>
             <span class="text-grey-6">{{data.api_update_date}}</span>
           </q-item-label>
         </q-item-section>
