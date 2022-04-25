@@ -7,13 +7,12 @@
       no-caps
       rounded
       unelevated
-      color="grey-6"
       text-color="grey-1"
-      toggle-color="teal-9"
+      :toggle-color=_toggle_btn_color
       toggle-text-color="grey-1"
       :options="[
-        {label: 'Buy', value: 'one', color:'cyan-8'},
-        {label: 'Sell', value: 'two', color:'purple-8'}
+        {label: _label_1, value: _value_1, color: _btn_color1},
+        {label: _label_2, value: _value_2, color: _btn_color2}
       ]"
     />
     <q-chip size="xs" style="pointer-events: none; user-select: none;" class="text-caption text-cyan-9">{{_selected_value == 'one' ? 'Buy' : 'Sell'}}</q-chip>
@@ -24,7 +23,14 @@
 import { watchEffect } from '@vue/runtime-core'
 export default {
   name: 'felButtonToggle',
-  props: ['_selected_value', '_option1', '_option2'],
+  props: ['_selected_value', 
+  '_toggle_btn_color',
+  '_btn_color1', 
+  '_btn_color2', 
+  '_value_1',
+  '_value_2',
+  '_label_1',
+  '_label_2'],
   setup () {
     return {}
   },

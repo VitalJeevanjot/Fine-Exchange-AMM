@@ -19,6 +19,7 @@
           <!-- Add toggle for buy/sell -->
           <felButtonToggle
             v-model:_selected_value="selected_value"
+            v-bind="val_binding_toggle_buy_sell"
           />
           <!-- select pair :: show balance --> 
           <!-- Select API -->
@@ -61,9 +62,20 @@ export default {
       category: 'Select API'
     })
 
-    const selected_value = ref('one')
+    const selected_value = ref('buy')
 
     const seconds_interval = ref(1)
+
+    const val_binding_toggle_buy_sell = ref({
+      _toggle_btn_color: 'teal-9',
+      _btn_color1: 'teal-7',
+      _btn_color2: 'teal-7',
+      _value_1: 'buy',
+      _value_2: 'sell',
+      _label_1: 'Buy',
+      _label_2: 'Sell'
+    })
+
     const val_binding_seconds_interval = ref({
       _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
@@ -76,13 +88,15 @@ export default {
       _class: 'q-pt-sm'
     })
 
+
     return {
       felCreateNewTaskDialog,
+      selected_value,
+      val_binding_toggle_buy_sell,
       api_selected,
       val_binding_apis_dropdown,
       seconds_interval,
       val_binding_seconds_interval,
-      selected_value,
       create_new_task () {
         felCreateNewTaskDialog.value = true
         // var int = 0
