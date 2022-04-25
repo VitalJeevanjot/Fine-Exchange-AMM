@@ -42,7 +42,8 @@ export default {
     const felCreateNewTaskDialog = ref(false)
     const api_selected = ref('')
     const val_binding_apis_dropdown = ref({
-      options: 'APIs'
+      options: 'APIs',
+      category: 'Select API'
     })
     return {
       felCreateNewTaskDialog,

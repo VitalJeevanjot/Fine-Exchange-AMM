@@ -87,7 +87,8 @@ export default {
     const data_to_save_binding = ref(null)
 
     const val_binding_exchanges_dropdown = ref({
-      options: 'Exchanges'
+      options: 'Exchanges',
+      category: 'Select Exchange'
     })
 
     const val_binding_api_name = ref({

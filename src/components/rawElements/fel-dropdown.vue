@@ -13,7 +13,7 @@
       max-width: 500px;"
     rounded
     :options="theseOptions" 
-    label="Select Value">
+    :label="category">
 
     <template v-slot:option="scope">
       <q-item v-bind="scope.itemProps">
@@ -56,7 +56,7 @@ import { useQuasar } from "quasar"
 
 export default {
   name: 'felDropdown',
-  props: ['model', 'options'],
+  props: ['model', 'options', 'category'],
   emits: ['update:model'],
   setup () {
     const qs = useQuasar()
