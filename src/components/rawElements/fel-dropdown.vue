@@ -1,16 +1,49 @@
 <template>
   <div> 
+    <!-- @filter="filterFn" -->
+    <!-- use-input -->
     <q-select 
     standout="bg-grey-10 text-grey-1" 
     :model-value="model" 
     @update:modelValue="$emit('update:model', $event)"
     class="q-pb-sm"
-    style="min-width: 300px"
+    style="min-width: 300px; 
+      width: 50vw;"
     rounded
-    :options="getOptions()" 
-    label="Select Value" />
+    :options="theseOptions" 
+    label="Select Value">
+
+    <template v-slot:option="scope">
+      <q-item v-bind="scope.itemProps">
+        <q-item-section>
+          <q-item-label 
+          style="
+            width: 60rem
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;"
+          >{{ scope.opt.label }}</q-item-label>
+          <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+        </q-item-section>
+      </q-item>
+    </template>
+
+    </q-select>
   </div>
 </template>
+
+<style>
+/* .q-field__native > span {
+  width: 12rem;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.q-field__native > input {
+  position: absolute;
+} */
+</style>
+
 
 <script>
 
@@ -23,10 +56,31 @@ export default {
   setup () {
     const qs = useQuasar()
     return {
-      qs
+      qs,
+    }
+  },
+  data() {
+    return {
+      theseOptions: this.getOptions()
     }
   },
   methods: {
+    // filterFn (val, update) {
+    //   if (val === '') {
+    //     update(() => {
+    //       this.theseOptions = this.getOptions()
+
+    //       // here you have access to "ref" which
+    //       // is the Vue reference of the QSelect
+    //     })
+    //     return
+    //   }
+
+    //   update(() => {
+    //     const needle = val.toLowerCase()
+    //     this.theseOptions = this.getOptions().filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+    //   })
+    // },
     getOptions() {
       if(this.options == 'Exchanges') {
         return this.getExchanges()
@@ -47,19 +101,26 @@ export default {
       ]
     },
     getAPIs() {
-      var allAPIKeys = this.qs.localStorage.getAllKeys()
+      var all_keys = this.qs.localStorage.getAllKeys()
 
-      return [
-        {
-          value: 'https://base1/v2',
-          label: 'Fine Exchanges Mainnet'
-        },
-        {
-          value: 'https://base/v2',
-          label: 'Fine Exchanges Testnet'
+      let api_name_keys = []
+      for (let i = 0; i < all_keys.length; i++) {
+        if(all_keys[i].includes('api_data_api_name_plain_pretext_')) {
+          let uniq_id = all_keys[i].replace('api_data_api_name_plain_pretext_', '')
+          api_name_keys.push({
+            label: this.qs.localStorage.getItem(all_keys[i]),
+            description: this.qs.localStorage.getItem('api_data_exchange_name_plain_pretext_' + uniq_id).label,
+            api_key: this.qs.localStorage.getItem('api_data_api_key_pretext_' + uniq_id),
+            api_secret: this.qs.localStorage.getItem('api_data_api_secret_pretext_' + uniq_id),
+            api_update_date: this.qs.localStorage.getItem('api_data_date_plain_pretext_' + uniq_id)
+          })
         }
-      ]
-    }
+      }
+
+      return api_name_keys.sort(function(a,b){
+          return a.api_update_date.localeCompare(b.api_update_date);
+        }).reverse();
+    },
   }
 }
 </script>
