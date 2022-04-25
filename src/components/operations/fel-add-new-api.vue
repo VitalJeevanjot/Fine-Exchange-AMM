@@ -70,7 +70,10 @@ export default {
   setup () {
     const felAddNewApiDialog = ref(false)
 
-    const exchange_name = ref('Fine Exchanges Mainnet')
+    const exchange_name = ref({
+          value: 'https://base1/v2',
+          label: 'Fine Exchanges Mainnet'
+    })
 
     const api_name = ref('')
     const api_key = ref('')
@@ -88,7 +91,7 @@ export default {
     })
 
     const val_binding_api_name = ref({
-      _style: 'max-width: 70vw; min-width: 300px;',
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
       _label: 'API Name',
       _hint: 'Enter name for Key/Secret',
@@ -99,7 +102,7 @@ export default {
     })
 
     const val_binding_api_key = ref({
-      _style: 'max-width: 70vw; min-width: 300px;',
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
       _label: 'API Key',
       _hint: 'The API Key',
@@ -110,7 +113,7 @@ export default {
     })
 
     const val_binding_api_secret = ref({
-      _style: 'max-width: 70vw; min-width: 300px;',
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
       _label: 'API Secret',
       _hint: 'The API Secret',

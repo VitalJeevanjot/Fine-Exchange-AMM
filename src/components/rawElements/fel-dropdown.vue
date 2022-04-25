@@ -9,7 +9,8 @@
     @input-value="model_value=''"
     class="q-pb-sm"
     style="min-width: 300px; 
-      width: 50vw;"
+      width: 30vw;
+      max-width: 500px;"
     rounded
     :options="theseOptions" 
     label="Select Value">
@@ -19,7 +20,8 @@
         <q-item-section>
           <q-item-label 
           style="
-            width: 60rem
+            width: 50vw;
+            max-width: 400px;
             white-space: nowrap; 
             overflow: hidden;
             text-overflow: ellipsis;"
@@ -35,7 +37,7 @@
 
 <style>
 .q-field__native > span {
-  width: 12rem;
+  max-width: 400px;
   padding-left: 0.3rem;
   white-space: nowrap; 
   overflow: hidden;
