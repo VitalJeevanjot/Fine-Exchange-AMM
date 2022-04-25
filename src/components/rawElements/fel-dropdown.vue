@@ -33,12 +33,13 @@
 </template>
 
 <style>
-/* .q-field__native > span {
+.q-field__native > span {
   width: 12rem;
   white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/*
 .q-field__native > input {
   position: absolute;
 } */
