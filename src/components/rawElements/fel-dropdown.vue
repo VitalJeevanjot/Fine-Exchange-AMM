@@ -77,9 +77,6 @@ export default {
       if (val === '') {
         update(() => {
           this.theseOptions = this.getOptions()
-
-          // here you have access to "ref" which
-          // is the Vue reference of the QSelect
         })
         return
       }
