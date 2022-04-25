@@ -71,7 +71,7 @@ export default {
   methods: {
     updateValue (event) {
       this.$emit('update:model', event)
-      this.model_value = event.label
+      this.model_value = event
     },
     filterFn (val, update) {
       if (val === '') {
