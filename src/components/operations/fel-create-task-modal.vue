@@ -21,7 +21,8 @@
             v-model:_selected_value="selected_value"
             v-bind="val_binding_toggle_buy_sell"
           />
-          <!-- select pair :: show balance --> 
+          <!-- select pair :: show balance (after selecting api) --> 
+
           <!-- Select API -->
           <felDropdown 
             v-model:model="api_selected"
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import felDropdown from 'components/rawElements/fel-dropdown.vue'
 import felInput from 'components/rawElements/fel-input.vue'
 import felButtonToggle from 'components/rawElements/fel-button-toggle.vue'
@@ -86,6 +87,10 @@ export default {
       _error_msg: '',
       _rules: [val => val.length >= 1 && val > 1 && val < 1000000000 || "Please add appropriate time in seconds!"],
       _class: 'q-pt-sm'
+    })
+
+    watchEffect(() => {
+      console.log(api_selected.value.label)
     })
 
 
