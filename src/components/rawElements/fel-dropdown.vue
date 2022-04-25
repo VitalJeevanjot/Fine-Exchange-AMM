@@ -1,11 +1,12 @@
 <template>
   <div> 
-    <!-- @filter="filterFn" -->
-    <!-- use-input -->
     <q-select 
     standout="bg-grey-10 text-grey-1" 
-    :model-value="model" 
-    @update:modelValue="$emit('update:model', $event)"
+    @filter="filterFn"
+    use-input
+    :model-value="model_value" 
+    @update:modelValue="updateValue"
+    @input-value="model_value=''"
     class="q-pb-sm"
     style="min-width: 300px; 
       width: 50vw;"
@@ -35,14 +36,15 @@
 <style>
 .q-field__native > span {
   width: 12rem;
+  padding-left: 0.3rem;
   white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/*
+
 .q-field__native > input {
   position: absolute;
-} */
+}
 </style>
 
 
@@ -62,26 +64,31 @@ export default {
   },
   data() {
     return {
-      theseOptions: this.getOptions()
+      theseOptions: this.getOptions(),
+      model_value: this.model
     }
   },
   methods: {
-    // filterFn (val, update) {
-    //   if (val === '') {
-    //     update(() => {
-    //       this.theseOptions = this.getOptions()
+    updateValue (event) {
+      this.$emit('update:model', event)
+      this.model_value = event.label
+    },
+    filterFn (val, update) {
+      if (val === '') {
+        update(() => {
+          this.theseOptions = this.getOptions()
 
-    //       // here you have access to "ref" which
-    //       // is the Vue reference of the QSelect
-    //     })
-    //     return
-    //   }
+          // here you have access to "ref" which
+          // is the Vue reference of the QSelect
+        })
+        return
+      }
 
-    //   update(() => {
-    //     const needle = val.toLowerCase()
-    //     this.theseOptions = this.getOptions().filter(v => v.label.toLowerCase().indexOf(needle) > -1)
-    //   })
-    // },
+      update(() => {
+        const needle = val.toLowerCase()
+        this.theseOptions = this.getOptions().filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+      })
+    },
     getOptions() {
       if(this.options == 'Exchanges') {
         return this.getExchanges()
@@ -122,6 +129,9 @@ export default {
           return a.api_update_date.localeCompare(b.api_update_date);
         }).reverse();
     },
+
+    printConsole(val) {
+    }
   }
 }
 </script>
