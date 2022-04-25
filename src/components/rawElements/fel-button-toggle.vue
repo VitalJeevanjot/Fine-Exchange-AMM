@@ -15,7 +15,7 @@
         {label: _label_2, value: _value_2, color: _btn_color2}
       ]"
     />
-    <q-chip size="xs" style="pointer-events: none; user-select: none;" class="text-caption text-cyan-9">{{_selected_value == _value_1 ? _label_1 : _label_2}}</q-chip>
+    <q-chip size="xs" style="pointer-events: none; user-select: none;" class="text-caption" :text-color="_toggle_btn_color">{{_selected_value == _value_1 ? _label_1 : _label_2}}</q-chip>
 </div>
 </template>
 
