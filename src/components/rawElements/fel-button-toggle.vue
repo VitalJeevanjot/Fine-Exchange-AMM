@@ -7,15 +7,16 @@
       no-caps
       rounded
       unelevated
-      color="white"
-      text-color="primary"
-      toggle-color="grey-6"
+      color="grey-6"
+      text-color="grey-1"
+      toggle-color="teal-9"
       toggle-text-color="grey-1"
       :options="[
-        {label: 'Option 1', value: 'one', class: 'bg-red-8 text-grey-1'},
-        {label: 'Option 2', value: 'two', class: 'bg-blue-8 text-grey-1'}
+        {label: 'Buy', value: 'one', color:'cyan-8'},
+        {label: 'Sell', value: 'two', color:'purple-8'}
       ]"
     />
+    <q-chip size="xs" style="pointer-events: none; user-select: none;" class="text-caption text-cyan-9">{{_selected_value == 'one' ? 'Buy' : 'Sell'}}</q-chip>
 </div>
 </template>
 
