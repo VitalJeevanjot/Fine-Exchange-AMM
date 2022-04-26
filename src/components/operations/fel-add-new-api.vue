@@ -46,7 +46,7 @@
         </div>
 
         <div class="row justify-center">
-          <felApiAddDataAskPin v-bind="data_to_save_binding" @savedApiData="dataSaved" @beforeSavingData="updateDate"/>
+          <felApiAddDataAskPin v-bind="val_binding_data_to_save" @savedApiData="dataSaved" @beforeSavingData="updateDate"/>
         </div>
 
       </q-card-section>
@@ -84,7 +84,7 @@ export default {
     
     const random_val_as_id = ref(null)
     
-    const data_to_save_binding = ref({'disable_btn': disable_add_button})
+    const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
 
     const val_binding_exchanges_dropdown = ref({
       options: 'Exchanges',
@@ -131,7 +131,7 @@ export default {
         disable_add_button.value = false
 
         random_val_as_id.value = window.crypto.randomUUID()
-        data_to_save_binding.value = {
+        val_binding_data_to_save.value = {
           'key1': `api_data_api_name_plain_pretext_${random_val_as_id.value}`,
           'value1': api_name,
           'key2': `api_data_api_key_pretext_${random_val_as_id.value}`,
@@ -158,7 +158,7 @@ export default {
       api_key,
       api_secret,
       updated_date,
-      data_to_save_binding,
+      val_binding_data_to_save,
       disable_add_button,
       val_binding_exchanges_dropdown,
       val_binding_api_name,

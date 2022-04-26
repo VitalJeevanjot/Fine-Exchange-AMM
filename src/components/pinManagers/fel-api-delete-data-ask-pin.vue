@@ -56,7 +56,7 @@ export default {
     felInput
   },
   props: ['unique_id'],
-  emits: ['savedApiData'],
+  emits: ['afterAPIDeletion'],
   setup () {
     const qs = useQuasar()
     const felAppPinManagerDialog = ref(false)

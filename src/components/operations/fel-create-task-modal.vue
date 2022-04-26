@@ -36,6 +36,7 @@
           <!-- Add spread or if use custom basic equation (With e(price) e_low e_high etc parameters provided for basic arithmetic form fine exchnage) -->
           
           <!-- use create task ask pin component for below button -->
+          <felCreateTaskAskPin v-bind="val_binding_data_to_save"/>
           <!-- <q-btn label="create task" rounded class="q-mt-md my-green text-white"/> -->
         </q-card-section>
       </q-card>
@@ -49,13 +50,15 @@ import { ref, watchEffect } from 'vue'
 import felDropdown from 'components/rawElements/fel-dropdown.vue'
 import felInput from 'components/rawElements/fel-input.vue'
 import felButtonToggle from 'components/rawElements/fel-button-toggle.vue'
+import felCreateTaskAskPin from 'components/pinManagers/fel-create-task-ask-pin.vue'
 export default {
   name: 'felCreateTaskModal',
   props: ['show_in_body', 'show_in_header'],
   components: {
     felDropdown,
     felInput,
-    felButtonToggle
+    felButtonToggle,
+    felCreateTaskAskPin
   },
   setup () {
     const felCreateNewTaskDialog = ref(false)
@@ -67,7 +70,9 @@ export default {
 
     const selected_value = ref('buy')
 
-    const seconds_interval = ref(1)
+    const seconds_interval = ref('')
+
+    const disable_add_button = ref(true)
 
     const val_binding_toggle_buy_sell = ref({
       _toggle_btn_color: 'cyan-9',
@@ -87,23 +92,33 @@ export default {
       _hint: 'Enter name for Key/Secret',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val.length >= 1 && val >= 1 && val < 1000000000 || "Please add appropriate time in seconds!"],
+      _rules: [val => val >= 1 && val < 1000000000 || "Please add between 1 (inc.) and 1000000000 (seconds)!"],
       _class: 'q-pt-sm'
     })
 
+    const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
+
     watchEffect(() => {
       console.log(api_selected.value.label)
+      if(seconds_interval.value >= 1 
+      && seconds_interval.value < 1000000000 
+      && api_selected.value.label) {
+        val_binding_data_to_save.value = {
+          'disable_btn': false
+        }
+      }
     })
-
 
     return {
       felCreateNewTaskDialog,
       selected_value,
-      val_binding_toggle_buy_sell,
       api_selected,
+      disable_add_button,
+      val_binding_toggle_buy_sell,
       val_binding_apis_dropdown,
       seconds_interval,
       val_binding_seconds_interval,
+      val_binding_data_to_save,
       create_new_task () {
         felCreateNewTaskDialog.value = true
         // var int = 0

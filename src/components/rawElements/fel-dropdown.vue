@@ -5,9 +5,11 @@
     color="grey-6"
     @filter="filterFn"
     use-input
+    @blur="model_value=model"
+    @focus="model_value=model"
     :model-value="model_value" 
     @update:modelValue="updateValue"
-    @input-value="model_value=''"
+    @input-value="input_value"
     class="q-pb-sm"
     style="min-width: 300px; 
       width: 30vw;
@@ -54,6 +56,7 @@
 <script>
 
 import { useQuasar } from "quasar"
+import { ref, watchEffect } from '@vue/runtime-core'
 
 export default {
   name: 'felDropdown',
@@ -61,14 +64,17 @@ export default {
   emits: ['update:model'],
   setup () {
     const qs = useQuasar()
+    const input_value = ref('')
+
     return {
       qs,
+      input_value
     }
   },
   data() {
     return {
       theseOptions: this.getOptions(),
-      model_value: this.model
+      model_value: this.model,
     }
   },
   methods: {
@@ -80,6 +86,7 @@ export default {
       if (val === '') {
         update(() => {
           this.theseOptions = this.getOptions()
+          this.model_value = ''
         })
         return
       }
@@ -87,6 +94,8 @@ export default {
       update(() => {
         const needle = val.toLowerCase()
         this.theseOptions = this.getOptions().filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+        console.log('callingm,eeee')
+        this.input_value = ''
       })
     },
     getOptions() {
