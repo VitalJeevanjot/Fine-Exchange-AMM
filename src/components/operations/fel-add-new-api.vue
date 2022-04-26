@@ -71,7 +71,7 @@ export default {
     const felAddNewApiDialog = ref(false)
 
     const exchange_name = ref({
-          value: 'https://base1/v2',
+          value: 'https://api.fine.exchange',
           label: 'Fine Exchanges Mainnet'
     })
 
@@ -80,11 +80,11 @@ export default {
     const api_secret = ref('')
     const updated_date = ref(null);
 
-    const disable_add_button = ref(false)
+    const disable_add_button = ref(true)
     
     const random_val_as_id = ref(null)
     
-    const data_to_save_binding = ref(null)
+    const data_to_save_binding = ref({'disable_btn': disable_add_button})
 
     const val_binding_exchanges_dropdown = ref({
       options: 'Exchanges',
@@ -126,10 +126,8 @@ export default {
     
 
     watchEffect(() => {
-      if(api_name.value.length < 4 || !api_key.value || !api_secret.value) {
-        disable_add_button.value = true
+      if(api_name.value.length >= 4 && api_key.value && api_secret.value) {
         updated_date.value = new Date().toLocaleString('en-GB'); // update date here
-      } else {
         disable_add_button.value = false
 
         random_val_as_id.value = window.crypto.randomUUID()
@@ -146,6 +144,8 @@ export default {
           'value5': updated_date,
           'disable_btn': disable_add_button
         }
+      } else {
+        disable_add_button.value = true
       }
     })
 

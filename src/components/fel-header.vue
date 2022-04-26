@@ -40,6 +40,10 @@
 
 .btn-disabled
   background-color: #828282
+
+.my-green
+  background-color: #87b26c 
+  // background-color: #9CCD7E 
 </style>
 
 

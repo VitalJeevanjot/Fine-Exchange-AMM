@@ -34,7 +34,9 @@
             v-bind="val_binding_seconds_interval"
           />
           <!-- Add spread or if use custom basic equation (With e(price) e_low e_high etc parameters provided for basic arithmetic form fine exchnage) -->
-
+          
+          <!-- use create task ask pin component for below button -->
+          <!-- <q-btn label="create task" rounded class="q-mt-md my-green text-white"/> -->
         </q-card-section>
       </q-card>
 

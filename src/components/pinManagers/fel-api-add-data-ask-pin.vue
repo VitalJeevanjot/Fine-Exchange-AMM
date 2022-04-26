@@ -2,7 +2,7 @@
   <div>
 
   <div class="row justify-center">
-    <q-btn flat icon="add" :disable="disable_btn" class="bg-green text-grey-3 q-mt-md" label="Add" rounded @click="felAppPinManagerDialog=true"/>
+    <q-btn :disable="disable_btn" class="my-green text-grey-1 q-mt-md" label="Add" rounded @click="felAppPinManagerDialog=true"/>
   </div>
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
