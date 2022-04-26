@@ -85,7 +85,7 @@ export default {
       _hint: 'Enter name for Key/Secret',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val.length >= 1 && val > 1 && val < 1000000000 || "Please add appropriate time in seconds!"],
+      _rules: [val => val.length >= 1 && val >= 1 && val < 1000000000 || "Please add appropriate time in seconds!"],
       _class: 'q-pt-sm'
     })
 
