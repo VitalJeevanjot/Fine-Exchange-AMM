@@ -2,6 +2,7 @@
   <div> 
     <q-select 
     standout="bg-grey-10 text-grey-1" 
+    color="grey-6"
     @filter="filterFn"
     use-input
     :model-value="model_value" 

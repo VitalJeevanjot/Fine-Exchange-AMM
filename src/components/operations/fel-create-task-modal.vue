@@ -68,9 +68,9 @@ export default {
     const seconds_interval = ref(1)
 
     const val_binding_toggle_buy_sell = ref({
-      _toggle_btn_color: 'teal-9',
-      _btn_color1: 'teal-7',
-      _btn_color2: 'teal-7',
+      _toggle_btn_color: 'cyan-9',
+      _btn_color1: 'cyan-7',
+      _btn_color2: 'cyan-7',
       _value_1: 'buy',
       _value_2: 'sell',
       _label_1: 'Buy',
