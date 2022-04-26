@@ -34,7 +34,10 @@
             v-bind="val_binding_seconds_interval"
           />
           <!-- Add spread or if use custom basic equation (With e(price) e_low e_high etc parameters provided for basic arithmetic form fine exchnage) -->
-          
+          <felInput
+            v-model:_input_val="seconds_interval"
+            v-bind="val_binding_spread_percent"
+          />
           <!-- use create task ask pin component for below button -->
           <felCreateTaskAskPin v-bind="val_binding_data_to_save"/>
           <!-- <q-btn label="create task" rounded class="q-mt-md my-green text-white"/> -->
@@ -89,10 +92,22 @@ export default {
       _mask: '',
       _type: 'number',
       _label: 'Interval (in seconds)',
-      _hint: 'Enter name for Key/Secret',
+      _hint: 'Enter seconds to wait before next call.',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val >= 1 && val < 1000000000 || "Please add between 1 (inc.) and 1000000000 (seconds)!"],
+      _rules: [val => val >= 1 && val < 1000000000 || "Please add between 1 (inc.) to 1000000000 (seconds)!"],
+      _class: 'q-pt-sm'
+    })
+
+    const val_binding_spread_percent = ref({
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
+      _mask: '',
+      _type: 'number',
+      _label: 'Spread (in Percent)',
+      _hint: 'Enter spread from sell or buy price.',
+      _show_error: false,
+      _error_msg: '',
+      _rules: [val => val >= 1 && val <= 10 || "Please add between 1 to 10 (both inc.) (percent)!"],
       _class: 'q-pt-sm'
     })
 
@@ -118,6 +133,7 @@ export default {
       val_binding_apis_dropdown,
       seconds_interval,
       val_binding_seconds_interval,
+      val_binding_spread_percent,
       val_binding_data_to_save,
       create_new_task () {
         felCreateNewTaskDialog.value = true

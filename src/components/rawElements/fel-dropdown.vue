@@ -94,7 +94,6 @@ export default {
       update(() => {
         const needle = val.toLowerCase()
         this.theseOptions = this.getOptions().filter(v => v.label.toLowerCase().indexOf(needle) > -1)
-        console.log('callingm,eeee')
         this.input_value = ''
       })
     },
