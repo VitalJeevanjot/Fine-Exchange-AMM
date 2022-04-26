@@ -99,11 +99,11 @@ export default {
     getExchanges() {
       return [
         {
-          value: 'https://base1/v2',
+          value: 'https://api.fine.exchange',
           label: 'Fine Exchanges Mainnet'
         },
         {
-          value: 'https://base/v2',
+          value: 'https://apitest.fine.exchange',
           label: 'Fine Exchanges Testnet'
         }
       ]
