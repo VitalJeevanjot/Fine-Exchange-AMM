@@ -35,7 +35,7 @@
           />
           <!-- Add spread or if use custom basic equation (With e(price) e_low e_high etc parameters provided for basic arithmetic form fine exchnage) -->
           <felInput
-            v-model:_input_val="seconds_interval"
+            v-model:_input_val="spread_percent"
             v-bind="val_binding_spread_percent"
           />
           <!-- use create task ask pin component for below button -->
@@ -74,6 +74,7 @@ export default {
     const selected_value = ref('buy')
 
     const seconds_interval = ref('')
+    const spread_percent = ref('')
 
     const disable_add_button = ref(true)
 
@@ -100,7 +101,7 @@ export default {
     })
 
     const val_binding_spread_percent = ref({
-      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw; padding-top: 15px',
       _mask: '',
       _type: 'number',
       _label: 'Spread (in Percent)',
@@ -114,12 +115,17 @@ export default {
     const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
 
     watchEffect(() => {
-      console.log(api_selected.value.label)
       if(seconds_interval.value >= 1 
       && seconds_interval.value < 1000000000 
+      && spread_percent.value >= 1 
+      && spread_percent.value <= 10 
       && api_selected.value.label) {
         val_binding_data_to_save.value = {
           'disable_btn': false
+        }
+      } else {
+        val_binding_data_to_save.value = {
+          'disable_btn': true
         }
       }
     })
@@ -132,6 +138,7 @@ export default {
       val_binding_toggle_buy_sell,
       val_binding_apis_dropdown,
       seconds_interval,
+      spread_percent,
       val_binding_seconds_interval,
       val_binding_spread_percent,
       val_binding_data_to_save,
