@@ -14,6 +14,7 @@
             <div>Create New Task</div> 
             <q-space/> 
             <q-btn icon='close' round flat dense v-close-popup/>
+            <q-btn icon='help' label="help" rounded flat dense v-close-popup/>
           </q-bar>
         <q-card-section>
           <!-- Add toggle for buy/sell -->
@@ -21,12 +22,18 @@
             v-model:_selected_value="selected_value"
             v-bind="val_binding_toggle_buy_sell"
           />
-          <!-- select pair :: show balance (after selecting api) --> 
 
           <!-- Select API -->
           <felDropdown 
             v-model:model="api_selected"
             v-bind="val_binding_apis_dropdown"
+          />
+
+          <!-- select pair :: show balance (after selecting api) --> 
+          <felDropdown 
+            v-show="show_dropdown_select_pair"
+            v-model:model="pair_selected"
+            v-bind="val_binding_pairs_dropdown"
           />
           <!-- Add timer interval (select range then provide min-max (excluded/included check)) -->
           <felInput
@@ -50,6 +57,7 @@
 
 <script>
 import { ref, watchEffect } from 'vue'
+import { useQuasar } from "quasar"
 import felDropdown from 'components/rawElements/fel-dropdown.vue'
 import felInput from 'components/rawElements/fel-input.vue'
 import felButtonToggle from 'components/rawElements/fel-button-toggle.vue'
@@ -64,11 +72,18 @@ export default {
     felCreateTaskAskPin
   },
   setup () {
+    const qs = useQuasar()
     const felCreateNewTaskDialog = ref(false)
     const api_selected = ref('')
+    const pair_selected = ref('')
     const val_binding_apis_dropdown = ref({
       options: 'APIs',
       category: 'Select API'
+    })
+
+    const val_binding_pairs_dropdown = ref({
+      options: 'Pairs',
+      category: 'Select Pair'
     })
 
     const selected_value = ref('buy')
@@ -77,6 +92,8 @@ export default {
     const spread_percent = ref('')
 
     const disable_add_button = ref(true)
+
+    const show_dropdown_select_pair = ref(false)
 
     const val_binding_toggle_buy_sell = ref({
       _toggle_btn_color: 'cyan-9',
@@ -115,13 +132,22 @@ export default {
     const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
 
     watchEffect(() => {
-      if(seconds_interval.value >= 1 
-      && seconds_interval.value < 1000000000 
-      && spread_percent.value >= 1 
-      && spread_percent.value <= 10 
-      && api_selected.value.label) {
-        val_binding_data_to_save.value = {
-          'disable_btn': false
+      console.log(qs.localStorage.getItem('available_pairs').find(o => o.label === pair_selected.value.label))
+      if(api_selected.value.label) {
+        show_dropdown_select_pair.value = true
+        if(seconds_interval.value >= 1 
+        && seconds_interval.value < 1000000000 
+        && spread_percent.value >= 1 
+        && spread_percent.value <= 10 
+        && qs.localStorage.getItem('available_pairs').find(o => o.label === pair_selected.value.label) != undefined
+        && pair_selected.value.label) {
+          val_binding_data_to_save.value = {
+            'disable_btn': false
+          }
+        } else {
+          val_binding_data_to_save.value = {
+            'disable_btn': true
+          }
         }
       } else {
         val_binding_data_to_save.value = {
@@ -131,14 +157,18 @@ export default {
     })
 
     return {
+      qs,
       felCreateNewTaskDialog,
       selected_value,
       api_selected,
+      pair_selected,
       disable_add_button,
-      val_binding_toggle_buy_sell,
-      val_binding_apis_dropdown,
       seconds_interval,
       spread_percent,
+      show_dropdown_select_pair,
+      val_binding_toggle_buy_sell,
+      val_binding_apis_dropdown,
+      val_binding_pairs_dropdown,
       val_binding_seconds_interval,
       val_binding_spread_percent,
       val_binding_data_to_save,
@@ -149,7 +179,7 @@ export default {
         // var new_int = setInterval(() => {
         //   console.log(int++)
         // }, 10000)
-      }
+      },
     }
   }
 }

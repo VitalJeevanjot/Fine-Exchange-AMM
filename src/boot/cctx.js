@@ -15,7 +15,7 @@ export default boot(({ app }) => {
 //   // for use inside Vue files (Options API) through this.$axios and this.$api
 
   app.config.globalProperties.$ccxt = ccxt;
-  console.log (new ccxt.hollaex({urls: {api: {rest: 'https://apitest.fine.exchange'}}})) // 'hollaex'
+  // console.log (new ccxt.hollaex({urls: {api: {rest: 'https://apitest.fine.exchange'}}})) // 'hollaex'
 //   // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
 //   //       so you won't necessarily have to import axios in each vue file
 

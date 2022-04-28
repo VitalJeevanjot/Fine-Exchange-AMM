@@ -10,7 +10,7 @@
     :model-value="model_value" 
     @update:modelValue="updateValue"
     @input-value="input_value"
-    class="q-pb-sm"
+    class="q-pb-md"
     style="min-width: 300px; 
       width: 30vw;
       max-width: 500px;"
@@ -81,6 +81,12 @@ export default {
     updateValue (event) {
       this.$emit('update:model', event)
       this.model_value = event
+
+      if(this.options == 'APIs') {
+        // emit and catch in create task so pair selection can be reset
+        this.qs.localStorage.set('api_selected_now', event)
+        this.qs.localStorage.set('available_pairs', this.getPairs())
+      }
     },
     filterFn (val, update) {
       if (val === '') {
@@ -102,6 +108,8 @@ export default {
         return this.getExchanges()
       } else if(this.options == 'APIs') {
         return this.getAPIs()
+      } else if(this.options == 'Pairs') {
+        return this.getPairs()
       }
     },
     getExchanges() {
@@ -136,6 +144,35 @@ export default {
       return api_name_keys.sort(function(a,b){
           return a.api_update_date.localeCompare(b.api_update_date);
         }).reverse();
+    },
+    getPairs() {
+      var current_api = this.qs.localStorage.getItem('api_selected_now')
+      var get_exchanges = this.getExchanges()
+
+      for (let index = 0; index < get_exchanges.length; index++) {
+        if(get_exchanges[index].label == current_api.description) {
+          // var exchange = new this.$ccxt.hollaex({urls: {api: {rest: get_exchanges[index].value}}})
+          // console.log(await exchange.loadMarkets())
+          return this.getPairForEachExchange(get_exchanges[index].label)
+        }
+      }
+      // var ccxt = new ccxt.hollaex({urls: {api: {rest: current_api.}}})
+      // var fine_exchange_mainnet = []
+    },
+    getPairForEachExchange(label) {
+      switch(label) {
+        case 'Fine Exchanges Mainnet':
+          return [{label: 'BCH/USDT', value: 'BCH/USDT'}, 
+          {label: 'BTC/USDT', value: 'BTC/USDT'}, 
+          {label: 'ETH/BTC', value: 'ETH/BTC'}, 
+          {label: 'ETH/USDT', value: 'ETH/USDT'}, 
+          {label: 'XHT/USDT', value: 'XHT/USDT'}]
+          break;
+        case 'Fine Exchanges Testnet':
+          return [{label: 'ETH/BTC', value: 'ETH/BTC'}, 
+          {label: 'XHT/USDT', value: 'XHT/USDT'}]
+          break;
+      }
     },
 
     printConsole(val) {
