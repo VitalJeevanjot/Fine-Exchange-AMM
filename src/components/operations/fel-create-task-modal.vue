@@ -132,7 +132,6 @@ export default {
     const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
 
     watchEffect(() => {
-      console.log(qs.localStorage.getItem('available_pairs').find(o => o.label === pair_selected.value.label))
       if(api_selected.value.label) {
         show_dropdown_select_pair.value = true
         if(seconds_interval.value >= 1 
