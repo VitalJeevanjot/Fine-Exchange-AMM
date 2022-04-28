@@ -149,7 +149,7 @@ export default {
             'disable_btn': true
           }
         }
-      } else {
+      } else { // this else here make sure even if some ciritical case the API selection resets then the button gets disable
         val_binding_data_to_save.value = {
           'disable_btn': true
         }
