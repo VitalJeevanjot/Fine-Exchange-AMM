@@ -134,6 +134,7 @@ export default {
     const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
 
     watchEffect(() => {
+      console.log(api_selected.value)
       if(api_selected.value.label) {
         show_dropdown_select_pair.value = true
         if(seconds_interval.value >= 1 
@@ -154,6 +155,10 @@ export default {
             'value4': seconds_interval,
             'key5': `task_data_percent_plain_pretext_${random_val_as_id.value}`,
             'value5': spread_percent,
+            'key6': `task_data_state_plain_pretext_${random_val_as_id.value}`,
+            'value6': 'running',
+            'key7': `task_data_id_plain_pretext_${random_val_as_id.value}`,
+            'value7': '0',
             'disable_btn': false
           }
         } else {

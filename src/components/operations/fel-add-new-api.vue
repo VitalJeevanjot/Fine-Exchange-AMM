@@ -142,6 +142,8 @@ export default {
           'value4': exchange_name,
           'key5': `api_data_date_plain_pretext_${random_val_as_id.value}`,
           'value5': updated_date,
+          'key6': `api_data_url_plain_pretext_${random_val_as_id.value}`,
+          'value6': exchange_name.value.value,
           'disable_btn': disable_add_button
         }
       } else {

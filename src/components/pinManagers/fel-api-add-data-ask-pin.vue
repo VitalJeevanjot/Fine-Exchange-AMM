@@ -65,6 +65,8 @@ export default {
   'value4', 
   'key5', 
   'value5',
+  'key6', 
+  'value6',
   'disable_btn'],
   emits: ['savedApiData'],
   setup () {
@@ -167,7 +169,7 @@ export default {
       
       this.$emit('beforeSavingData')
 
-      for (let index = 1; index <= 5; index++) {
+      for (let index = 1; index <= 6; index++) {
         var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
           if(!(this['key'+index].includes('plain_'))) {

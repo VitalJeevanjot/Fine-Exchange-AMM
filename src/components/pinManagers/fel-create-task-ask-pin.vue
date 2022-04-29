@@ -65,6 +65,10 @@ export default {
   'value4', 
   'key5', 
   'value5',
+  'key6', 
+  'value6',
+  'key7', 
+  'value7',
   'disable_btn'],
   emits: ['savedCreatedTask'],
   setup () {
@@ -181,7 +185,11 @@ export default {
       return {api_key, api_secret}
     },
     async encrypt_data() {
-      const _algo = { 
+      // encrypt, save and run
+      console.log('-----------------------------------')
+      console.log(this.value4)
+      console.log(this.value2.value)
+      const _algo = {
         name: "AES-GCM", 
         iv: this.strToArrayBuffer(this.pic + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
       }
@@ -211,8 +219,9 @@ export default {
       }
       
       this.$emit('beforeSavingData')
-
-      for (let index = 1; index <= 5; index++) {
+      var index = 1
+      var interval = null
+      for (index = 1; index < 7; index++) {
         var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
           if(!(this['key'+index].includes('plain_'))) {
@@ -231,8 +240,13 @@ export default {
           this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
           // console.log(await this.decrypt_key_secret_data())
         }
-        
       }
+      // When the index is 7
+      // var created_task = setInterval(() => {
+      //   var ccxt = new ccxt.hollaex({urls: {api: {rest: value2.}}})
+      // }, this.value4) //valye 4 is the interval
+      this.qs.localStorage.set(this['key'+index], created_task)
+
       this.pic = ''
       this.felAppPinManagerDialog = false
       this.$emit('savedCreatedTask')

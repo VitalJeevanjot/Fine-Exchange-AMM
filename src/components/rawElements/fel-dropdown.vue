@@ -133,6 +133,7 @@ export default {
           let uniq_id = all_keys[i].replace('api_data_api_name_plain_pretext_', '')
           api_name_keys.push({
             label: this.qs.localStorage.getItem(all_keys[i]),
+            url: this.qs.localStorage.getItem('api_data_url_plain_pretext_' + uniq_id),
             description: this.qs.localStorage.getItem('api_data_exchange_name_plain_pretext_' + uniq_id).label,
             api_key: this.qs.localStorage.getItem('api_data_api_key_pretext_' + uniq_id),
             api_secret: this.qs.localStorage.getItem('api_data_api_secret_pretext_' + uniq_id),
