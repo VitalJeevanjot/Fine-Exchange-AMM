@@ -95,6 +95,8 @@ export default {
 
     const show_dropdown_select_pair = ref(false)
 
+    const random_val_as_id = ref(null)
+
     const val_binding_toggle_buy_sell = ref({
       _toggle_btn_color: 'cyan-9',
       _btn_color1: 'cyan-7',
@@ -140,7 +142,18 @@ export default {
         && spread_percent.value <= 10 
         && qs.localStorage.getItem('available_pairs').find(o => o.label === pair_selected.value.label) != undefined
         && pair_selected.value.label) {
+          random_val_as_id.value = window.crypto.randomUUID()
           val_binding_data_to_save.value = {
+            'key1': `task_data_type_pain_pretext_${random_val_as_id.value}`, //buy or sell
+            'value1': selected_value, //buy or sell
+            'key2': `task_data_api_plain_pretext_${random_val_as_id.value}`,
+            'value2': api_selected,
+            'key3': `task_data_pair_plain_pretext_${random_val_as_id.value}`,
+            'value3': pair_selected,
+            'key4': `task_data_interval_plain_pretext_${random_val_as_id.value}`,
+            'value4': seconds_interval,
+            'key5': `task_data_percent_plain_pretext_${random_val_as_id.value}`,
+            'value5': spread_percent,
             'disable_btn': false
           }
         } else {
@@ -165,6 +178,7 @@ export default {
       seconds_interval,
       spread_percent,
       show_dropdown_select_pair,
+      random_val_as_id,
       val_binding_toggle_buy_sell,
       val_binding_apis_dropdown,
       val_binding_pairs_dropdown,

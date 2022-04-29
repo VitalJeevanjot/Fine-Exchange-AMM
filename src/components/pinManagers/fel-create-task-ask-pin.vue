@@ -135,6 +135,50 @@ export default {
       }
       return true
     },
+
+    async decrypt_key_secret_data() {
+      const _algo = { 
+        name: "AES-GCM", 
+        iv: this.strToArrayBuffer(this.pic + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
+      }
+
+      var api_key = null
+      var api_secret = null
+      let key_stored = this.qs.localStorage.getItem("important_welcome_key")
+      let vlk = []
+      vlk = Object.values(key_stored)
+
+      let imported_key = await window.crypto.subtle.importKey(
+        'raw',
+        new Uint8Array(vlk),
+        'AES-GCM',
+        true,
+        ['encrypt', 'decrypt']
+      )
+
+
+      try {
+        api_key = await window.crypto.subtle.decrypt(
+          _algo, 
+          imported_key,
+          this.strToArrayBuffer(this.qs.localStorage.getItem("api_selected_now").api_key)
+        );
+        console.log(this.arrayBufferToString(api_key))
+      } catch (e) {
+        console.log(e)
+      }
+
+      try {
+        api_secret = await window.crypto.subtle.decrypt(
+          _algo, 
+          imported_key,
+          this.strToArrayBuffer(this.qs.localStorage.getItem("api_selected_now").api_secret)
+        );
+        console.log(this.arrayBufferToString(api_secret))
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async encrypt_data() {
       const _algo = { 
         name: "AES-GCM", 
