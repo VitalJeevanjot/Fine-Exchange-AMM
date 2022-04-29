@@ -156,14 +156,13 @@ export default {
         ['encrypt', 'decrypt']
       )
 
-
       try {
         api_key = await window.crypto.subtle.decrypt(
           _algo, 
           imported_key,
           this.strToArrayBuffer(this.qs.localStorage.getItem("api_selected_now").api_key)
         );
-        console.log(this.arrayBufferToString(api_key))
+        api_key = this.arrayBufferToString(api_key)
       } catch (e) {
         console.log(e)
       }
@@ -174,10 +173,12 @@ export default {
           imported_key,
           this.strToArrayBuffer(this.qs.localStorage.getItem("api_selected_now").api_secret)
         );
-        console.log(this.arrayBufferToString(api_secret))
+        api_secret = this.arrayBufferToString(api_secret)
       } catch (e) {
         console.log(e)
       }
+
+      return {api_key, api_secret}
     },
     async encrypt_data() {
       const _algo = { 
@@ -228,6 +229,7 @@ export default {
             encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
           }
           this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
+          // console.log(await this.decrypt_key_secret_data())
         }
         
       }

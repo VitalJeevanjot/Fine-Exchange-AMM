@@ -144,7 +144,7 @@ export default {
         && pair_selected.value.label) {
           random_val_as_id.value = window.crypto.randomUUID()
           val_binding_data_to_save.value = {
-            'key1': `task_data_type_pain_pretext_${random_val_as_id.value}`, //buy or sell
+            'key1': `task_data_type_plain_pretext_${random_val_as_id.value}`, //buy or sell
             'value1': selected_value, //buy or sell
             'key2': `task_data_api_plain_pretext_${random_val_as_id.value}`,
             'value2': api_selected,
