@@ -33,11 +33,13 @@ export default defineComponent({
   },
   setup () {
     const show_no_tasks_content = ref(true)
+    const value_bind = ref({ logo_src: "fine_exchange_smaller.png" })
     const val_bind_create_task = ref({show_in_body: true})
     const qs = useQuasar()
 
     return {
       qs,
+      value_bind,
       show_no_tasks_content,
       val_bind_create_task,
 
@@ -78,7 +80,6 @@ export default defineComponent({
   },
   methods: {
     updateData() {
-      console.log('dddddddddajsjhdkajsd')
       this.val_bind_list_data = {saved_data: this.get_tasks_data(), show_delete: true}
     }
   }

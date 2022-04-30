@@ -88,10 +88,9 @@ export default defineComponent({
 
   setup() {
     // const leftDrawerOpen = ref(false);
-    const value_bind = ref({ logo_src: "fine_exchange_smaller.png" })
+    
     return {
       // essentialLinks: linksList,
-      value_bind
       // leftDrawerOpen,
       // toggleLeftDrawer() {
       //   leftDrawerOpen.value = !leftDrawerOpen.value;
