@@ -68,7 +68,7 @@ export default {
   'key6', 
   'value6',
   'disable_btn'],
-  emits: ['savedApiData'],
+  emits: ['savedApiData', 'beforeSavingData'],
   setup () {
     const qs = useQuasar()
     const felAppPinManagerDialog = ref(false)

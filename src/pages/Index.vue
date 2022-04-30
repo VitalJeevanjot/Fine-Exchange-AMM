@@ -1,8 +1,12 @@
 <template>
+  <fel-header
+      v-bind="value_bind"
+      @commandToUpdate="updateData"
+    />
   <q-page class="flex flex-center" style="background-color: #CFCFCF">
     <div v-show="show_no_tasks_content">
       <p class="text-h4 text-grey-6" style="user-select: none;">No tasks Yet!</p>
-      <felCreateTaskModal v-bind="val_bind_create_task"/>
+      <felCreateTaskModal v-bind="val_bind_create_task" @commandToUpdate="updateData"/>
     </div>
     <div v-show="!show_no_tasks_content" style="width: 95vw;">
     <felListItem v-bind="val_bind_list_data" @commandToUpdate="updateData"/>
@@ -16,12 +20,14 @@
 <script>
 import { ref, defineComponent } from "vue";
 import { useQuasar } from "quasar"
-import felCreateTaskModal from "src/components/operations/fel-create-task-modal.vue"
-import felListItem from 'src/components/rawElements/fel-list-item-tasks.vue'
+import felHeader from "components/fel-header.vue"
+import felCreateTaskModal from "components/operations/fel-create-task-modal.vue"
+import felListItem from 'components/rawElements/fel-list-item-tasks.vue'
 
 export default defineComponent({
   name: "PageIndex",
   components: {
+    felHeader,
     felCreateTaskModal,
     felListItem
   },
@@ -57,8 +63,9 @@ export default defineComponent({
         if(tasks_keys.length > 0) {
           show_no_tasks_content.value = false
         }
+
         return tasks_keys.sort(function(a,b){
-          return a.updated_date.localeCompare(b.update_date);
+          return a.updated_date.localeCompare(b.updated_date);
         }).reverse();
 
       }
@@ -71,6 +78,7 @@ export default defineComponent({
   },
   methods: {
     updateData() {
+      console.log('dddddddddajsjhdkajsd')
       this.val_bind_list_data = {saved_data: this.get_tasks_data(), show_delete: true}
     }
   }

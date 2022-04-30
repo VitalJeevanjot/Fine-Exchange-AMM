@@ -9,7 +9,7 @@
         <q-space />
 
         <felAppPinManager />
-        <felCreateTaskModal v-bind="val_bind_create_task" />
+        <felCreateTaskModal v-bind="val_bind_create_task" @commandToUpdate="$emit('commandToUpdate')"/>
         <felSettingsModal />
         <felUserAccountModal />
         <felHelpModal />
@@ -68,6 +68,7 @@ export default defineComponent ({
     felCreateTaskModal,
     felAppPinManager
   },
+  emits:['commandToUpdate'],
   props: {
     logo_src: {
       type: String,
@@ -91,6 +92,8 @@ export default defineComponent ({
   // ).then((key) => { console.log(key) })
     // console.log(window.crypto.randomUUID())
     // console.log(window.crypto.getRandomValues(new Uint8Array(16)))
+  },
+  methods: {
   }
 })
 </script>

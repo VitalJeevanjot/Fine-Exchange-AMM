@@ -1,9 +1,5 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <fel-header
-      v-bind="value_bind"
-    />
-
     <!-- <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
@@ -79,7 +75,7 @@ body
 //   },
 // ];
 
-import felHeader from "components/fel-header.vue"
+
 import { defineComponent, ref } from "vue";
 
 
@@ -87,7 +83,6 @@ export default defineComponent({
   name: "MainLayout",
 
   components: {
-    felHeader
     // EssentialLink
   },
 

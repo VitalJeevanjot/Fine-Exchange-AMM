@@ -72,7 +72,7 @@ export default {
   'key8', 
   'value8',
   'disable_btn'],
-  emits: ['savedCreatedTask'],
+  emits: ['savedCreatedTask', 'beforeSavingData'],
   setup () {
     const qs = useQuasar()
     const felAppPinManagerDialog = ref(false)

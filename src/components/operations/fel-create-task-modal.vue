@@ -65,6 +65,7 @@ import felCreateTaskAskPin from 'components/pinManagers/fel-create-task-ask-pin.
 export default {
   name: 'felCreateTaskModal',
   props: ['show_in_body', 'show_in_header'],
+  emits: ['commandToUpdate'],
   components: {
     felDropdown,
     felInput,
@@ -197,17 +198,18 @@ export default {
       val_binding_data_to_save,
       create_new_task () {
         felCreateNewTaskDialog.value = true
-      },
-      task_created() {
-        felCreateNewTaskDialog.value = false
-        seconds_interval.value = ''
-        spread_percent.value = ''
       }
     }
   },
   methods: {
     update_date_now() {
       this.updated_date = new Date().toLocaleString('en-GB');
+    },
+    task_created() {
+      this.$emit('commandToUpdate')
+      this.felCreateNewTaskDialog = false
+      this.seconds_interval = ''
+      this.spread_percent = ''
     }
   }
 }
