@@ -46,7 +46,7 @@
             v-bind="val_binding_spread_percent"
           />
           <!-- use create task ask pin component for below button -->
-          <felCreateTaskAskPin v-bind="val_binding_data_to_save" @savedCreatedTask="task_created"/>
+          <felCreateTaskAskPin v-bind="val_binding_data_to_save" @savedCreatedTask="task_created" @beforeSavingData="update_date_now"/>
           <!-- <q-btn label="create task" rounded class="q-mt-md my-green text-white"/> -->
         </q-card-section>
       </q-card>
@@ -76,6 +76,7 @@ export default {
     const felCreateNewTaskDialog = ref(false)
     const api_selected = ref('')
     const pair_selected = ref('')
+    const updated_date = ref('')
     const val_binding_apis_dropdown = ref({
       options: 'APIs',
       category: 'Select API'
@@ -144,6 +145,7 @@ export default {
         && qs.localStorage.getItem('available_pairs').find(o => o.label === pair_selected.value.label) != undefined
         && pair_selected.value.label) {
           random_val_as_id.value = window.crypto.randomUUID()
+          updated_date.value = new Date().toLocaleString('en-GB'); // update date here
           val_binding_data_to_save.value = {
             'key1': `task_data_type_plain_pretext_${random_val_as_id.value}`, //buy or sell
             'value1': selected_value, //buy or sell
@@ -157,8 +159,10 @@ export default {
             'value5': spread_percent,
             'key6': `task_data_state_plain_pretext_${random_val_as_id.value}`,
             'value6': 'running',
-            'key7': `task_data_id_plain_pretext_${random_val_as_id.value}`,
-            'value7': '0',
+            'key7': `task_data_date_plain_pretext_${random_val_as_id.value}`,
+            'value7': updated_date,
+            'key8': `task_data_id_plain_pretext_${random_val_as_id.value}`,
+            'value8': '0',
             'disable_btn': false
           }
         } else {
@@ -184,6 +188,7 @@ export default {
       spread_percent,
       show_dropdown_select_pair,
       random_val_as_id,
+      updated_date,
       val_binding_toggle_buy_sell,
       val_binding_apis_dropdown,
       val_binding_pairs_dropdown,
@@ -198,6 +203,11 @@ export default {
         seconds_interval.value = ''
         spread_percent.value = ''
       }
+    }
+  },
+  methods: {
+    update_date_now() {
+      this.update_date = new Date().toLocaleString('en-GB');
     }
   }
 }

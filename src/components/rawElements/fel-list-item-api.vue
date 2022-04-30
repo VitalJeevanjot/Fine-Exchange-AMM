@@ -22,9 +22,9 @@
             <span class="text-grey-6">{{data.api_update_date}}</span>
           </q-item-label>
         </q-item-section>
-        <q-tem-section top side v-show="show_delete">
+        <q-item-section top side v-show="show_delete">
           <felApiDeleteDataAskPin v-bind="val_binding = {unique_id: data.api_unique_id}" @afterAPIDeletion="$emit('commandToUpdate')"/>
-        </q-tem-section>
+        </q-item-section>
       </q-item>
     </q-list>
   </q-scroll-area>

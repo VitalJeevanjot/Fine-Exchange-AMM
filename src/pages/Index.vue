@@ -4,6 +4,9 @@
       <p class="text-h4 text-grey-6" style="user-select: none;">No tasks Yet!</p>
       <felCreateTaskModal v-bind="val_bind_create_task"/>
     </div>
+    <div v-show="!show_no_tasks_content" style="width: 95vw;">
+    <felListItem v-bind="val_bind_list_data" @commandToUpdate="updateData"/>
+    </div>
   </q-page>
 </template>
 
@@ -12,20 +15,63 @@
 
 <script>
 import { ref, defineComponent } from "vue";
+import { useQuasar } from "quasar"
 import felCreateTaskModal from "src/components/operations/fel-create-task-modal.vue"
-
+import felListItem from 'src/components/rawElements/fel-list-item-tasks.vue'
 
 export default defineComponent({
   name: "PageIndex",
   components: {
-    felCreateTaskModal
+    felCreateTaskModal,
+    felListItem
   },
   setup () {
     const show_no_tasks_content = ref(true)
     const val_bind_create_task = ref({show_in_body: true})
+    const qs = useQuasar()
+
     return {
+      qs,
       show_no_tasks_content,
-      val_bind_create_task
+      val_bind_create_task,
+
+      get_tasks_data() {
+        let all_keys = qs.localStorage.getAllKeys()
+        let tasks_keys = []
+
+        for (let index = 0; index < all_keys.length; index++) {
+          if(all_keys[index].includes('task_data_type_plain_pretext_')) {
+            let uniq_id = all_keys[index].replace('task_data_type_plain_pretext_', '')
+            tasks_keys.push({
+              pair_selected: qs.localStorage.getItem('task_data_pair_plain_pretext_' + uniq_id),
+              selected_type: qs.localStorage.getItem('task_data_type_plain_pretext_' + uniq_id),
+              seconds_interval: qs.localStorage.getItem('task_data_interval_plain_pretext_' + uniq_id),
+              spread_percent: qs.localStorage.getItem('task_data_percent_plain_pretext_' + uniq_id),
+              status: qs.localStorage.getItem('task_data_state_plain_pretext_' + uniq_id),
+              updated_date: qs.localStorage.getItem('task_data_date_plain_pretext_' + uniq_id),
+              task_id: qs.localStorage.getItem('task_data_id_plain_pretext_' + uniq_id),
+              unique_id: uniq_id
+            })
+          }
+        }
+        if(tasks_keys.length > 0) {
+          show_no_tasks_content.value = false
+        }
+        return tasks_keys.sort(function(a,b){
+          return a.updated_date.localeCompare(b.update_date);
+        }).reverse();
+
+      }
+    }
+  },
+  data () {
+    return {
+      val_bind_list_data: {saved_data: this.get_tasks_data(), show_delete: true}
+    }
+  },
+  methods: {
+    updateData() {
+      this.val_bind_list_data = {saved_data: this.get_tasks_data(), show_delete: true}
     }
   }
 });

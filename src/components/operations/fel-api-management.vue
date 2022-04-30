@@ -20,7 +20,7 @@
             
         </q-bar>
         <q-card-section>
-            <felListItem v-bind="val_list_data_binding" @commandToUpdate="updateData"/>
+            <felListItem v-bind="val_bind_list_data" @commandToUpdate="updateData"/>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -33,7 +33,7 @@
 <script>
 import { useQuasar } from "quasar"
 import felAddNewApi from 'components/operations/fel-add-new-api.vue';
-import felListItem from 'components/rawElements/fel-list-item.vue'
+import felListItem from 'components/rawElements/fel-list-item-api.vue'
 import { ref } from "vue";
 export default {
   name: 'felApiManagement',
@@ -71,12 +71,12 @@ export default {
   },
   data () {
     return {
-      val_list_data_binding: {saved_data: this.get_saved_api_data(), show_delete: true}
+      val_bind_list_data: {saved_data: this.get_saved_api_data(), show_delete: true}
     }
   },
   methods: {
     updateData() {
-      this.val_list_data_binding = {saved_data: this.get_saved_api_data(), show_delete: true}
+      this.val_bind_list_data = {saved_data: this.get_saved_api_data(), show_delete: true}
     }
   }
 }

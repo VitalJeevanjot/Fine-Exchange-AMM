@@ -46,7 +46,7 @@
         </div>
 
         <div class="row justify-center">
-          <felApiAddDataAskPin v-bind="val_binding_data_to_save" @savedApiData="dataSaved" @beforeSavingData="updateDate"/>
+          <felApiAddDataAskPin v-bind="val_binding_data_to_save" @savedApiData="dataSaved" @beforeSavingData="update_date_now"/>
         </div>
 
       </q-card-section>
@@ -180,7 +180,7 @@ export default {
 
       this.$emit('reloadApiManagement')
     },
-    updateDate() {
+    update_date_now() {
       this.updated_date = new Date().toLocaleString('en-GB'); // update date here
     }
   }

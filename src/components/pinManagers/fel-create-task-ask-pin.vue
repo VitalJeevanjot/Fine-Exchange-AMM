@@ -69,6 +69,8 @@ export default {
   'value6',
   'key7', 
   'value7',
+  'key8', 
+  'value8',
   'disable_btn'],
   emits: ['savedCreatedTask'],
   setup () {
@@ -217,7 +219,7 @@ export default {
       
       this.$emit('beforeSavingData')
       var index = 1
-      for (index = 1; index < 7; index++) {
+      for (index = 1; index < 8; index++) {
         var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
           if(!(this['key'+index].includes('plain_'))) {
