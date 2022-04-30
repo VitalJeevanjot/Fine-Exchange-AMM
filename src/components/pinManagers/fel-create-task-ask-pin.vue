@@ -217,7 +217,6 @@ export default {
       
       this.$emit('beforeSavingData')
       var index = 1
-      var interval = null
       for (index = 1; index < 7; index++) {
         var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
