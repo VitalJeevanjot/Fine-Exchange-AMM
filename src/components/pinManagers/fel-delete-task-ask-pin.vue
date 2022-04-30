@@ -2,7 +2,7 @@
   <div>
 
   <div class="row justify-center">
-    <q-btn icon="delete" flat round size="0.9rem" @click="felAppPinManagerDialog=true"/>
+    <q-btn icon="las la-stop-circle" class="q-ma-xs" dense round @click="felAppPinManagerDialog=true"/>
   </div>
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>

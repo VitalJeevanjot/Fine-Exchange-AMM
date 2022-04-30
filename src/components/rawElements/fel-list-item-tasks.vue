@@ -27,11 +27,11 @@
         </q-item-section>
         <q-item-section top side v-show="show_delete">
           <div v-show="data.status == 'running'">
-            <q-btn icon="las la-stop-circle" rounded dense style="color: #58B39A"/>
+            <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #58B39A"/>
           </div>
 
           <div v-show="data.status == 'stopped'">
-            <q-btn icon="las la-stop-circle" rounded dense style="color: #d13030"/>
+            <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #d13030"/>
           </div>
           <felDeleteTaskAskPin v-bind="val_binding = {unique_id: data.unique_id}" @afterTaskDeletion="$emit('commandToUpdate')"/>
         </q-item-section>
