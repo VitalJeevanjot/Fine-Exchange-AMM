@@ -4,7 +4,7 @@
     > 
     <q-list bordered>
       <q-item-label header>All Tasks ({{saved_data.length}})</q-item-label>
-      <q-item clickable style="border-radius: 10px; margin-right: 1rem;" v-for="(data, index) in saved_data" :key="index">
+      <q-item clickable style="border-radius: 10px; background-color: #eaeaea" v-for="(data, index) in saved_data" :key="index">
         <q-item-section top>
           <q-item-label style="
               width: 15rem;
@@ -19,7 +19,7 @@
             <span class="text-grey-9 text-subtitle1"> <span class="text-grey-7">Type: </span>{{data.selected_type}}</span>
           </q-item-label>
           <q-item-label>
-            <span class="text-grey-8 text-subtitle1"><span class="text-grey-7">Interval (in Seconds): </span>{{data.seconds_interval}}</span>
+            <span class="text-grey-8 text-subtitle1"><span class="text-grey-7">Interval: </span>{{data.seconds_interval}} <span class="text-caption">(seconds)</span></span>
           </q-item-label>
           <q-item-label>
             <span class="text-grey-8 text-subtitle2"><span class="text-grey-7">Spread: </span>{{data.spread_percent}}</span>
