@@ -8,7 +8,7 @@
       <p class="text-h4 text-grey-6" style="user-select: none;">No tasks Yet!</p>
       <felCreateTaskModal v-bind="val_bind_create_task" @commandToUpdate="updateData"/>
     </div>
-    <div v-show="!show_no_tasks_content" style="width: 95vw;">
+    <div v-show="!show_no_tasks_content" style="width: 100vw;" class="q-pl-sm">
     <felListItem v-bind="val_bind_list_data" @commandToUpdate="updateData"/>
     </div>
   </q-page>
