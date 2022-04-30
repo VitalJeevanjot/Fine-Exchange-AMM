@@ -3,7 +3,7 @@
     style="height: 90vh; min-height: 400px; max-width: 100vw;"
     > 
     <q-list bordered>
-      <q-item-label header>Tasks ({{saved_data.length}})</q-item-label>
+      <q-item-label header>All Tasks ({{saved_data.length}})</q-item-label>
       <q-item clickable style="border-radius: 10px; margin-right: 1rem;" v-for="(data, index) in saved_data" :key="index">
         <q-item-section top>
           <q-item-label style="
