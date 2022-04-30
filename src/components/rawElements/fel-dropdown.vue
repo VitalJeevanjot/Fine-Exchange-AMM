@@ -148,13 +148,15 @@ export default {
     },
     getPairs() {
       var current_api = this.qs.localStorage.getItem('api_selected_now')
-      var get_exchanges = this.getExchanges()
-
-      for (let index = 0; index < get_exchanges.length; index++) {
-        if(get_exchanges[index].label == current_api.description) {
-          // var exchange = new this.$ccxt.hollaex({urls: {api: {rest: get_exchanges[index].value}}})
-          // console.log(await exchange.loadMarkets())
-          return this.getPairForEachExchange(get_exchanges[index].label)
+      if(current_api) {
+        var get_exchanges = this.getExchanges()
+  
+        for (let index = 0; index < get_exchanges.length; index++) {
+          if(get_exchanges[index].label == current_api.description) {
+            // var exchange = new this.$ccxt.hollaex({urls: {api: {rest: get_exchanges[index].value}}})
+            // console.log(await exchange.loadMarkets())
+            return this.getPairForEachExchange(get_exchanges[index].label)
+          }
         }
       }
       // var ccxt = new ccxt.hollaex({urls: {api: {rest: current_api.}}})

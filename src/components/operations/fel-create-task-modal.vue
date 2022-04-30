@@ -46,7 +46,7 @@
             v-bind="val_binding_spread_percent"
           />
           <!-- use create task ask pin component for below button -->
-          <felCreateTaskAskPin v-bind="val_binding_data_to_save"/>
+          <felCreateTaskAskPin v-bind="val_binding_data_to_save" @savedCreatedTask="task_created"/>
           <!-- <q-btn label="create task" rounded class="q-mt-md my-green text-white"/> -->
         </q-card-section>
       </q-card>
@@ -134,7 +134,7 @@ export default {
     const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
 
     watchEffect(() => {
-      console.log(api_selected.value)
+      // console.log(api_selected.value)
       if(api_selected.value.label) {
         show_dropdown_select_pair.value = true
         if(seconds_interval.value >= 1 
@@ -192,12 +192,12 @@ export default {
       val_binding_data_to_save,
       create_new_task () {
         felCreateNewTaskDialog.value = true
-        // var int = 0
-        // console.log(int++)
-        // var new_int = setInterval(() => {
-        //   console.log(int++)
-        // }, 10000)
       },
+      task_created() {
+        felCreateNewTaskDialog.value = false
+        seconds_interval.value = ''
+        spread_percent.value = ''
+      }
     }
   }
 }

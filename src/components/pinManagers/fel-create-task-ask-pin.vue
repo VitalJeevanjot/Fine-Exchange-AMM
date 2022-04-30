@@ -186,9 +186,6 @@ export default {
     },
     async encrypt_data() {
       // encrypt, save and run
-      console.log('-----------------------------------')
-      console.log(this.value4)
-      console.log(this.value2.value)
       const _algo = {
         name: "AES-GCM", 
         iv: this.strToArrayBuffer(this.pic + "-66696e65"), // 66696e65 ("fine" in bytes from https://onlinestringtools.com/convert-string-to-bytes)
@@ -242,9 +239,9 @@ export default {
         }
       }
       // When the index is 7
-      // var created_task = setInterval(() => {
-      //   var ccxt = new ccxt.hollaex({urls: {api: {rest: value2.}}})
-      // }, this.value4) //valye 4 is the interval
+      var created_task = setInterval(() => {
+        var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})
+      }, this.value4) //value 4 is the interval
       this.qs.localStorage.set(this['key'+index], created_task)
 
       this.pic = ''
