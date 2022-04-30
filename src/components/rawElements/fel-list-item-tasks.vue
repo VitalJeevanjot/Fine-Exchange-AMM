@@ -1,8 +1,8 @@
 <template>
   <q-scroll-area
-    style="height: 95vh; min-height: 400px; max-width: 100vw;"
+    style="height: 90vh; min-height: 400px; max-width: 100vw;"
     > 
-    <q-list>
+    <q-list bordered>
       <q-item-label header>Tasks ({{saved_data.length}})</q-item-label>
       <q-item clickable style="border-radius: 10px; margin-right: 1rem;" v-for="(data, index) in saved_data" :key="index">
         <q-item-section top>
@@ -11,18 +11,18 @@
               white-space: nowrap; 
               overflow: hidden;
               text-overflow: ellipsis;">
-            <span class="text-weight-medium">
-              {{data.pair_selected}}
+            <span class="text-h6">
+              <span class="text-grey-7">Pair: </span>{{data.pair_selected.label}}
             </span>
           </q-item-label>
           <q-item-label>
-            <span class="text-grey-9 text-caption">{{data.selected_type}}</span>
+            <span class="text-grey-9 text-subtitle1"> <span class="text-grey-7">Type: </span>{{data.selected_type}}</span>
           </q-item-label>
-          <q-item-label caption>
-            <span class="text-grey-6">{{data.seconds_interval}}</span>
+          <q-item-label>
+            <span class="text-grey-8 text-subtitle1"><span class="text-grey-7">Interval (in Seconds): </span>{{data.seconds_interval}}</span>
           </q-item-label>
-          <q-item-label caption>
-            <span class="text-grey-6">{{data.spread_percent}}</span>
+          <q-item-label>
+            <span class="text-grey-8 text-subtitle2"><span class="text-grey-7">Spread: </span>{{data.spread_percent}}</span>
           </q-item-label>
         </q-item-section>
         <q-item-section top side v-show="show_delete">
