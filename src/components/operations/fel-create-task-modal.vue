@@ -207,7 +207,7 @@ export default {
   },
   methods: {
     update_date_now() {
-      this.update_date = new Date().toLocaleString('en-GB');
+      this.updated_date = new Date().toLocaleString('en-GB');
     }
   }
 }
