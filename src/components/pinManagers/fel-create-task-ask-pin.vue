@@ -243,7 +243,7 @@ export default {
       var created_task = setInterval(() => {
         var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})
         console.log(this.value7)
-      }, this.value4) //value 4 is the interval
+      }, this.value4 * 1000) //value 4 is the interval
       this.qs.localStorage.set(this['key'+index], created_task)
 
       this.pic = ''
