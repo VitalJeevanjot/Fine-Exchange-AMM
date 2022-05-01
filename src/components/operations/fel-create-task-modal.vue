@@ -117,7 +117,7 @@ export default {
       _hint: 'Enter seconds to wait before next call.',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val >= 1 && val < 10000 || "Please add between 1 (inc.) to 10000 (seconds)!"],
+      _rules: [val => val >= 5 && val < 10000 || "Please add between 5 (inc.) to 10000 (seconds)!"],
       _class: 'q-pt-sm'
     })
 
@@ -139,7 +139,7 @@ export default {
       // console.log(api_selected.value)
       if(api_selected.value.label) {
         show_dropdown_select_pair.value = true
-        if(seconds_interval.value >= 1 
+        if(seconds_interval.value >= 5 
         && seconds_interval.value < 10000 
         && spread_percent.value >= 1 
         && spread_percent.value <= 10 
