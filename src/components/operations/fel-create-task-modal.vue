@@ -113,11 +113,11 @@ export default {
       _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
       _type: 'number',
-      _label: 'Interval (in seconds)',
+      _label: 'Interval (seconds)',
       _hint: 'Enter seconds to wait before next call.',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val > 60 && val < 10000 || "Please add between 60 to 10000 (seconds)!"],
+      _rules: [val => val > 400 && val < 10000 || "Please add between 400 to 10000 (seconds)!"],
       _class: 'q-pt-sm'
     })
 
@@ -129,7 +129,7 @@ export default {
       _hint: 'Enter spread from sell or buy price.',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val >= 1 && val <= 10 || "Please add between 1 to 10 (both inc.) (percent)!"],
+      _rules: [val => val >= 0.01 && val <= 2 || "Please add between 0.01 to 2 (percent)!"],
       _class: 'q-pt-sm'
     })
 
@@ -139,10 +139,10 @@ export default {
       // console.log(api_selected.value)
       if(api_selected.value.label) {
         show_dropdown_select_pair.value = true
-        if(seconds_interval.value > 60 
+        if(seconds_interval.value > 400 
         && seconds_interval.value < 10000 
-        && spread_percent.value >= 1 
-        && spread_percent.value <= 10 
+        && spread_percent.value >= 0.01 
+        && spread_percent.value <= 2 
         && qs.localStorage.getItem('available_pairs').find(o => o.label === pair_selected.value.label) != undefined
         && pair_selected.value.label) {
           random_val_as_id.value = window.crypto.randomUUID()
