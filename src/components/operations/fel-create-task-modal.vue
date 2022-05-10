@@ -24,10 +24,13 @@
           />
 
           <!-- Select API -->
-          <felDropdown 
-            v-model:model="api_selected"
-            v-bind="val_binding_apis_dropdown"
-          />
+          <div class="row">
+            <felDropdown 
+              v-model:model="api_selected"
+              v-bind="val_binding_apis_dropdown"
+            />
+            <felApiManagement class="q-pt-md q-pl-xs"/>
+          </div>
 
           <!-- select pair :: show balance (after selecting api) --> 
           <felDropdown 
@@ -62,6 +65,7 @@ import felDropdown from 'components/rawElements/fel-dropdown.vue'
 import felInput from 'components/rawElements/fel-input.vue'
 import felButtonToggle from 'components/rawElements/fel-button-toggle.vue'
 import felCreateTaskAskPin from 'components/pinManagers/fel-create-task-ask-pin.vue'
+import felApiManagement from 'components/operations/fel-api-management.vue';
 export default {
   name: 'felCreateTaskModal',
   props: ['show_in_body', 'show_in_header'],
@@ -70,7 +74,8 @@ export default {
     felDropdown,
     felInput,
     felButtonToggle,
-    felCreateTaskAskPin
+    felCreateTaskAskPin,
+    felApiManagement
   },
   setup () {
     const qs = useQuasar()
@@ -197,6 +202,7 @@ export default {
       val_binding_spread_percent,
       val_binding_data_to_save,
       create_new_task () {
+
         felCreateNewTaskDialog.value = true
       }
     }

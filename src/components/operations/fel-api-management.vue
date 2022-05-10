@@ -1,6 +1,6 @@
 <template>
 <div>
-  <q-btn icon='key' flat dense @click="felApiManagementDialog = true">
+  <q-btn icon='key' flat dense rounded @click="felApiManagementDialog = true">
     <q-tooltip>
       API(s) Management
     </q-tooltip>

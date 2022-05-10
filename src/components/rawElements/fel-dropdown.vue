@@ -113,16 +113,26 @@ export default {
       }
     },
     getExchanges() {
-      return [
-        {
-          value: 'https://api.fine.exchange',
-          label: 'Fine Exchanges Mainnet'
-        },
-        {
-          value: 'https://apitest.fine.exchange',
-          label: 'Fine Exchanges Testnet'
-        }
-      ]
+      if(!this.getAPIs().length) {
+        return [
+          {
+            value: 'https://api.fine.exchange',
+            label: 'Fine Exchanges Mainnet',
+            description: 'required first to sync tasks with cloud'
+          }
+        ]
+      } else {
+        return [
+          {
+            value: 'https://api.fine.exchange',
+            label: 'Fine Exchanges Mainnet'
+          },
+          {
+            value: 'https://apitest.fine.exchange',
+            label: 'Fine Exchanges Testnet'
+          }
+        ]
+      }
     },
     getAPIs() {
       var all_keys = this.qs.localStorage.getAllKeys()

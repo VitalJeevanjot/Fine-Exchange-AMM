@@ -10,7 +10,7 @@
 
         <felAppPinManager />
         <felCreateTaskModal v-bind="val_bind_create_task" @commandToUpdate="$emit('commandToUpdate')"/>
-        <felSettingsModal />
+        <felApiManagement />
         <felUserAccountModal />
         <felHelpModal />
 
@@ -51,7 +51,8 @@
 import { defineComponent, ref } from "vue";
 
 import felHelpModal from "components/miscellaneous/fel-help-modal.vue"
-import felSettingsModal from "src/components/operations/fel-settings-modal.vue"
+// import felSettingsModal from "src/components/operations/fel-settings-modal.vue"
+import felApiManagement from 'components/operations/fel-api-management.vue';
 import felUserAccountModal from "src/components/information/fel-user-account-modal.vue"
 import felCreateTaskModal from "src/components/operations/fel-create-task-modal.vue"
 
@@ -63,10 +64,11 @@ export default defineComponent ({
   name: 'felHeader',
   components: {
     felHelpModal,
-    felSettingsModal,
+    // felSettingsModal,
     felUserAccountModal,
     felCreateTaskModal,
-    felAppPinManager
+    felAppPinManager,
+    felApiManagement
   },
   emits:['commandToUpdate'],
   props: {

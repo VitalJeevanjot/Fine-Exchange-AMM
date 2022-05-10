@@ -1,4 +1,5 @@
 <template>
+<!-- Not in use for now... -->
   <div>
     <q-btn flat round dense icon="settings" class="q-mr-sm" @click="felSettingsDialog = true" />
 
