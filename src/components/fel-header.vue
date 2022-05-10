@@ -25,7 +25,7 @@
 <style lang="sass">
 .card-in-level-1-dialog
   background-color: #f2f2f2
-  border-radius: 30px !important
+  border-radius: 15px !important
 
 .card-in-level-2-dialog
   background-color: #ECECEC

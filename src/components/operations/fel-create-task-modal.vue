@@ -9,14 +9,18 @@
 
   <div>
     <q-dialog v-model="felCreateNewTaskDialog" persistent>
-      <q-card class="card-in-level-1-dialog" style="min-width: 300px">
+      <q-card class="card-in-level-1-dialog" style="min-width: 300px;">
           <q-bar class="bg-grey-10 text-grey-1">
             <div>Create New Task</div> 
             <q-space/> 
             <q-btn icon='close' round flat dense v-close-popup/>
             <q-btn icon='help' label="help" rounded flat dense v-close-popup/>
           </q-bar>
+          <q-scroll-area
+        style="height: 80vh; min-height: 200px; min-width: 23rem;"
+      > 
         <q-card-section>
+          
           <!-- Add toggle for buy/sell -->
           <felButtonToggle
             v-model:_selected_value="selected_value"
@@ -29,7 +33,7 @@
               v-model:model="api_selected"
               v-bind="val_binding_apis_dropdown"
             />
-            <felApiManagement class="q-pt-md q-pl-xs"/>
+            <felApiManagement style="margin-left: 3px; margin-top: 1.1vh;"/>
           </div>
 
           <!-- select pair :: show balance (after selecting api) --> 
@@ -39,7 +43,6 @@
             v-bind="val_binding_pairs_dropdown"
           />
           <!-- Add timer interval (select range then provide min-max (excluded/included check)) -->
-          <div class="row">
             <felInput
               v-model:_input_val="seconds_interval"
               v-bind="val_binding_seconds_interval"
@@ -48,7 +51,6 @@
               v-model:_input_val="amount"
               v-bind="val_binding_amount"
             />
-          </div>
           <!-- Add spread or if use custom basic equation (With e(price) e_low e_high etc parameters provided for basic arithmetic form fine exchnage) -->
           <felInput
             v-model:_input_val="spread_percent"
@@ -58,6 +60,7 @@
           <felCreateTaskAskPin v-bind="val_binding_data_to_save" @savedCreatedTask="task_created" @beforeSavingData="update_date_now"/>
           <!-- <q-btn label="create task" rounded class="q-mt-md my-green text-white"/> -->
         </q-card-section>
+      </q-scroll-area>
       </q-card>
 
     </q-dialog>
@@ -122,7 +125,7 @@ export default {
     })
 
     const val_binding_seconds_interval = ref({
-      _style: 'max-width: 500px; min-width: 100px; width: 30vw;',
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
       _type: 'number',
       _label: 'Interval (seconds)',
@@ -130,11 +133,11 @@ export default {
       _show_error: false,
       _error_msg: '',
       _rules: [val => val >= 400 && val <= 10000 || "Please add between 400 to 10000 (seconds)!"],
-      _class: 'q-pa-xs q-pb-md'
+      _class: 'q-pt-sm'
     })
 
     const val_binding_amount = ref({
-      _style: 'max-width: 500px; min-width: 100px; width: 30vw;',
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
       _type: 'number',
       _label: 'Amount',
@@ -142,11 +145,11 @@ export default {
       _show_error: false,
       _error_msg: '',
       _rules: [val => val >= 0.001 && val <= 100 || "Please add between 0.001 to 100 (per cent)!"],
-      _class: 'q-pa-xs q-pb-md'
+      _class: 'q-mt-sm'
     })
 
     const val_binding_spread_percent = ref({
-      _style: 'max-width: 500px; min-width: 100px; width: 30vw; padding-top: 15px',
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw; padding-top: 15px',
       _mask: '',
       _type: 'number',
       _label: 'Spread (in Percent)',
@@ -154,7 +157,7 @@ export default {
       _show_error: false,
       _error_msg: '',
       _rules: [val => val >= 0.01 && val <= 2 || "Please add between 0.01 to 2 (percent)!"],
-      _class: 'q-mt-md q-pa-xs'
+      _class: 'q-mt-sm'
     })
 
     const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
