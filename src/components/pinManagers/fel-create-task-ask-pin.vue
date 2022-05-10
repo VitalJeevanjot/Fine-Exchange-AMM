@@ -2,7 +2,7 @@
   <div>
 
   <div class="row justify-center">
-    <q-btn :disable="disable_btn" class="my-green text-grey-1 q-mt-md" label="Create" rounded @click="felAppPinManagerDialog=true"/>
+    <q-btn :disable="disable_btn" class="my-green text-grey-1 q-mt-lg" label="Create" rounded @click="felAppPinManagerDialog=true"/>
   </div>
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
@@ -71,6 +71,8 @@ export default {
   'value7',
   'key8', 
   'value8',
+  'key9', 
+  'value9',
   'disable_btn'],
   emits: ['savedCreatedTask', 'beforeSavingData'],
   setup () {
@@ -219,7 +221,9 @@ export default {
       
       this.$emit('beforeSavingData')
       var index = 1
-      for (index = 1; index < 8; index++) {
+      // @change when change in key/value because task id was 
+      // planned to be assigned later when creating or saving(here)
+      for (index = 1; index < 9; index++) {
         var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
           if(!(this['key'+index].includes('plain_'))) {

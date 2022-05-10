@@ -39,10 +39,16 @@
             v-bind="val_binding_pairs_dropdown"
           />
           <!-- Add timer interval (select range then provide min-max (excluded/included check)) -->
-          <felInput
-            v-model:_input_val="seconds_interval"
-            v-bind="val_binding_seconds_interval"
-          />
+          <div class="row">
+            <felInput
+              v-model:_input_val="seconds_interval"
+              v-bind="val_binding_seconds_interval"
+            />
+            <felInput
+              v-model:_input_val="amount"
+              v-bind="val_binding_amount"
+            />
+          </div>
           <!-- Add spread or if use custom basic equation (With e(price) e_low e_high etc parameters provided for basic arithmetic form fine exchnage) -->
           <felInput
             v-model:_input_val="spread_percent"
@@ -96,6 +102,7 @@ export default {
     const selected_value = ref('buy')
 
     const seconds_interval = ref('')
+    const amount = ref('')
     const spread_percent = ref('')
 
     const disable_add_button = ref(true)
@@ -115,7 +122,7 @@ export default {
     })
 
     const val_binding_seconds_interval = ref({
-      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
+      _style: 'max-width: 500px; min-width: 100px; width: 30vw;',
       _mask: '',
       _type: 'number',
       _label: 'Interval (seconds)',
@@ -123,11 +130,23 @@ export default {
       _show_error: false,
       _error_msg: '',
       _rules: [val => val >= 400 && val <= 10000 || "Please add between 400 to 10000 (seconds)!"],
-      _class: 'q-pt-sm'
+      _class: 'q-pa-xs q-pb-md'
+    })
+
+    const val_binding_amount = ref({
+      _style: 'max-width: 500px; min-width: 100px; width: 30vw;',
+      _mask: '',
+      _type: 'number',
+      _label: 'Amount',
+      _hint: 'Enter how much amount you like to use.',
+      _show_error: false,
+      _error_msg: '',
+      _rules: [val => val >= 0.001 && val <= 100 || "Please add between 0.001 to 100 (per cent)!"],
+      _class: 'q-pa-xs q-pb-md'
     })
 
     const val_binding_spread_percent = ref({
-      _style: 'max-width: 500px; min-width: 300px; width: 30vw; padding-top: 15px',
+      _style: 'max-width: 500px; min-width: 100px; width: 30vw; padding-top: 15px',
       _mask: '',
       _type: 'number',
       _label: 'Spread (in Percent)',
@@ -135,7 +154,7 @@ export default {
       _show_error: false,
       _error_msg: '',
       _rules: [val => val >= 0.01 && val <= 2 || "Please add between 0.01 to 2 (percent)!"],
-      _class: 'q-pt-sm'
+      _class: 'q-mt-md q-pa-xs'
     })
 
     const val_binding_data_to_save = ref({'disable_btn': disable_add_button})
@@ -148,6 +167,8 @@ export default {
         && seconds_interval.value <= 10000 
         && spread_percent.value >= 0.01 
         && spread_percent.value <= 2 
+        && amount.value >= 0.001 
+        && amount.value <= 100
         && qs.localStorage.getItem('available_pairs').find(o => o.label === pair_selected.value.label) != undefined
         && pair_selected.value.label) {
           random_val_as_id.value = window.crypto.randomUUID()
@@ -167,8 +188,10 @@ export default {
             'value6': 'running',
             'key7': `task_data_date_plain_pretext_${random_val_as_id.value}`,
             'value7': updated_date,
-            'key8': `task_data_id_plain_pretext_${random_val_as_id.value}`,
-            'value8': '0',
+            'key8': `task_data_amount_plain_pretext_${random_val_as_id.value}`,
+            'value8': amount,
+            'key9': `task_data_id_plain_pretext_${random_val_as_id.value}`,
+            'value9': '0',
             'disable_btn': false
           }
         } else {
@@ -191,6 +214,7 @@ export default {
       pair_selected,
       disable_add_button,
       seconds_interval,
+      amount,
       spread_percent,
       show_dropdown_select_pair,
       random_val_as_id,
@@ -201,6 +225,7 @@ export default {
       val_binding_seconds_interval,
       val_binding_spread_percent,
       val_binding_data_to_save,
+      val_binding_amount,
       create_new_task () {
 
         felCreateNewTaskDialog.value = true

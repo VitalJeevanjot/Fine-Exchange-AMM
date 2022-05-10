@@ -117,7 +117,7 @@ export default {
         return [
           {
             value: 'https://api.fine.exchange',
-            label: 'Fine Exchanges Mainnet',
+            label: 'Fine Exchange Mainnet',
             description: 'required first to sync tasks with cloud'
           }
         ]
@@ -125,11 +125,11 @@ export default {
         return [
           {
             value: 'https://api.fine.exchange',
-            label: 'Fine Exchanges Mainnet'
+            label: 'Fine Exchange Mainnet'
           },
           {
             value: 'https://apitest.fine.exchange',
-            label: 'Fine Exchanges Testnet'
+            label: 'Fine Exchange Testnet'
           }
         ]
       }
@@ -174,14 +174,14 @@ export default {
     },
     getPairForEachExchange(label) {
       switch(label) {
-        case 'Fine Exchanges Mainnet':
+        case 'Fine Exchange Mainnet':
           return [{label: 'BCH/USDT', value: 'BCH/USDT'}, 
           {label: 'BTC/USDT', value: 'BTC/USDT'}, 
           {label: 'ETH/BTC', value: 'ETH/BTC'}, 
           {label: 'ETH/USDT', value: 'ETH/USDT'}, 
           {label: 'XHT/USDT', value: 'XHT/USDT'}]
           break;
-        case 'Fine Exchanges Testnet':
+        case 'Fine Exchange Testnet':
           return [{label: 'ETH/BTC', value: 'ETH/BTC'}, 
           {label: 'XHT/USDT', value: 'XHT/USDT'}]
           break;
