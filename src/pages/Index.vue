@@ -52,9 +52,11 @@ export default defineComponent({
             let uniq_id = all_keys[index].replace('task_data_type_plain_pretext_', '')
             tasks_keys.push({
               pair_selected: qs.localStorage.getItem('task_data_pair_plain_pretext_' + uniq_id),
+              api_selected: qs.localStorage.getItem('task_data_api_plain_pretext_' + uniq_id),
               selected_type: qs.localStorage.getItem('task_data_type_plain_pretext_' + uniq_id),
+              amount: qs.localStorage.getItem('task_data_amount_plain_pretext_' + uniq_id),
               seconds_interval: qs.localStorage.getItem('task_data_interval_plain_pretext_' + uniq_id),
-              spread_percent: qs.localStorage.getItem('task_data_percent_plain_pretext_' + uniq_id),
+              spread_percent: qs.localStorage.getItem('task_data_spread_percent_plain_pretext_' + uniq_id),
               status: qs.localStorage.getItem('task_data_state_plain_pretext_' + uniq_id),
               updated_date: qs.localStorage.getItem('task_data_date_plain_pretext_' + uniq_id),
               task_id: qs.localStorage.getItem('task_data_id_plain_pretext_' + uniq_id),

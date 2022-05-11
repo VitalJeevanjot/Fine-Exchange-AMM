@@ -185,7 +185,7 @@ export default {
             'value3': pair_selected,
             'key4': `task_data_interval_plain_pretext_${random_val_as_id.value}`,
             'value4': seconds_interval,
-            'key5': `task_data_percent_plain_pretext_${random_val_as_id.value}`,
+            'key5': `task_data_spread_percent_plain_pretext_${random_val_as_id.value}`,
             'value5': spread_percent,
             'key6': `task_data_state_plain_pretext_${random_val_as_id.value}`,
             'value6': 'running',
