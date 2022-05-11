@@ -140,7 +140,7 @@ export default {
       _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
       _type: 'number',
-      _label: 'Amount',
+      _label: 'Amount (per cent)',
       _hint: 'Enter how much amount you like to use.',
       _show_error: false,
       _error_msg: '',
@@ -149,10 +149,10 @@ export default {
     })
 
     const val_binding_spread_percent = ref({
-      _style: 'max-width: 500px; min-width: 300px; width: 30vw; padding-top: 15px',
+      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
       _mask: '',
       _type: 'number',
-      _label: 'Spread (in Percent)',
+      _label: 'Spread (per cent)',
       _hint: 'Enter spread from sell or buy price.',
       _show_error: false,
       _error_msg: '',
