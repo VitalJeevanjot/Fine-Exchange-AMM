@@ -4,6 +4,7 @@
       @commandToUpdate="updateData"
     />
   <q-page class="flex flex-center" style="background-color: #CFCFCF">
+    <!-- old background color #CFCFCF -->
     <div v-show="show_no_tasks_content">
       <p class="text-h4 text-grey-6" style="user-select: none;">No tasks Yet!</p>
       <felCreateTaskModal v-bind="val_bind_create_task" @commandToUpdate="updateData"/>

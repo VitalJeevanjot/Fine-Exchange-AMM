@@ -1,71 +1,71 @@
 <template>
-  <q-scroll-area
-    style="height: 90vh; min-height: 400px;"
-    > 
-    <q-list class="q-pr-md">
-      <q-item-label header>All Tasks ({{saved_data.length}})</q-item-label>
-      <q-item class="q-mt-sm" clickable style="border-radius: 10px; background-color: #eaeaea">
-        <q-item-section>
-          <q-table
-            dark
-            style="width: 95vw"
-            virtual-scroll
-            :rows-per-page-options="[0]"
-            :rows="getData()"
-          >
-          <template v-slot:body-cell="props">
-          <q-td :props="props" 
-          :class="(props.row.status == 'running') ? 'bg-green-9' : 
-          (props.row.status == 'stopped') ? 'bg-red-9' : 'bg-grey-3'">
-            {{props.value}}
-            <!-- <div v-if="props.row.status == 'running'">
-              <q-badge color="green-9" :label="props.value" />
-            </div>
-            <div v-if="props.row.status == 'stopped'">
-              <q-badge color="red-9" :label="props.value" />
-            </div> -->
-          </q-td>
+  <div class="row justify-center">
+    <q-table
+      :title="'All Tasks' + ' (' + saved_data.length + ')'"
+      dark
+      class="q-mr-sm q-mt-sm q-mb-sm"
+      style="width: 98vw; height: 87vh;"
+      virtual-scroll
+      :rows-per-page-options="[0]"
+      :rows="getData()"
+    >
+      <template v-slot:body-cell="props">
+        <q-td :props="props" 
+        :class="(props.row.status == 'running') ? 'bg-green-9' : 
+        (props.row.status == 'stopped') ? 'bg-red-9' : 'bg-grey-3'">
+          {{props.value}}
+          <!-- <div v-if="props.row.status == 'running'">
+            <q-badge color="green-9" :label="props.value" />
+          </div>
+          <div v-if="props.row.status == 'stopped'">
+            <q-badge color="red-9" :label="props.value" />
+          </div> -->
+        </q-td>
       </template>
-          <template v-slot:bottom>
-            <!-- <div v-show="data.status == 'running'">
-              <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #58B39A"/>
-            </div>
+    <template v-slot:bottom>
+      <!-- <div v-show="data.status == 'running'">
+        <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #58B39A"/>
+      </div>
 
-            <div v-show="data.status == 'stopped'">
-              <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #d13030"/>
-            </div> -->
-            <div v-show="show_delete">
-              <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
-            </div>
-          </template>
-          </q-table>
+      <div v-show="data.status == 'stopped'">
+        <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #d13030"/>
+      </div> -->
+      <div v-show="show_delete">
+        <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
+      </div>
+    </template>
+    </q-table>
+    
+  </div>
 
-          <!-- <q-item-label style="
-              width: 15rem;
-              white-space: nowrap; 
-              overflow: hidden;
-              text-overflow: ellipsis;">
-            <span class="text-h6">
-              <span class="text-grey-7">Pair: </span>{{data.pair_selected.label}}
-            </span>
-          </q-item-label> -->
-          <!-- <q-item-label>
-            <span class="text-grey-9 text-subtitle1"> <span class="text-grey-7">Type: </span>{{data.selected_type}}</span>
-          </q-item-label>
-          <q-item-label>
-            <span class="text-grey-9 text-subtitle1">  <span class="text-grey-7">API:</span> {{data.api_selected.label}}</span>
-          </q-item-label>
-          <q-item-label>
-            <span class="text-grey-8 text-subtitle1"><span class="text-grey-7">Interval: </span>{{data.seconds_interval}}<span class="text-caption">s</span></span>
-          </q-item-label>
-          <q-item-label>
-            <span class="text-grey-8 text-subtitle2"><span class="text-grey-7">Spread: </span>{{data.spread_percent}}%</span>
-          </q-item-label> -->
-        </q-item-section>
-      </q-item>
-    </q-list>
-  </q-scroll-area>
+        <!-- <q-item-label style="
+            width: 15rem;
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;">
+          <span class="text-h6">
+            <span class="text-grey-7">Pair: </span>{{data.pair_selected.label}}
+          </span>
+        </q-item-label> -->
+        <!-- <q-item-label>
+          <span class="text-grey-9 text-subtitle1"> <span class="text-grey-7">Type: </span>{{data.selected_type}}</span>
+        </q-item-label>
+        <q-item-label>
+          <span class="text-grey-9 text-subtitle1">  <span class="text-grey-7">API:</span> {{data.api_selected.label}}</span>
+        </q-item-label>
+        <q-item-label>
+          <span class="text-grey-8 text-subtitle1"><span class="text-grey-7">Interval: </span>{{data.seconds_interval}}<span class="text-caption">s</span></span>
+        </q-item-label>
+        <q-item-label>
+          <span class="text-grey-8 text-subtitle2"><span class="text-grey-7">Spread: </span>{{data.spread_percent}}%</span>
+        </q-item-label> -->
 </template>
+
+<style scoped>
+.table {
+  background-color: #CFCFCF;
+}
+</style>
 
 <script>
 import { useQuasar } from "quasar"
