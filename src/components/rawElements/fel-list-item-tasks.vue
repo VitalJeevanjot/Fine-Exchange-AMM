@@ -2,17 +2,27 @@
   <div class="row justify-center">
     <q-table
       :title="'All Tasks' + ' (' + saved_data.length + ')'"
+      :hide-bottom="true"
       dark
       class="q-mr-sm q-mt-sm q-mb-sm"
-      style="width: 98vw; height: 87vh;"
+      style="width: 98vw; max-height: 87vh"
       virtual-scroll
       :rows-per-page-options="[0]"
       :rows="getData()"
     >
+    <template v-slot:top-right="props">
+        <q-tr :props="props">
+          <q-td auto-width>
+            <q-btn size="sm" class="q-ma-sm" color="accent" round dense icon="sync" />
+            <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
+          </q-td>
+        </q-tr>
+    </template>
+
       <template v-slot:body-cell="props">
         <q-td :props="props" 
-        :class="(props.row.status == 'running') ? 'bg-green-9' : 
-        (props.row.status == 'stopped') ? 'bg-red-9' : 'bg-grey-3'">
+        :class="(props.row.status == 'running') ? 'bg-teal-6' : 
+        (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-8'">
           {{props.value}}
           <!-- <div v-if="props.row.status == 'running'">
             <q-badge color="green-9" :label="props.value" />
@@ -25,8 +35,9 @@
       <template v-slot:body-cell-id="props">
         <q-td :props="props">
           <div>
-            <q-btn @click="copyText(props.value)" size="sm" :color="(props.row.status == 'running') ? 'green-9' : 
-        (props.row.status == 'stopped') ? 'red-9' : 'grey-3'"
+            <q-btn @click="copyText(props.value)" size="sm" 
+            :color="(props.row.status == 'running') ? 'teal-6' : 
+            (props.row.status == 'stopped') ? 'teal-10' : 'grey-3'"
          icon="las la-clipboard" :label="props.value"/>
           </div>
         </q-td>
@@ -34,14 +45,14 @@
       <template v-slot:bottom>
         <!-- <div v-show="data.status == 'running'">
           <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #58B39A"/>
-        </div>
+        </div>-->
 
-        <div v-show="data.status == 'stopped'">
-          <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #d13030"/>
-        </div> -->
-        <div v-show="show_delete">
-          <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
+        <div>
+          <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #CFCFCF"/>
         </div>
+        <!-- <div v-show="show_delete">
+          <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
+        </div> -->
       </template>
     </q-table>
     
@@ -68,13 +79,8 @@
         <q-item-label>
           <span class="text-grey-8 text-subtitle2"><span class="text-grey-7">Spread: </span>{{data.spread_percent}}%</span>
         </q-item-label> -->
-</template>
 
-<style scoped>
-.table {
-  background-color: #CFCFCF;
-}
-</style>
+</template>
 
 <script>
 import { useQuasar } from "quasar"
@@ -90,14 +96,15 @@ export default {
   setup () {
     const val_binding = {unique_id: 'hello'}
     const qs = useQuasar()
+    const selected = ref([])
     return {
       val_binding,
+      selected,
       qs
     }
   },
   data() {
     return {
-
     }
   },
   methods: {

@@ -188,7 +188,7 @@ export default {
             'key5': `task_data_spread_percent_plain_pretext_${random_val_as_id.value}`,
             'value5': spread_percent,
             'key6': `task_data_state_plain_pretext_${random_val_as_id.value}`,
-            'value6': 'stopped',
+            'value6': 'running',
             'key7': `task_data_date_plain_pretext_${random_val_as_id.value}`,
             'value7': updated_date,
             'key8': `task_data_amount_plain_pretext_${random_val_as_id.value}`,

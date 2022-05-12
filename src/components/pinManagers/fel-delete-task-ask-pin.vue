@@ -1,9 +1,8 @@
 <template>
-  <div>
 
-  <div class="row justify-center">
-    <q-btn icon="delete" class="q-ma-xs" dense round @click="felAppPinManagerDialog=true"/>
-  </div>
+
+  <q-btn icon="delete" dense round @click="felAppPinManagerDialog=true"/>
+
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
     <q-card class="card-in-level-2-dialog">
@@ -39,7 +38,6 @@
 
     </q-card>
   </q-dialog>
-  </div>
 </template>
 
 
