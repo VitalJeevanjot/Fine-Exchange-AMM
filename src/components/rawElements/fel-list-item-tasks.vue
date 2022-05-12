@@ -22,18 +22,27 @@
           </div> -->
         </q-td>
       </template>
-    <template v-slot:bottom>
-      <!-- <div v-show="data.status == 'running'">
-        <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #58B39A"/>
-      </div>
+      <template v-slot:body-cell-id="props">
+        <q-td :props="props">
+          <div>
+            <q-btn @click="copyText(props.value)" size="sm" :color="(props.row.status == 'running') ? 'green-9' : 
+        (props.row.status == 'stopped') ? 'red-9' : 'grey-3'"
+         icon="las la-clipboard" :label="props.value"/>
+          </div>
+        </q-td>
+      </template>
+      <template v-slot:bottom>
+        <!-- <div v-show="data.status == 'running'">
+          <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #58B39A"/>
+        </div>
 
-      <div v-show="data.status == 'stopped'">
-        <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #d13030"/>
-      </div> -->
-      <div v-show="show_delete">
-        <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
-      </div>
-    </template>
+        <div v-show="data.status == 'stopped'">
+          <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #d13030"/>
+        </div> -->
+        <div v-show="show_delete">
+          <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
+        </div>
+      </template>
     </q-table>
     
   </div>
@@ -70,6 +79,7 @@
 <script>
 import { useQuasar } from "quasar"
 import { ref } from "vue"
+import { copyToClipboard } from 'quasar'
 
 import felDeleteTaskAskPin from 'src/components/pinManagers/fel-delete-task-ask-pin.vue'
 
@@ -79,22 +89,15 @@ export default {
   props: ['saved_data', 'show_delete'],
   setup () {
     const val_binding = {unique_id: 'hello'}
+    const qs = useQuasar()
     return {
-      val_binding
+      val_binding,
+      qs
     }
   },
   data() {
     return {
-      // data: {
-      //   // pair: this.saved_data[0].pair_selected.label,
-      //   // api: this.saved_data[0].api_selected.label,
-      //   // type: this.saved_data[0].selected_type,
-      //   // amount: this.saved_data[0].amount,
-      //   // interval: this.saved_data[0].seconds_interval,
-      //   // status: this.saved_data[0].status,
-      //   // date: this.saved_data[0].updated_date,
-      //   // id: this.saved_data[0].unique_id
-      // }
+
     }
   },
   methods: {
@@ -111,13 +114,38 @@ export default {
             spread: this.saved_data[index].spread,
             status: this.saved_data[index].status,
             date: this.saved_data[index].date,
-            "unique id": this.saved_data[index]["unique id"],
+            id: this.saved_data[index]["unique id"],
           }
         );
         
       }
       return data
     },
+    copyText(t) {
+      copyToClipboard(t)
+      .then(() => {
+        // success!
+        this.qs.notify({
+          color: 'grey-8',
+          message: 'Copied to clipboard',
+          group: true,
+          badgeColor: 'grey-10',
+          position: 'top'
+        })
+      })
+      .catch(() => {
+        // fail
+        // Error message patteren
+        this.qs.notify({
+          color: 'grey-2',
+          textColor: 'grey-10',
+          badgeColor: 'grey-2',
+          badgeTextColor: 'grey-10',
+          message: 'Error when Copying Id, Report to developers!',
+          position: 'top'
+        })
+      })
+    }
   },
   mounted() {
     console.log(this.getData())
