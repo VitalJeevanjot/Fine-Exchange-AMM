@@ -13,8 +13,7 @@
     <template v-slot:top-right="props">
         <q-tr :props="props">
           <q-td auto-width>
-            <q-btn size="sm" class="q-ma-sm" color="accent" round dense icon="sync" />
-            <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
+            
           </q-td>
         </q-tr>
     </template>
@@ -33,13 +32,37 @@
         </q-td>
       </template>
       <template v-slot:body-cell-id="props">
-        <q-td :props="props">
-          <div>
-            <q-btn @click="copyText(props.value)" size="sm" 
-            :color="(props.row.status == 'running') ? 'teal-6' : 
-            (props.row.status == 'stopped') ? 'teal-10' : 'grey-3'"
-         icon="las la-clipboard" :label="props.value"/>
+        <q-td :props="props" :class="(props.row.status == 'running') ? 'bg-teal-6' : 
+            (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-3'"
+         >
+
+          {{props.value}}
+          <q-btn icon="las la-clipboard" 
+          @click="copyText(props.value)" size="xs" 
+          round
+          class="bg-white text-black"
+          />
+
+        </q-td>
+      </template>
+      <template v-slot:body-cell-status="props">
+        <q-td :props="props" :class="(props.row.status == 'running') ? 'bg-teal-6' : 
+            (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-3'">
+          <div class="row justify-center" v-if="props.value=='stopped'">
+            <q-btn size="xs" class="q-ma-xs bg-white" style="color: #58B39A" round dense icon="las la-play-circle" />
+            {{props.value}}
           </div>
+          <div class="row justify-center" v-if="props.value=='running'">
+            <q-btn size="xs" class="q-ma-xs bg-white" style="color: #D75959" round dense icon="las la-stop-circle" />
+            {{props.value}}
+          </div>
+        </q-td>
+      </template>
+      <template v-slot:body-cell-pair="props">
+        <q-td :props="props" :class="(props.row.status == 'running') ? 'bg-teal-6' : 
+            (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-3'">
+            <felDeleteTaskAskPin v-bind="val_binding = {unique_id: props.row.id}" @afterTaskDeletion="$emit('commandToUpdate')"/>
+            {{props.value}}
         </q-td>
       </template>
       <template v-slot:bottom>

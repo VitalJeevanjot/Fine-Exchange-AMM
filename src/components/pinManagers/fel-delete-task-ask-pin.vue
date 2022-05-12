@@ -1,7 +1,9 @@
 <template>
 
 
-  <q-btn icon="delete" dense round @click="felAppPinManagerDialog=true"/>
+  <q-btn icon="las la-trash" size="xs" class="text-white q-ma-sm"
+    style="background: #D75959"
+   round @click="felAppPinManagerDialog=true"/>
 
 
   <q-dialog v-model="felAppPinManagerDialog" persistent>
