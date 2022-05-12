@@ -7,17 +7,23 @@
       <q-item class="q-mt-sm" clickable style="border-radius: 10px; background-color: #eaeaea">
         <q-item-section>
           <q-table
-            class="bg-grey-4"
+            dark
             style="width: 95vw"
             virtual-scroll
             :rows-per-page-options="[0]"
             :rows="getData()"
           >
-          <template v-slot:body-cell-status="props">
-          <q-td :props="props">
-            <div>
-              <q-badge :color="`${(props.value=='running') ? 'green-6' : 'red-7'}`" :label="props.value" />
+          <template v-slot:body-cell="props">
+          <q-td :props="props" 
+          :class="(props.row.status == 'running') ? 'bg-green-9' : 
+          (props.row.status == 'stopped') ? 'bg-red-9' : 'bg-grey-3'">
+            {{props.value}}
+            <!-- <div v-if="props.row.status == 'running'">
+              <q-badge color="green-9" :label="props.value" />
             </div>
+            <div v-if="props.row.status == 'stopped'">
+              <q-badge color="red-9" :label="props.value" />
+            </div> -->
           </q-td>
       </template>
           <template v-slot:bottom>
