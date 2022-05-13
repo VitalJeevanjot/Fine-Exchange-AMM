@@ -243,12 +243,28 @@ export default {
           // console.log(await this.decrypt_key_secret_data())
         }
       }
-      // When the index is 7
-      var created_task = setInterval(() => {
-        var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})
-        console.log(this.value7)
-      }, this.value4 * 1000) //value 4 is the interval
-      this.qs.localStorage.set(this['key'+index], created_task)
+      // TODO: When the index is 9 -> make request to my backend, also notify with toast about success or failure
+      let constructPostObj = {
+        [this.key1]: this.value1,
+        [this.key2]: this.value2,
+        [this.key3]: this.value3,
+        [this.key4]: this.value4,
+        [this.key5]: this.value5,
+        [this.key6]: this.value6,
+        [this.key7]: this.value7,
+        [this.key8]: this.value8,
+        [this.key9]: this.value9,
+        api_key: (await this.decrypt_key_secret_data()).api_key,
+        api_secret: (await this.decrypt_key_secret_data()).api_secret
+      }
+      this.$axios.post("http://localhost:3000/create_new", {
+        body: constructPostObj
+      })
+      // var created_task = setInterval(() => {
+      //   var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})
+      //   console.log(this.value7)
+      // }, this.value4 * 1000) //value 4 is the interval
+      // this.qs.localStorage.set(this['key'+index], created_task)
 
       this.pic = ''
       this.felAppPinManagerDialog = false
