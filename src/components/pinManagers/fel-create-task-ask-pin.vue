@@ -245,6 +245,10 @@ export default {
       }
       // TODO: When the index is 9 -> make request to my backend, also notify with toast about success or failure
       let constructPostObj = {
+        unique_id: this.value9,
+        api_url: this.value2.url,
+        api_key: (await this.decrypt_key_secret_data()).api_key,
+        api_secret: (await this.decrypt_key_secret_data()).api_secret,
         [this.key1]: this.value1,
         [this.key2]: this.value2,
         [this.key3]: this.value3,
@@ -253,9 +257,7 @@ export default {
         [this.key6]: this.value6,
         [this.key7]: this.value7,
         [this.key8]: this.value8,
-        [this.key9]: this.value9,
-        api_key: (await this.decrypt_key_secret_data()).api_key,
-        api_secret: (await this.decrypt_key_secret_data()).api_secret
+        [this.key9]: this.value9
       }
       this.$axios.post("http://localhost:3000/create_new", {
         body: constructPostObj

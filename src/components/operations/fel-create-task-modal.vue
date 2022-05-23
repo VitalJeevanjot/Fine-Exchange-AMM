@@ -194,7 +194,7 @@ export default {
             'key8': `task_data_amount_plain_pretext_${random_val_as_id.value}`,
             'value8': amount,
             'key9': `task_data_id_plain_pretext_${random_val_as_id.value}`,
-            'value9': '0',
+            'value9': random_val_as_id,
             'disable_btn': false
           }
         } else {
