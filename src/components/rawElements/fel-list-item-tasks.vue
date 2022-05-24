@@ -178,8 +178,8 @@ export default {
     }
   },
   mounted() {
-    console.log(this.getData())
-    console.log(this.saved_data)
+    // console.log(this.getData())
+    // console.log(this.saved_data)
   }
 }
 </script>

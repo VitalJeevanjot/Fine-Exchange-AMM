@@ -25,6 +25,7 @@ import felHeader from "components/fel-header.vue"
 import felCreateTaskModal from "components/operations/fel-create-task-modal.vue"
 import felListItem from 'components/rawElements/fel-list-item-tasks.vue'
 
+
 export default defineComponent({
   name: "PageIndex",
   components: {
@@ -85,6 +86,9 @@ export default defineComponent({
     updateData() {
       this.val_bind_list_data = {saved_data: this.get_tasks_data(), show_delete: true}
     }
+  },
+  mounted() {
+    console.log(this.$getAPIs())
   }
 });
 </script>
