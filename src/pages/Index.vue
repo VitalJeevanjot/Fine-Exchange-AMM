@@ -88,7 +88,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    console.log(this.$getAPIs())
+    // console.log(this.$getAPIs())
   }
 });
 </script>

@@ -189,6 +189,15 @@ export default {
         }
         
       }
+      if(this.$getAPIs().length == 1) {
+        this.qs.localStorage.set('login_api_apiName', this['value1'])
+        this.qs.localStorage.set('login_api_apiKey', this['value2'])
+        this.qs.localStorage.set('login_api_secretKey', this['value3'])
+        this.qs.localStorage.set('login_api_exchangeName', this['value4'])
+        this.qs.localStorage.set('login_api_addDate', this['value5'])
+        this.qs.localStorage.set('login_api_exchangeURL', this['value6'])
+      }
+      
       this.pic = ''
       this.felAppPinManagerDialog = false
       this.$emit('savedApiData')
