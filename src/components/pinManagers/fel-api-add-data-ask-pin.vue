@@ -50,6 +50,8 @@ import { ref, watchEffect } from "vue"
 
 import felInput from 'components/rawElements/fel-input.vue'
 
+import {getAPIs} from 'components/helpers'
+
 export default {
   name: 'felApiAddDataAskPin',
   components: {
@@ -189,7 +191,7 @@ export default {
         }
         
       }
-      if(this.$getAPIs().length == 1) {
+      if(getAPIs(this.qs).length == 1) {
         this.qs.localStorage.set('login_api_apiName', this['value1'])
         this.qs.localStorage.set('login_api_apiKey', this['value2'])
         this.qs.localStorage.set('login_api_secretKey', this['value3'])
@@ -197,7 +199,7 @@ export default {
         this.qs.localStorage.set('login_api_addDate', this['value5'])
         this.qs.localStorage.set('login_api_exchangeURL', this['value6'])
       }
-      
+
       this.pic = ''
       this.felAppPinManagerDialog = false
       this.$emit('savedApiData')

@@ -1,12 +1,8 @@
-import { boot } from "quasar/wrappers";
-import { useQuasar } from "quasar"
-
-
-export default boot(({ app }) => {
-  app.config.globalProperties.$getAPIs = () => {
-
-    const qs = useQuasar()
-  
+export function getAPIs(qs) {
+    if(qs == undefined) {
+      console.log("ERROR: qs from apiHelpers not defining")
+      return
+    }
     var all_keys = qs.localStorage.getAllKeys()
   
     let api_name_keys = []
@@ -28,4 +24,3 @@ export default boot(({ app }) => {
         return a.api_update_date.localeCompare(b.api_update_date);
       }).reverse();
   }
-});

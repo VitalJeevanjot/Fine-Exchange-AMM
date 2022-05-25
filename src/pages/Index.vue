@@ -6,8 +6,13 @@
   <q-page style="background-color: #CFCFCF">
     <!-- old background color #CFCFCF -->
     <div v-show="show_no_tasks_content">
-      <p class="text-h4 text-grey-6" style="user-select: none;">No tasks Yet!</p>
-      <felCreateTaskModal v-bind="val_bind_create_task" @commandToUpdate="updateData"/>
+      <div class="row justify-center q-pt-md">
+        <p class="text-h4 text-grey-6" style="user-select: none;">No tasks Yet!</p>
+      </div>
+
+      <div class="row justify-center">
+        <felCreateTaskModal v-bind="val_bind_create_task" @commandToUpdate="updateData"/>
+      </div>
     </div>
     <div v-show="!show_no_tasks_content" style="width: 100vw;" class="q-pl-sm">
     <felListItem v-bind="val_bind_list_data" @commandToUpdate="updateData"/>
@@ -24,7 +29,7 @@ import { useQuasar } from "quasar"
 import felHeader from "components/fel-header.vue"
 import felCreateTaskModal from "components/operations/fel-create-task-modal.vue"
 import felListItem from 'components/rawElements/fel-list-item-tasks.vue'
-
+import {getAPIs} from 'components/helpers'
 
 export default defineComponent({
   name: "PageIndex",
@@ -88,7 +93,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    // console.log(this.$getAPIs())
+    // console.log(getAPIs(this.qs))
   }
 });
 </script>

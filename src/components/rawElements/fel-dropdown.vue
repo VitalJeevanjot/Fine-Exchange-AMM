@@ -58,6 +58,8 @@
 import { useQuasar } from "quasar"
 import { ref, watchEffect } from '@vue/runtime-core'
 
+import { getAPIs } from '../helpers'
+
 export default {
   name: 'felDropdown',
   props: ['model', 'options', 'category'],
@@ -107,13 +109,13 @@ export default {
       if(this.options == 'Exchanges') {
         return this.getExchanges()
       } else if(this.options == 'APIs') {
-        return this.$getAPIs()
+        return getAPIs(this.qs)
       } else if(this.options == 'Pairs') {
         return this.getPairs()
       }
     },
     getExchanges() {
-      if(!this.$getAPIs().length) {
+      if(!getAPIs(this.qs).length) {
         return [
           {
             value: 'https://api.fine.exchange',
