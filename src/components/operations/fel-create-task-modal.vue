@@ -17,7 +17,7 @@
             <q-btn icon='help' label="help" rounded flat dense v-close-popup/>
           </q-bar>
           <q-scroll-area
-        style="height: 80vh; min-height: 200px; min-width: 26rem;"
+        style="max-height: 80vh; height: 80vh; min-height: 400px; width: 26rem;"
       > 
         <q-card-section>
           
@@ -125,7 +125,7 @@ export default {
     })
 
     const val_binding_seconds_interval = ref({
-      _style: 'max-width: 500px; min-width: 350px; width: 30vw;',
+      _style: 'width: 20rem; min-width: 350px;',
       _mask: '',
       _type: 'number',
       _label: 'Interval (seconds)',
@@ -137,7 +137,7 @@ export default {
     })
 
     const val_binding_amount = ref({
-      _style: 'max-width: 500px; min-width: 350px; width: 30vw;',
+      _style: 'width: 20rem; min-width: 350px;',
       _mask: '',
       _type: 'number',
       _label: 'Amount (per cent)',
@@ -149,7 +149,7 @@ export default {
     })
 
     const val_binding_spread_percent = ref({
-      _style: 'max-width: 500px; min-width: 350px; width: 30vw;',
+      _style: 'width: 20rem; min-width: 350px;',
       _mask: '',
       _type: 'number',
       _label: 'Spread (per cent)',

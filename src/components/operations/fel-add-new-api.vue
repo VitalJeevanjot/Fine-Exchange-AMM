@@ -15,21 +15,21 @@
       </q-card-section>
 
       <q-card-section>
-        <div class="row justify-center">
+        <div class="">
           <felDropdown 
             v-model:model="exchange_name"
             v-bind="val_binding_exchanges_dropdown"
           />
         </div>
 
-        <div class="row justify-center">
+        <div class="">
           <felInput 
             v-model:_input_val="api_name"
             v-bind="val_binding_api_name"
           />
         </div>
 
-        <div class="row justify-center">
+        <div class="">
           <felInput 
             v-model:_input_val="api_key"
             v-bind="val_binding_api_key"
@@ -37,7 +37,7 @@
         </div>
 
 
-        <div class="row justify-center">
+        <div class="">
           <felInput 
             v-model:_input_val="api_secret"
             v-bind="val_binding_api_secret"
@@ -92,7 +92,7 @@ export default {
     })
 
     const val_binding_api_name = ref({
-      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
+      _style: 'min-width: 300px; width: 20rem;',
       _mask: '',
       _label: 'API Name',
       _hint: 'Enter name for Key/Secret',
@@ -103,7 +103,7 @@ export default {
     })
 
     const val_binding_api_key = ref({
-      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
+      _style: 'min-width: 300px; width: 24rem;',
       _mask: '',
       _label: 'API Key',
       _hint: 'The API Key',
@@ -114,7 +114,7 @@ export default {
     })
 
     const val_binding_api_secret = ref({
-      _style: 'max-width: 500px; min-width: 300px; width: 30vw;',
+      _style: ' min-width: 300px; width: 24rem;',
       _mask: '',
       _label: 'API Secret',
       _hint: 'The API Secret',

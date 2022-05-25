@@ -11,9 +11,8 @@
     @update:modelValue="updateValue"
     @input-value="input_value"
     class="q-pb-md"
-    style="min-width: 300px; 
-      width: 30vw;
-      max-width: 500px;"
+    style="min-width: 20rem; 
+      width: 20rem;"
     rounded
     :options="theseOptions" 
     :label="category">
