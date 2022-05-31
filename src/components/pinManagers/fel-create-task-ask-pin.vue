@@ -45,9 +45,9 @@
 
 
 <script>
-import { useQuasar } from "quasar"
+import { QSpinnerCube, useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
-
+import { showSpinner } from 'components/helpers.js'
 import felInput from 'components/rawElements/fel-input.vue'
 
 export default {
@@ -259,9 +259,16 @@ export default {
         [this.key8]: this.value8,
         [this.key9]: this.value9
       }
-      this.$axios.post("http://localhost:3000/create_new", {
-        body: constructPostObj
-      })
+      showSpinner(this.qs, QSpinnerGears)
+      try {
+        let res = await this.$axios.post("http://localhost:3002/create_new", {
+          body: constructPostObj
+        })
+      } catch(e) {
+        this.qs.notify({
+          message: "API_Error:CodeC_N1:"+e.message
+        })
+      }
       // var created_task = setInterval(() => {
       //   var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})
       //   console.log(this.value7)
@@ -275,7 +282,7 @@ export default {
   },
 
   async mounted() {
-
+    showSpinner(this.qs, QSpinnerCube)
   }
 }
 </script>

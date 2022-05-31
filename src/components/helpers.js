@@ -24,3 +24,13 @@ export function getAPIs(qs) {
         return a.api_update_date.localeCompare(b.api_update_date);
       }).reverse();
   }
+
+  export function showSpinner(qs, spinner) {
+    qs.loading.show({
+        spinner: spinner,
+        spinnerColor: 'grey-4',
+        spinnerSize: 80,
+        message: '<div class="bg-blue-grey-9 q-pa-sm" style="border-radius: 1rem"><span class="text-h6 text-grey-1">Starting task on <span class="text-cyan-5">cloud</span>.</span></div>',
+        html: true,
+    })
+  }
