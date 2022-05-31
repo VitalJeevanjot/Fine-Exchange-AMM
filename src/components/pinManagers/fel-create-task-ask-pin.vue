@@ -227,15 +227,12 @@ export default {
         var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
           if(!(this['key'+index].includes('plain_'))) {
-            var __algo = {}
-            Object.assign(__algo, _algo)
+
             const encrypted_val = await window.crypto.subtle.encrypt(
-                __algo,
+                _algo,
                 imported_key, 
                 this.strToArrayBuffer(this['value'+index])
               );
-    
-            __algo.iv = this.arrayBufferToString(__algo.iv)
     
             encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
           }

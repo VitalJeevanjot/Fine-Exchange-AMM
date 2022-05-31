@@ -171,15 +171,14 @@ export default {
       
       this.$emit('beforeSavingData')
 
+
       for (let index = 1; index <= 6; index++) {
         var encrypted_decoded_text = this['value'+index]
         if(!!this['key'+index] && !!this['value'+index]) {
           if(!(this['key'+index].includes('plain_'))) {
-            var __algo = {}
-            Object.assign(__algo, _algo)
-            const encrypted_val = await this.encryptVals(this['value'+index]) 
+        
+            const encrypted_val = await this.encryptVals(_algo, imported_key, this['value'+index]) 
     
-            __algo.iv = this.arrayBufferToString(__algo.iv)
     
             encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
           }
@@ -187,10 +186,12 @@ export default {
         }
         
       }
+
+      // TODO: Run a get services (tasks) method here as well by taking value2 and value3 unencrypted...
       if(getAPIs(this.qs).length == 1) {
         this.qs.localStorage.set('login_api_apiName', this['value1'])
-        this.qs.localStorage.set('login_api_apiKey', await this.encryptVals(this['value2']) )
-        this.qs.localStorage.set('login_api_secretKey', await this.encryptVals(this['value3']) )
+        this.qs.localStorage.set('login_api_apiKey', await this.encryptVals(_algo, imported_key, this['value2']) )
+        this.qs.localStorage.set('login_api_secretKey', await this.encryptVals(_algo, imported_key, this['value3']) )
         this.qs.localStorage.set('login_api_exchangeName', this['value4'])
         this.qs.localStorage.set('login_api_addDate', this['value5'])
         this.qs.localStorage.set('login_api_exchangeURL', this['value6'])
@@ -201,9 +202,9 @@ export default {
       this.$emit('savedApiData')
     },
 
-    async encryptVals(val) {
+    async encryptVals(_algo, imported_key, val) {
       return await window.crypto.subtle.encrypt(
-        __algo,
+        _algo,
         imported_key, 
         this.strToArrayBuffer(val)
       );
