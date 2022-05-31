@@ -259,7 +259,7 @@ export default {
         [this.key8]: this.value8,
         [this.key9]: this.value9
       }
-      showSpinner(this.qs, QSpinnerGears)
+      showSpinner(this.qs, QSpinnerCube)
       try {
         let res = await this.$axios.post("http://localhost:3002/create_new", {
           body: constructPostObj
@@ -282,7 +282,6 @@ export default {
   },
 
   async mounted() {
-    showSpinner(this.qs, QSpinnerCube)
   }
 }
 </script>
