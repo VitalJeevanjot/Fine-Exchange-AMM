@@ -177,11 +177,7 @@ export default {
           if(!(this['key'+index].includes('plain_'))) {
             var __algo = {}
             Object.assign(__algo, _algo)
-            const encrypted_val = await window.crypto.subtle.encrypt(
-                __algo,
-                imported_key, 
-                this.strToArrayBuffer(this['value'+index])
-              );
+            const encrypted_val = await this.encryptVals(this['value'+index]) 
     
             __algo.iv = this.arrayBufferToString(__algo.iv)
     
@@ -193,8 +189,8 @@ export default {
       }
       if(getAPIs(this.qs).length == 1) {
         this.qs.localStorage.set('login_api_apiName', this['value1'])
-        this.qs.localStorage.set('login_api_apiKey', this['value2'])
-        this.qs.localStorage.set('login_api_secretKey', this['value3'])
+        this.qs.localStorage.set('login_api_apiKey', await this.encryptVals(this['value2']) )
+        this.qs.localStorage.set('login_api_secretKey', await this.encryptVals(this['value3']) )
         this.qs.localStorage.set('login_api_exchangeName', this['value4'])
         this.qs.localStorage.set('login_api_addDate', this['value5'])
         this.qs.localStorage.set('login_api_exchangeURL', this['value6'])
@@ -203,8 +199,17 @@ export default {
       this.pic = ''
       this.felAppPinManagerDialog = false
       this.$emit('savedApiData')
+    },
+
+    async encryptVals(val) {
+      return await window.crypto.subtle.encrypt(
+        __algo,
+        imported_key, 
+        this.strToArrayBuffer(val)
+      );
     }
   },
+
 
   async mounted() {
 
