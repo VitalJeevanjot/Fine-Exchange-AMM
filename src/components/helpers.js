@@ -34,3 +34,19 @@ export function getAPIs(qs) {
         html: true,
     })
   }
+
+  export function showDialog(qs, _class, _title, _message) {
+    qs.dialog({
+          class: _class,
+          title: _title,
+          html: true,
+          message: _message,
+          persistent: true,
+          ok: {
+            style: 'border-radius: 15px',
+            color: 'grey-10 text-grey-1'
+          }
+    }).onOk(() => {
+      // console.log('OK')
+    })
+  }

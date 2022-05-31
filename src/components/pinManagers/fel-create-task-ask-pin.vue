@@ -47,7 +47,7 @@
 <script>
 import { QSpinnerCube, useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
-import { showLoading } from 'components/helpers.js'
+import { showLoading, showDialog } from 'components/helpers.js'
 import felInput from 'components/rawElements/fel-input.vue'
 
 export default {
@@ -136,7 +136,7 @@ export default {
           imported_key,
           this.strToArrayBuffer(this.qs.localStorage.getItem("important_welcome_edec"))
         );
-        console.log(this.arrayBufferToString(decrypted))
+        // console.log(this.arrayBufferToString(decrypted))
       } catch (e) {
         console.log(e)
         return false
@@ -258,23 +258,24 @@ export default {
       }
       showLoading(this.qs, QSpinnerCube)
       try {
-        let res = await this.$axios.post("http://localhost:3002/create_new", {
+        let res = await this.$axios.post("http://localhost:3003/create_new", {
           body: constructPostObj
         })
+        console.log(res.data)
+        
+        this.pic = ''
+        this.felAppPinManagerDialog = false
+        this.$emit('savedCreatedTask')
       } catch(e) {
-        this.qs.notify({
-          message: "API_Error:CodeC_N1:"+e.message
-        })
+        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-red text-h5">Alert</span>', "API_Error:CodeC_N1:"+e.message)
       }
+      this.qs.loading.hide()
+      
       // var created_task = setInterval(() => {
       //   var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})
       //   console.log(this.value7)
       // }, this.value4 * 1000) //value 4 is the interval
       // this.qs.localStorage.set(this['key'+index], created_task)
-
-      this.pic = ''
-      this.felAppPinManagerDialog = false
-      this.$emit('savedCreatedTask')
     }
   },
 
