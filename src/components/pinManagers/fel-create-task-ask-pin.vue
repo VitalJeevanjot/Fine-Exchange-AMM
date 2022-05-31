@@ -47,7 +47,7 @@
 <script>
 import { QSpinnerCube, useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
-import { showSpinner } from 'components/helpers.js'
+import { showLoading } from 'components/helpers.js'
 import felInput from 'components/rawElements/fel-input.vue'
 
 export default {
@@ -259,7 +259,7 @@ export default {
         [this.key8]: this.value8,
         [this.key9]: this.value9
       }
-      showSpinner(this.qs, QSpinnerCube)
+      showLoading(this.qs, QSpinnerCube)
       try {
         let res = await this.$axios.post("http://localhost:3002/create_new", {
           body: constructPostObj
@@ -282,6 +282,8 @@ export default {
   },
 
   async mounted() {
+    // showLoading(this.qs, QSpinnerCube)
+    // setTimeout(() => {this.qs.loading.hide()}, 3000)
   }
 }
 </script>

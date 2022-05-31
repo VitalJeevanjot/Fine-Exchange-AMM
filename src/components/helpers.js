@@ -25,7 +25,7 @@ export function getAPIs(qs) {
       }).reverse();
   }
 
-  export function showSpinner(qs, spinner) {
+  export function showLoading(qs, spinner) {
     qs.loading.show({
         spinner: spinner,
         spinnerColor: 'grey-4',
