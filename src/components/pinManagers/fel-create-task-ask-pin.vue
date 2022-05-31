@@ -267,7 +267,7 @@ export default {
         this.felAppPinManagerDialog = false
         this.$emit('savedCreatedTask')
       } catch(e) {
-        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-red text-h5">Alert</span>', "API_Error:CodeC_N1:"+e.message)
+        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-red text-h5">Alert</span> <q-icon name="warning" color="warning" size="2rem" />', "API_Error:CodeC_N1:"+e.message)
       }
       this.qs.loading.hide()
       
@@ -282,6 +282,8 @@ export default {
   async mounted() {
     // showLoading(this.qs, QSpinnerCube)
     // setTimeout(() => {this.qs.loading.hide()}, 3000)
+    showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-red text-caption text-bold">error</span>', "API_Error:CodeC_N1:")
+
   }
 }
 </script>
