@@ -178,8 +178,7 @@ export default {
           if(!(this['key'+index].includes('plain_'))) {
         
             const encrypted_val = await this.encryptVals(_algo, imported_key, this['value'+index]) 
-    
-    
+
             encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
           }
           this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
@@ -187,11 +186,14 @@ export default {
         
       }
 
-      // TODO: Run a get services (tasks) method here as well by taking value2 and value3 unencrypted...
       if(getAPIs(this.qs).length == 1) {
+        // TODO: Run a get services (tasks) method here as well (if get user details returned error here then reset user api added and ask for api details again (this only when adding api first time)) by taking value2 and value3 unencrypted...
+        let api_key_encrypted = this.arrayBufferToString(await this.encryptVals(_algo, imported_key, this['value2']))
+        let api_secret_encrypted = this.arrayBufferToString(await this.encryptVals(_algo, imported_key, this['value3']))
+        
         this.qs.localStorage.set('login_api_apiName', this['value1'])
-        this.qs.localStorage.set('login_api_apiKey', await this.encryptVals(_algo, imported_key, this['value2']) )
-        this.qs.localStorage.set('login_api_secretKey', await this.encryptVals(_algo, imported_key, this['value3']) )
+        this.qs.localStorage.set('login_api_apiKey', api_key_encrypted)
+        this.qs.localStorage.set('login_api_secretKey', api_secret_encrypted)
         this.qs.localStorage.set('login_api_exchangeName', this['value4'])
         this.qs.localStorage.set('login_api_addDate', this['value5'])
         this.qs.localStorage.set('login_api_exchangeURL', this['value6'])
