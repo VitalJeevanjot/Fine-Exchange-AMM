@@ -263,14 +263,15 @@ export default {
         })
         console.log(res)
         console.log(res.data)
-        showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-green text-caption text-bold">success</span>', "Task Status: " + res.data)
+
+        showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', "Task Status: " + res.data)
 
         
         this.pic = ''
         this.felAppPinManagerDialog = false
         this.$emit('savedCreatedTask')
       } catch(e) {
-        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-red text-h5">Alert</span> <q-icon name="warning" color="warning" size="2rem" />', "API_Error:CodeC_N1:"+e.message)
+        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeC_N1:"+e.message)
       }
       this.qs.loading.hide()
       
@@ -283,6 +284,7 @@ export default {
   },
 
   async mounted() {
+
     // showLoading(this.qs, QSpinnerCube)
     // setTimeout(() => {this.qs.loading.hide()}, 3000)
     //error creation task:
