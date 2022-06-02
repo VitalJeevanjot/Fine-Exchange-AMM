@@ -25,12 +25,12 @@ export function getAPIs(qs) {
       }).reverse();
   }
 
-  export function showLoading(qs, spinner) {
+  export function showLoading(qs, spinner, message1, message2) {
     qs.loading.show({
         spinner: spinner,
         spinnerColor: 'grey-4',
         spinnerSize: 80,
-        message: '<div class="bg-blue-grey-9 q-pa-sm" style="border-radius: 1rem"><span class="text-h6 text-grey-1">Starting task on <span class="text-cyan-5">cloud</span>.</span></div>',
+        message: `<div class="bg-blue-grey-9 q-pa-sm" style="border-radius: 1rem"><span class="text-h6 text-grey-1"> ${message1} </span> ${message2}.</div>`,
         html: true,
     })
   }

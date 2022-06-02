@@ -256,7 +256,7 @@ export default {
         [this.key8]: this.value8,
         [this.key9]: this.value9
       }
-      showLoading(this.qs, QSpinnerCube)
+      showLoading(this.qs, QSpinnerCube, 'Your task is running in ', '<span class="text-cyan-5">cloud</span>')
       try {
         let res = await this.$axios.post("http://localhost:3003/create_new", {
           body: constructPostObj
