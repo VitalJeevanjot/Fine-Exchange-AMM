@@ -116,10 +116,15 @@ export default {
     getExchanges() {
       if(!getAPIs(this.qs).length) {
         return [
+          // TODO: on official lounch, uncomment mainnet and remove testnet or comment it
+          // {
+          //   value: 'https://api.fine.exchange',
+          //   label: 'Fine Exchange Mainnet',
+          //   description: 'required first to sync tasks with cloud'
+          // },
           {
-            value: 'https://api.fine.exchange',
-            label: 'Fine Exchange Mainnet',
-            description: 'required first to sync tasks with cloud'
+            value: 'https://apitest.fine.exchange',
+            label: 'Fine Exchange Testnet'
           }
         ]
       } else {

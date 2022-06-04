@@ -172,10 +172,12 @@ export default {
       
       this.$emit('beforeSavingData')
 
-      if(getAPIs(this.qs).length == 1) {
+      if(getAPIs(this.qs).length == 0) {
         var constructPostObj = {
           login_api_apiKey: this['value2'],
-          login_api_secretKey: this['value3']
+          login_api_secretKey: this['value3'],
+          login_api_apiKey_S: this['value2'].substring(0, 15),
+          login_api_exchangeURL: this['value6']
         }
         showLoading(this.qs, QSpinnerCube, 'Your login keys are ', '<span class="text-grey-5 text-h6">saving.....</span>')
         let res;
@@ -187,7 +189,11 @@ export default {
           console.log(res.data)
         } catch(e) {
           console.log(e)
-          showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeE_L1:"+e.message)
+          let error = e.message;
+          if(e.response) {
+            error = e.response.data.message
+          }
+          showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeE_L1:"+error)
           this.qs.loading.hide()
           return
         }
