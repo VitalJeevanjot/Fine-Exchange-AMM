@@ -172,6 +172,35 @@ export default {
       
       this.$emit('beforeSavingData')
 
+      if(getAPIs(this.qs).length == 1) {
+        var constructPostObj = {
+          login_api_apiKey: this['value2'],
+          login_api_secretKey: this['value3']
+        }
+        showLoading(this.qs, QSpinnerCube, 'Your login keys are ', '<span class="text-grey-5 text-h6">saving.....</span>')
+        try {
+          let res = await this.$axios.post("http://localhost:3003/encrypt_login", {
+            body: constructPostObj
+          })
+          console.log(res)
+          console.log(res.data)
+          showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', '<span class="text-grey-10 text-bold">Login key <span class="text-blue-grey-8">Saved!</span></span>')
+        } catch(e) {
+          console.log(e)
+          showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeE_L1:"+e.message)
+          this.qs.loading.hide()
+          return
+        }
+
+        this.qs.localStorage.set('login_api_apiKey_S', this['value2'].substring(0, 15))
+        this.qs.localStorage.set('login_api_apiName', this['value1'])
+        this.qs.localStorage.set('login_api_apiKey', res.data.login_api_apiKey_enc)
+        this.qs.localStorage.set('login_api_secretKey', res.data.login_api_secretKey_enc)
+        this.qs.localStorage.set('login_api_exchangeName', this['value4'])
+        this.qs.localStorage.set('login_api_addDate', this['value5'])
+        this.qs.localStorage.set('login_api_exchangeURL', this['value6'])
+        // TODO: Run a get services (tasks) method here as well (if get user details returned error here then reset user api added and ask for api details again (this only when adding api first time)) by taking value2 and value3 unencrypted...
+      }
 
       for (let index = 1; index <= 6; index++) {
         var encrypted_decoded_text = this['value'+index]
@@ -187,38 +216,9 @@ export default {
         
       }
 
-      if(getAPIs(this.qs).length == 1) {
-        var constructPostObj = {
-          login_api_apiKey: this['value2'],
-          login_api_secretKey: this['value3']
-        }
-        showLoading(this.qs, QSpinnerCube, 'Your login keys are ', '<span class="text-grey-5 text-h6">saving</span>')
-        try {
-          let res = await this.$axios.post("http://localhost:3003/encrypt_login", {
-            body: constructPostObj
-          })
-          console.log(res)
-          console.log(res.data)
-
-          this.qs.localStorage.set('login_api_apiName', this['value1'])
-          this.qs.localStorage.set('login_api_apiKey', res.data.login_api_apiKey_enc)
-          this.qs.localStorage.set('login_api_secretKey', res.data.login_api_secretKey_enc)
-          this.qs.localStorage.set('login_api_exchangeName', this['value4'])
-          this.qs.localStorage.set('login_api_addDate', this['value5'])
-          this.qs.localStorage.set('login_api_exchangeURL', this['value6'])
-
-          showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', '<span class="text-grey-10 text-bold">Login key <span class="text-blue-grey-8">Saved!</span></span>')
-
-        } catch(e) {
-          console.log(e)
-          showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeE_L1:"+e.message)
-        }
-        this.qs.loading.hide()
-        // TODO: Run a get services (tasks) method here as well (if get user details returned error here then reset user api added and ask for api details again (this only when adding api first time)) by taking value2 and value3 unencrypted...
-      }
-
       this.pic = ''
       this.felAppPinManagerDialog = false
+      this.qs.loading.hide()
       this.$emit('savedApiData')
     },
 

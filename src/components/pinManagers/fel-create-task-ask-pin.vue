@@ -242,8 +242,10 @@ export default {
       }
       // TODO: When the index is 9 -> make request to my backend, also notify with toast about success or failure
       let constructPostObj = {
+
         unique_id: this.value9,
         api_url: this.value2.url,
+        login_api_apiKey_S: this.qs.localStorage.getItem('login_api_apiKey_S'),
         api_key: (await this.decrypt_key_secret_data()).api_key,
         api_secret: (await this.decrypt_key_secret_data()).api_secret,
         [this.key1]: this.value1,
