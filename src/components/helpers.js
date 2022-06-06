@@ -66,7 +66,11 @@ export function getAPIs(qs) {
     }
     catch(e) {
       console.log(e)
-      showDialog(qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeM_S1:"+e.message)
+      let error = e.message;
+      if(e.response) {
+        error = e.response.data.message
+      }
+      showDialog(qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeM_S1:"+error)
     }
     qs.loading.hide()
   }
