@@ -50,3 +50,23 @@ export function getAPIs(qs) {
       // console.log('OK')
     })
   }
+
+  export async function fetchTasks(qs, QSpinnerCube, $axios) {
+    showLoading(qs, QSpinnerCube, 'Getting your ', '<span class="text-cyan-5">tasks</span>')
+    const constructPostObj = {
+      login_api_apiKey_S: qs.localStorage.getItem('login_api_apiKey_S'),
+      login_api_apiKey: qs.localStorage.getItem('login_api_apiKey'),
+      login_api_secretKey: qs.localStorage.getItem('login_api_secretKey'),
+      login_api_exchangeURL: qs.localStorage.getItem('login_api_exchangeURL')
+    } 
+    try {
+      await $axios.post("http://localhost:3003/my_services", {
+        body: constructPostObj
+      })
+    }
+    catch(e) {
+      console.log(e)
+      showDialog(qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeM_S1:"+e.message)
+    }
+    qs.loading.hide()
+  }

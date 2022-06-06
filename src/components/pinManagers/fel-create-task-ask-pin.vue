@@ -47,7 +47,7 @@
 <script>
 import { QSpinnerCube, useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
-import { showLoading, showDialog } from 'components/helpers.js'
+import { showLoading, showDialog, fetchTasks } from 'components/helpers.js'
 import felInput from 'components/rawElements/fel-input.vue'
 
 export default {
@@ -277,33 +277,17 @@ export default {
       }
       await getTasks()
       this.qs.loading.hide()
-      
+      fetchTasks(this.qs, QSpinnerCube, this.$axios)
       // var created_task = setInterval(() => {
       //   var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})
       //   console.log(this.value7)
       // }, this.value4 * 1000) //value 4 is the interval
       // this.qs.localStorage.set(this['key'+index], created_task)
-    },
-    async getTasks() {
-      const constructPostObj = {
-        login_api_apiKey_S: this.qs.localStorage.getItem('login_api_apiKey_S'),
-        login_api_apiKey: this.qs.localStorage.getItem('login_api_apiKey'),
-        login_api_secretKey: this.qs.localStorage.getItem('login_api_secretKey'),
-        login_api_exchangeURL: this.qs.localStorage.getItem('login_api_exchangeURL')
-      } 
-      try {
-        await this.$axios.post("http://localhost:3003/my_services", {
-          body: constructPostObj
-        })
-      }
-      catch(e) {
-        console.log(e)
-      }
     }
   },
 
   async mounted() {
-    this.getTasks()
+    fetchTasks(this.qs, QSpinnerCube, this.$axios)
     // showLoading(this.qs, QSpinnerCube)
     // setTimeout(() => {this.qs.loading.hide()}, 3000)
     //error creation task:
