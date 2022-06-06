@@ -225,6 +225,7 @@ export default {
         
       }
 
+      
       this.pic = ''
       this.felAppPinManagerDialog = false
       this.$emit('savedApiData')

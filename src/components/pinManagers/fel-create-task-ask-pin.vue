@@ -275,6 +275,7 @@ export default {
       } catch(e) {
         showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeC_N1:"+e.message)
       }
+      await getTasks()
       this.qs.loading.hide()
       
       // var created_task = setInterval(() => {
@@ -282,11 +283,27 @@ export default {
       //   console.log(this.value7)
       // }, this.value4 * 1000) //value 4 is the interval
       // this.qs.localStorage.set(this['key'+index], created_task)
+    },
+    async getTasks() {
+      const constructPostObj = {
+        login_api_apiKey_S: this.qs.localStorage.getItem('login_api_apiKey_S'),
+        login_api_apiKey: this.qs.localStorage.getItem('login_api_apiKey'),
+        login_api_secretKey: this.qs.localStorage.getItem('login_api_secretKey'),
+        login_api_exchangeURL: this.qs.localStorage.getItem('login_api_exchangeURL')
+      } 
+      try {
+        await this.$axios.post("http://localhost:3003/my_services", {
+          body: constructPostObj
+        })
+      }
+      catch(e) {
+        console.log(e)
+      }
     }
   },
 
   async mounted() {
-
+    this.getTasks()
     // showLoading(this.qs, QSpinnerCube)
     // setTimeout(() => {this.qs.loading.hide()}, 3000)
     //error creation task:
