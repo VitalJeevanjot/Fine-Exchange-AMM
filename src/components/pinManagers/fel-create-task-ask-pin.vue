@@ -256,7 +256,8 @@ export default {
         type: 'limit',
         seconds_interval: this.value4,
         spread_percent: this.value5,
-        amount: this.value8
+        amount: this.value8,
+        task_uuid: this.value9
       }
       showLoading(this.qs, QSpinnerCube, 'Your task is running in ', '<span class="text-cyan-5">cloud</span>')
       try {
