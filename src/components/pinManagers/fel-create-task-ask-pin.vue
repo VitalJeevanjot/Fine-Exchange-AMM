@@ -244,22 +244,19 @@ export default {
       let constructPostObj = {
 
         unique_id: this.value9,
-        api_url: this.value2.url,
         login_api_apiKey_S: this.qs.localStorage.getItem('login_api_apiKey_S'),
         login_api_apiKey: this.qs.localStorage.getItem('login_api_apiKey'),
         login_api_secretKey: this.qs.localStorage.getItem('login_api_secretKey'),
         login_api_exchangeURL: this.qs.localStorage.getItem('login_api_exchangeURL'),
+        api_url: this.value2.url,
         api_key: (await this.decrypt_key_secret_data()).api_key,
         api_secret: (await this.decrypt_key_secret_data()).api_secret,
-        [this.key1]: this.value1,
-        [this.key2]: this.value2,
-        [this.key3]: this.value3,
-        [this.key4]: this.value4,
-        [this.key5]: this.value5,
-        [this.key6]: this.value6,
-        [this.key7]: this.value7,
-        [this.key8]: this.value8,
-        [this.key9]: this.value9
+        side: this.value1,
+        symbol: this.value3,
+        type: 'limit',
+        seconds_interval: this.value4,
+        spread_percent: this.value5,
+        amount: this.value8
       }
       showLoading(this.qs, QSpinnerCube, 'Your task is running in ', '<span class="text-cyan-5">cloud</span>')
       try {

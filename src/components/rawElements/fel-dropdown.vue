@@ -141,28 +141,6 @@ export default {
         ]
       }
     },
-    // getAPIs() {
-    //   var all_keys = this.qs.localStorage.getAllKeys()
-
-    //   let api_name_keys = []
-    //   for (let i = 0; i < all_keys.length; i++) {
-    //     if(all_keys[i].includes('api_data_api_name_plain_pretext_')) {
-    //       let uniq_id = all_keys[i].replace('api_data_api_name_plain_pretext_', '')
-    //       api_name_keys.push({
-    //         label: this.qs.localStorage.getItem(all_keys[i]),
-    //         url: this.qs.localStorage.getItem('api_data_url_plain_pretext_' + uniq_id),
-    //         description: this.qs.localStorage.getItem('api_data_exchange_name_plain_pretext_' + uniq_id).label,
-    //         api_key: this.qs.localStorage.getItem('api_data_api_key_pretext_' + uniq_id),
-    //         api_secret: this.qs.localStorage.getItem('api_data_api_secret_pretext_' + uniq_id),
-    //         api_update_date: this.qs.localStorage.getItem('api_data_date_plain_pretext_' + uniq_id)
-    //       })
-    //     }
-    //   }
-
-    //   return api_name_keys.sort(function(a,b){
-    //       return a.api_update_date.localeCompare(b.api_update_date);
-    //     }).reverse();
-    // },
     getPairs() {
       var current_api = this.qs.localStorage.getItem('api_selected_now')
       if(current_api) {
