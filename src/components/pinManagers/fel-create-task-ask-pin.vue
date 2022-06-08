@@ -274,11 +274,14 @@ export default {
         this.felAppPinManagerDialog = false
         this.$emit('savedCreatedTask')
       } catch(e) {
-        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeC_N1:"+e.message)
+        let error = e.message;
+        if(e.response) {
+          error = e.response.data.message
+        }
+        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeC_N1:"+error)
       }
-      await getTasks()
+      await fetchTasks(this.qs, QSpinnerCube, this.$axios)
       this.qs.loading.hide()
-      fetchTasks(this.qs, QSpinnerCube, this.$axios)
       // var created_task = setInterval(() => {
       //   var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})
       //   console.log(this.value7)
@@ -288,7 +291,8 @@ export default {
   },
 
   async mounted() {
-    fetchTasks(this.qs, QSpinnerCube, this.$axios)
+    // testing:
+    // fetchTasks(this.qs, QSpinnerCube, this.$axios)
     // showLoading(this.qs, QSpinnerCube)
     // setTimeout(() => {this.qs.loading.hide()}, 3000)
     //error creation task:
