@@ -219,31 +219,32 @@ export default {
           return
       }
       
-      this.$emit('beforeSavingData')
-      var index = 1
       // @change when change in key/value because task id was 
       // planned to be assigned later when creating or saving(here)
-      for (index = 1; index < 9; index++) {
-        var encrypted_decoded_text = this['value'+index]
-        if(!!this['key'+index] && !!this['value'+index]) {
-          if(!(this['key'+index].includes('plain_'))) {
 
-            const encrypted_val = await window.crypto.subtle.encrypt(
-                _algo,
-                imported_key, 
-                this.strToArrayBuffer(this['value'+index])
-              );
+      // OLD: Not saving Tasks locally anymore
+      // this.$emit('beforeSavingData')
+      // var index = 1
+      // for (index = 1; index < 9; index++) {
+      //   var encrypted_decoded_text = this['value'+index]
+      //   if(!!this['key'+index] && !!this['value'+index]) {
+      //     if(!(this['key'+index].includes('plain_'))) {
+
+      //       const encrypted_val = await window.crypto.subtle.encrypt(
+      //           _algo,
+      //           imported_key, 
+      //           this.strToArrayBuffer(this['value'+index])
+      //         );
     
-            encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
-          }
-          this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
-          // console.log(await this.decrypt_key_secret_data())
-        }
-      }
+      //       encrypted_decoded_text = this.arrayBufferToString(encrypted_val)
+      //     }
+          
+      //     // this.qs.localStorage.set(this['key'+index], encrypted_decoded_text)
+      //     // console.log(await this.decrypt_key_secret_data())
+      //   }
+      // }
       // TODO: When the index is 9 -> make request to my backend, also notify with toast about success or failure
       let constructPostObj = {
-
-        unique_id: this.value9,
         login_api_apiKey_S: this.qs.localStorage.getItem('login_api_apiKey_S'),
         login_api_apiKey: this.qs.localStorage.getItem('login_api_apiKey'),
         login_api_secretKey: this.qs.localStorage.getItem('login_api_secretKey'),
@@ -251,6 +252,8 @@ export default {
         api_url: this.value2.url,
         api_key: (await this.decrypt_key_secret_data()).api_key,
         api_secret: (await this.decrypt_key_secret_data()).api_secret,
+        api_desc: this.qs.localStorage.getItem("api_selected_now").description,
+        api_name: this.qs.localStorage.getItem("api_selected_now").label,
         side: this.value1,
         symbol: this.value3,
         type: 'limit',

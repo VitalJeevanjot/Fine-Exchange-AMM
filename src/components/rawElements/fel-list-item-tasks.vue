@@ -13,7 +13,7 @@
     <template v-slot:top-right="props">
         <q-tr :props="props">
           <q-td auto-width>
-            
+            <!-- TODO: add cloud icon and sync option here Later... -->
           </q-td>
         </q-tr>
     </template>
@@ -136,8 +136,8 @@ export default {
       for (let index = 0; index < this.saved_data.length; index++) {
         data.push(
           {
-            pair: this.saved_data[index].pair.label,
-            api: this.saved_data[index].api.label,
+            pair: this.saved_data[index].pair,
+            api: this.saved_data[index].api,
             type: this.saved_data[index].type,
             amount: this.saved_data[index].amount,
             interval: this.saved_data[index].interval,
@@ -178,8 +178,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.getData())
-    // console.log(this.saved_data)
   }
 }
 </script>

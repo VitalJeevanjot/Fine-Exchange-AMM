@@ -60,9 +60,21 @@ export function getAPIs(qs) {
       login_api_exchangeURL: qs.localStorage.getItem('login_api_exchangeURL')
     } 
     try {
-      await $axios.post("http://localhost:3003/my_services", {
+      let res = await $axios.post("http://localhost:3003/my_services", {
         body: constructPostObj
       })
+      console.log(res.data)
+      let _data = res.data.services
+      for (let index = 0; index < _data.length; index++) {
+        qs.localStorage.set("task_data_pair_plain_pretext_"+_data[index].taskID, _data[index].taskPair);
+        qs.localStorage.set("task_data_api_plain_pretext_"+_data[index].taskID, _data[index].taskExchangeAPIName);
+        qs.localStorage.set("task_data_type_plain_pretext_"+_data[index].taskID, _data[index].taskSide);
+        qs.localStorage.set("task_data_amount_plain_pretext_"+_data[index].taskID, _data[index].taskAmount);
+        qs.localStorage.set("task_data_interval_plain_pretext_"+_data[index].taskID, _data[index].taskInterval);
+        qs.localStorage.set("task_data_spread_percent_plain_pretext_"+_data[index].taskID, _data[index].taskSpread);
+        qs.localStorage.set("task_data_state_plain_pretext_"+_data[index].taskID, _data[index].taskStatus);
+        qs.localStorage.set("task_data_date_plain_pretext_"+_data[index].taskID, _data[index].taskCreatedTime);
+      }
     }
     catch(e) {
       console.log(e)
@@ -74,3 +86,5 @@ export function getAPIs(qs) {
     }
     qs.loading.hide()
   }
+
+

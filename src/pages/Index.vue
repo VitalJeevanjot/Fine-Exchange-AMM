@@ -25,11 +25,11 @@
 
 <script>
 import { ref, defineComponent } from "vue";
-import { useQuasar } from "quasar"
+import { QSpinnerCube, useQuasar } from "quasar"
 import felHeader from "components/fel-header.vue"
 import felCreateTaskModal from "components/operations/fel-create-task-modal.vue"
 import felListItem from 'components/rawElements/fel-list-item-tasks.vue'
-import {getAPIs} from 'components/helpers'
+import {fetchTasks, getAPIs} from 'components/helpers'
 
 export default defineComponent({
   name: "PageIndex",
@@ -39,61 +39,67 @@ export default defineComponent({
     felListItem
   },
   setup () {
-    const show_no_tasks_content = ref(true)
+    const qs = useQuasar()
+    const show_no_tasks_content = ref(false)
     const value_bind = ref({ logo_src: "fine_exchange_smaller.png" })
     const val_bind_create_task = ref({show_in_body: true})
-    const qs = useQuasar()
 
     return {
-      qs,
       value_bind,
+      qs,
       show_no_tasks_content,
       val_bind_create_task,
-
-      get_tasks_data() {
-        let all_keys = qs.localStorage.getAllKeys()
-        let tasks_keys = []
-
-        for (let index = 0; index < all_keys.length; index++) {
-          if(all_keys[index].includes('task_data_type_plain_pretext_')) {
-            let uniq_id = all_keys[index].replace('task_data_type_plain_pretext_', '')
-            tasks_keys.push({
-              pair: qs.localStorage.getItem('task_data_pair_plain_pretext_' + uniq_id),
-              api: qs.localStorage.getItem('task_data_api_plain_pretext_' + uniq_id),
-              type: qs.localStorage.getItem('task_data_type_plain_pretext_' + uniq_id),
-              amount: qs.localStorage.getItem('task_data_amount_plain_pretext_' + uniq_id),
-              interval: qs.localStorage.getItem('task_data_interval_plain_pretext_' + uniq_id),
-              spread: qs.localStorage.getItem('task_data_spread_percent_plain_pretext_' + uniq_id),
-              status: qs.localStorage.getItem('task_data_state_plain_pretext_' + uniq_id),
-              date: qs.localStorage.getItem('task_data_date_plain_pretext_' + uniq_id),
-              // "task id": qs.localStorage.getItem('task_data_id_plain_pretext_' + uniq_id),
-              "unique id": uniq_id
-            })
-          }
-        }
-        if(tasks_keys.length > 0) {
-          show_no_tasks_content.value = false
-        }
-
-        return tasks_keys.sort(function(a,b){
-          return a.date.localeCompare(b.date);
-        }).reverse();
-
-      }
     }
   },
   data () {
     return {
-      val_bind_list_data: {saved_data: this.get_tasks_data(), show_delete: true}
+      val_bind_list_data: {saved_data: [], show_delete: true}
     }
   },
   methods: {
-    updateData() {
-      this.val_bind_list_data = {saved_data: this.get_tasks_data(), show_delete: true}
+    async get_tasks_data() {
+      await fetchTasks(this.qs, QSpinnerCube, this.$axios)
+      let all_keys = this.qs.localStorage.getAllKeys()
+      let tasks_keys = []
+
+      for (let index = 0; index < all_keys.length; index++) {
+        if(all_keys[index].includes('task_data_type_plain_pretext_')) {
+          let uniq_id = all_keys[index].replace('task_data_type_plain_pretext_', '')
+          tasks_keys.push({
+            pair: this.qs.localStorage.getItem('task_data_pair_plain_pretext_' + uniq_id),
+            api: this.qs.localStorage.getItem('task_data_api_plain_pretext_' + uniq_id),
+            type: this.qs.localStorage.getItem('task_data_type_plain_pretext_' + uniq_id),
+            amount: this.qs.localStorage.getItem('task_data_amount_plain_pretext_' + uniq_id),
+            interval: this.qs.localStorage.getItem('task_data_interval_plain_pretext_' + uniq_id),
+            spread: this.qs.localStorage.getItem('task_data_spread_percent_plain_pretext_' + uniq_id),
+            status: this.qs.localStorage.getItem('task_data_state_plain_pretext_' + uniq_id),
+            date: this.qs.localStorage.getItem('task_data_date_plain_pretext_' + uniq_id),
+            // "task id": qs.localStorage.getItem('task_data_id_plain_pretext_' + uniq_id),
+            "unique id": uniq_id
+          })
+        }
+      }
+      if(tasks_keys.length > 0) {
+        this.show_no_tasks_content = false
+      } else {
+        this.show_no_tasks_content = true
+      }
+
+      return tasks_keys.sort(function(a,b){
+        return a.date.localeCompare(b.date);
+      }).reverse();
+
+    },
+    async updateData() {
+      this.val_bind_list_data = {saved_data: await this.get_tasks_data(), show_delete: true}
     }
   },
-  mounted() {
-    // console.log(getAPIs(this.qs))
+  async mounted() {
+    if(getAPIs(this.qs).length == 0) {
+      this.show_no_tasks_content = true
+      return
+    }
+    await this.updateData()
   }
 });
 </script>

@@ -1,7 +1,7 @@
 <template>
 
 
-  <q-btn icon="las la-trash" size="xs" class="text-white q-ma-sm"
+  <q-btn icon="las la-trash" size="xs" class="text-white q-mr-xs"
     style="background: #D75959"
    round @click="felAppPinManagerDialog=true"/>
 
