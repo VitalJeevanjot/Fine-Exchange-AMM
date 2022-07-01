@@ -49,12 +49,12 @@
         <q-td :props="props" :class="(props.row.status == 'running') ? 'bg-teal-6' : 
             (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-3'">
           <div class="row justify-center" v-if="props.value=='stopped'">
-            <q-btn size="xs" class="q-ma-xs bg-white" style="color: #58B39A" round dense icon="las la-play-circle" />
+            <q-btn size="xs" class="q-ma-xs bg-white" style="color: #58B39A; margin-left: -1rem;" round dense icon="las la-play-circle" />
             {{props.value}}
           </div>
           <div class="row justify-center" v-if="props.value=='running'">
-            <q-btn size="xs" class="q-ma-xs bg-white" style="color: #D75959" round dense icon="las la-stop-circle" />
-            {{props.value}}
+            <q-btn size="xs" class="q-ma-xs bg-white" style="color: #D75959; margin-left: -1rem;" round dense icon="las la-stop-circle" />
+            <span>{{props.value}}</span>
           </div>
         </q-td>
       </template>
