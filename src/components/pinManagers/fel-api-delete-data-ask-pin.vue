@@ -21,9 +21,9 @@
           </div>
           <div class="row q-pb-md">
             <div class="col-2 text-center"><q-icon name="task" size="1.5em"/></div>
-            <div class="col-10 q-pr-sm">On deleting the Last API,
-              any running tasks will remain running on the cloud 
-              unless they are stopped/deleted explicitly either by you or by us.</div>
+            <div class="col-10 q-pr-sm">On deleting the first/login API,
+              tasks current status will remain same in the cloud.
+              Unless it is changed explicitly either by us or by you after loggin.</div>
           </div>
 
           <div class="q-gutter-md row justify-center q-pb-md">
