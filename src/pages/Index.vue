@@ -99,7 +99,8 @@ export default defineComponent({
       this.show_no_tasks_content = true
       return
     }
-    await this.updateData()
+    // ALready updaring data through API Management at start
+    // await this.updateData()
   }
 });
 </script>

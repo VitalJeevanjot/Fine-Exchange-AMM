@@ -132,7 +132,7 @@ export default {
       _hint: 'Enter seconds to wait before next call.',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val >= 400 && val <= 10000 || "Please add between 400 to 10000 (seconds)!"],
+      _rules: [val => val >= 10 && val <= 10000 || "Please add between 400 to 10000 (seconds)!"],  // TODO: change from 10 to 400 min. seconds_interval
       _class: 'q-pt-sm'
     })
 
@@ -166,7 +166,7 @@ export default {
       // console.log(api_selected.value)
       if(api_selected.value.label) {
         show_dropdown_select_pair.value = true
-        if(seconds_interval.value >= 400 
+        if(seconds_interval.value >= 10 // TODO: change from 10 to 400 min. seconds_interval
         && seconds_interval.value <= 10000 
         && spread_percent.value >= 0.01 
         && spread_percent.value <= 2 

@@ -19,6 +19,12 @@
               secure the local data used by this app to some extent. DO NOT FORGET THESE 4 CHARACTERS! 
               The characters are hidden & each appended with one extra character (-). </div>
           </div>
+          <div class="row q-pb-md">
+            <div class="col-2 text-center"><q-icon name="task" size="1.5em"/></div>
+            <div class="col-10 q-pr-sm">On deleting the Last API,
+              any running tasks will remain running on the cloud 
+              unless they are stopped/deleted explicitly either by you or by us.</div>
+          </div>
 
           <div class="q-gutter-md row justify-center q-pb-md">
             <felInput
@@ -45,10 +51,11 @@
 
 
 <script>
-import { useQuasar } from "quasar"
+import { QSpinnerCube, useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
 
 import felInput from 'components/rawElements/fel-input.vue'
+import { fetchTasks, getAPIs } from '../helpers'
 
 export default {
   name: 'felApiDeleteDataAskPin',
@@ -164,6 +171,23 @@ export default {
         if(get_saved_all_keys[index].includes(this.unique_id)) {
           this.qs.localStorage.remove(get_saved_all_keys[index])
         }
+      }
+
+      // Remove Login Key
+      // Remove API Key
+      if(getAPIs(this.qs).length == 0) {
+        const get_keys = get_saved_all_keys.filter(x => x.includes("login_api_"))
+        for (let index = 0; index < get_keys.length; index++) {
+            this.qs.localStorage.remove(get_keys[index])
+        }
+        const _get_keys = get_saved_all_keys.filter(x => x.includes("task_data_"))
+        for (let index = 0; index < _get_keys.length; index++) {
+            this.qs.localStorage.remove(_get_keys[index])
+        }
+        this.qs.localStorage.remove('api_selected_now')
+        this.qs.localStorage.remove('available_pairs')
+        
+        // await fetchTasks(this.qs, QSpinnerCube, this.$axios)
       }
 
       this.pic = ''

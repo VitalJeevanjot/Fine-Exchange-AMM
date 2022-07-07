@@ -283,7 +283,7 @@ export default {
         }
         showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeC_N1:"+error)
       }
-      await fetchTasks(this.qs, QSpinnerCube, this.$axios)
+      // await fetchTasks(this.qs, QSpinnerCube, this.$axios)
       this.qs.loading.hide()
       // var created_task = setInterval(() => {
       //   var ccxt = new this.$ccxt.hollaex({urls: {api: {rest: this.value2.url}}})

@@ -158,17 +158,39 @@ export default {
           return
       }
       
-      var get_saved_all_keys = this.qs.localStorage.getAllKeys()
+      // var get_saved_all_keys = this.qs.localStorage.getAllKeys()
 
-      for (let index = 0; index < get_saved_all_keys.length; index++) {
-        if(get_saved_all_keys[index].includes(this.unique_id)) {
-          this.qs.localStorage.remove(get_saved_all_keys[index])
+      // for (let index = 0; index < get_saved_all_keys.length; index++) {
+      //   if(get_saved_all_keys[index].includes(this.unique_id)) {
+      //     this.qs.localStorage.remove(get_saved_all_keys[index])
+      //   }
+      // }
+      showLoading(this.qs, QSpinnerCube, 'Your task is deleting from', '<span class="text-cyan-5">cloud</span>')
+      try {
+        let res = await this.$axios.post("http://localhost:3003/delete", {
+          id: this.unique_id
+        })
+        console.log(res)
+        console.log(res.data)
+
+        showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', "Task Status: " + res.data)
+
+        
+        this.pic = ''
+        this.felAppPinManagerDialog = false
+      } catch(e) {
+        let error = e.message;
+        if(e.response) {
+          error = e.response.data.message
         }
+        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeC_N1:"+error)
       }
-
+      // await fetchTasks(this.qs, QSpinnerCube, this.$axios)
       this.pic = ''
       this.felAppPinManagerDialog = false
       this.$emit('afterTaskDeletion')
+      this.qs.loading.hide()
+
     }
   },
 }

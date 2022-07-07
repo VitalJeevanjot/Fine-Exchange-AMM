@@ -52,6 +52,7 @@ export function getAPIs(qs) {
   }
 
   export async function fetchTasks(qs, QSpinnerCube, $axios) {
+    if(getAPIs(qs).length == 0) return
     showLoading(qs, QSpinnerCube, 'Getting your ', '<span class="text-cyan-5">tasks</span>')
     const constructPostObj = {
       login_api_apiKey_S: qs.localStorage.getItem('login_api_apiKey_S'),

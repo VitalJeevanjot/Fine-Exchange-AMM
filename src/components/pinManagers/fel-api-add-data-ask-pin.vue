@@ -50,7 +50,7 @@ import { ref, watchEffect } from "vue"
 
 import felInput from 'components/rawElements/fel-input.vue'
 
-import {getAPIs} from 'components/helpers'
+import {fetchTasks, getAPIs} from 'components/helpers'
 import { showLoading, showDialog } from 'components/helpers.js'
 
 export default {
@@ -185,8 +185,8 @@ export default {
           res = await this.$axios.post("http://localhost:3003/encrypt_login", {
             body: constructPostObj
           })
-          console.log(res)
-          console.log(res.data)
+          // console.log(res)
+          // console.log(res.data)
         } catch(e) {
           console.log(e)
           let error = e.message;
@@ -208,6 +208,7 @@ export default {
         
         this.qs.loading.hide()
         showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', res.data.message)
+        // await fetchTasks(this.qs, QSpinnerCube, this.$axios)
         // TODO: Run a get services (tasks) method here as well (if get user details returned error here then reset user api added and ask for api details again (this only when adding api first time)) by taking value2 and value3 unencrypted...
       }
 
