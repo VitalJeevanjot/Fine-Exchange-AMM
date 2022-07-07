@@ -167,8 +167,13 @@ export default {
       // }
       showLoading(this.qs, QSpinnerCube, 'Your task is deleting from', '<span class="text-cyan-5">cloud</span>')
       try {
-        let res = await this.$axios.post("http://localhost:3003/delete", {
-          id: this.unique_id
+        let res = await this.$axios.post("http://localhost:3003/delete_service", {
+          body: {
+            id: this.unique_id,
+            login_api_apiKey_S: this.qs.localStorage.getItem('login_api_apiKey_S'),
+            login_api_apiKey: this.qs.localStorage.getItem('login_api_apiKey'),
+            login_api_secretKey: this.qs.localStorage.getItem('login_api_secretKey'),
+          }
         })
         console.log(res)
         console.log(res.data)
