@@ -165,6 +165,7 @@ export default {
       //     this.qs.localStorage.remove(get_saved_all_keys[index])
       //   }
       // }
+      // Delete Task
       showLoading(this.qs, QSpinnerCube, 'Your task is deleting from', '<span class="text-cyan-5">cloud</span>')
       try {
         let res = await this.$axios.post("http://localhost:3003/delete_service", {
@@ -188,7 +189,7 @@ export default {
         if(e.response) {
           error = e.response.data.message
         }
-        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeC_N1:"+error)
+        showDialog(this.qs, 'bg-grey-3 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Request Status</span>', "API_Error:CodeD_S1:"+error)
       }
       // await fetchTasks(this.qs, QSpinnerCube, this.$axios)
       this.pic = ''
