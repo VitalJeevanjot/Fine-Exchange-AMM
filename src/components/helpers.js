@@ -64,6 +64,16 @@ export function getAPIs(qs) {
       let res = await $axios.post("http://localhost:3003/my_services", {
         body: constructPostObj
       })
+
+      // First remove all tasks keys then
+      var all_keys = qs.localStorage.getAllKeys()
+      for (let i = 0; i < all_keys.length; i++) {
+        if(all_keys[i].includes('task_data_')) {
+          qs.localStorage.remove(all_keys[i])
+        }
+      }
+
+      // add newer keys
       // console.log(res.data)
       let _data = res.data.services
       for (let index = 0; index < _data.length; index++) {
