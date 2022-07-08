@@ -64,7 +64,7 @@ export function getAPIs(qs) {
       let res = await $axios.post("http://localhost:3003/my_services", {
         body: constructPostObj
       })
-      console.log(res.data)
+      // console.log(res.data)
       let _data = res.data.services
       for (let index = 0; index < _data.length; index++) {
         qs.localStorage.set("task_data_pair_plain_pretext_"+_data[index].taskID, _data[index].taskPair);

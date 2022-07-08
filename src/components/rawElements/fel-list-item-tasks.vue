@@ -65,7 +65,7 @@
             {{props.value}}
         </q-td>
       </template>
-      <template v-slot:bottom>
+      <!-- <template v-slot:bottom> -->
         <!-- <div v-show="data.status == 'running'">
           <q-btn icon="las la-stop-circle" class="q-ma-xs" rounded dense style="color: #58B39A"/>
         </div>-->
@@ -76,7 +76,7 @@
         <!-- <div v-show="show_delete">
           <felDeleteTaskAskPin v-bind="val_binding = {unique_id: '0'}" @afterTaskDeletion="$emit('commandToUpdate')"/>
         </div> -->
-      </template>
+      <!-- </template> -->
     </q-table>
     
   </div>
