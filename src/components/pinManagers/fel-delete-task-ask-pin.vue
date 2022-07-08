@@ -45,10 +45,11 @@
 
 
 <script>
-import { useQuasar } from "quasar"
+import { QSpinnerCube, useQuasar } from "quasar"
 import { ref, watchEffect } from "vue"
 
 import felInput from 'components/rawElements/fel-input.vue'
+import { showDialog, showLoading } from '../helpers'
 
 export default {
   name: 'felTaskDeleteDataAskPin',
@@ -179,7 +180,7 @@ export default {
         console.log(res)
         console.log(res.data)
 
-        showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', "Task Status: " + res.data)
+        showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', "Task Status: " + res.data.message)
 
         
         this.pic = ''
