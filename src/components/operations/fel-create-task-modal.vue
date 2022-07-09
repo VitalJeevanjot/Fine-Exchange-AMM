@@ -1,6 +1,10 @@
 <template>
   <div v-show="show_in_header">
-    <q-btn flat round dense icon="add_circle" class="q-mr-sm" @click="create_new_task" />
+    <q-btn flat round dense icon="add_circle" class="q-mr-sm" @click="create_new_task">
+     <q-tooltip>
+      Create Task
+    </q-tooltip>
+    </q-btn>
   </div>
 
   <div class="row justify-center" v-show="show_in_body">

@@ -176,6 +176,7 @@ export default {
 
       // Remove Login Key
       // Remove API Key
+      // Logout
       if(getAPIs(this.qs).length == 0) {
         const get_keys = get_saved_all_keys.filter(x => x.includes("login_api_"))
         for (let index = 0; index < get_keys.length; index++) {

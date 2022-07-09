@@ -7,7 +7,6 @@
         </q-avatar>
 
         <q-space />
-
         <felAppPinManager />
         <felCreateTaskModal v-bind="val_bind_create_task" @commandToUpdate="$emit('commandToUpdate')"/>
         <felApiManagement @commandToUpdate="$emit('commandToUpdate')"/>

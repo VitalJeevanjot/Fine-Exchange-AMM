@@ -1,16 +1,14 @@
 <template>
 
   <div>
-    <q-btn
-      @click="toggleFelHelpDialog"
-      flat
-      rounded
-      dense
-      icon="help_outline"
-      size="0.7rem"
-      label="help"
-      class="q-mr-md"
-    />
+    <q-btn rounded
+    @click="toggleFelHelpDialog"
+    > 
+      <q-icon name="laptop_chromebook" size="1.2em"/> 
+      <span class="q-pl-xs">Help</span>
+      <!-- Get started guide & Show API 15 digits and email to take help -->
+    </q-btn>
+
 
   <!-- Fine Exchange Limited (fel) or fel = Fine Exchange Limited -->
   <q-dialog v-model="felHeaderDialog" persistent>
