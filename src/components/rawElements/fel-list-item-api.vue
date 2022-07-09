@@ -28,6 +28,9 @@
       </q-item>
     </q-list>
   </q-scroll-area>
+    <div class="row">
+      <q-icon name="logout" size="1.3em" class="q-pr-sm"/> <p class="text-caption">To logout, Delete every API from this List.</p>
+    </div>
 </template>
 
 <script>

@@ -19,6 +19,10 @@
               secure the local data used by this app to some extent. DO NOT FORGET THESE 4 CHARACTERS! 
               The characters are hidden & each appended with one extra character (-). </div>
           </div>
+          <div class="row q-pb-md">
+            <div class="col-2 text-center"><q-icon name="task" size="1.5em"/></div>
+            <div class="col-10 q-pr-sm">Cancel orders from the exchange yourself after the task stops or deletes. </div>
+          </div>
 
           <div class="q-gutter-md row justify-center q-pb-md">
             <felInput
