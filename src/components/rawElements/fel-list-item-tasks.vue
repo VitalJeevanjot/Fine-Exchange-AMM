@@ -21,7 +21,7 @@
       <template v-slot:body-cell="props">
         <q-td :props="props" 
         :class="(props.row.status == 'running') ? 'bg-teal-6' : 
-        (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-8'">
+        (props.row.status == 'stopped') ? 'bg-grey-10' : 'bg-grey-8'">
           {{props.value}}
           <!-- <div v-if="props.row.status == 'running'">
             <q-badge color="green-9" :label="props.value" />
@@ -33,7 +33,7 @@
       </template>
       <template v-slot:body-cell-id="props">
         <q-td :props="props" :class="(props.row.status == 'running') ? 'bg-teal-6' : 
-            (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-3'"
+            (props.row.status == 'stopped') ? 'bg-grey-10' : 'bg-grey-3'"
          >
 
           {{props.value}}
@@ -47,7 +47,7 @@
       </template>
       <template v-slot:body-cell-status="props">
         <q-td :props="props" :class="(props.row.status == 'running') ? 'bg-teal-6' : 
-            (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-3'">
+            (props.row.status == 'stopped') ? 'bg-grey-10' : 'bg-grey-3'">
           <div class="row" v-if="props.value=='stopped'">
             <!-- <q-btn size="xs" class="q-ma-xs bg-white" style="color: #58B39A; margin-left: -1rem;" round dense icon="las la-play-circle" /> -->
             {{props.value}}
@@ -60,7 +60,7 @@
       </template>
       <template v-slot:body-cell-pair="props">
         <q-td :props="props" :class="(props.row.status == 'running') ? 'bg-teal-6' : 
-            (props.row.status == 'stopped') ? 'bg-teal-10' : 'bg-grey-3'">
+            (props.row.status == 'stopped') ? 'bg-grey-10' : 'bg-grey-3'">
             <felDeleteTaskAskPin v-bind="val_binding = {unique_id: props.row.id}" @afterTaskDeletion="$emit('commandToUpdate')"/>
             {{props.value}}
         </q-td>
