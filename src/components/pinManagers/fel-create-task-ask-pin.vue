@@ -21,7 +21,7 @@
           </div>
           <div class="row q-pb-md">
             <div class="col-2 text-center"><q-icon name="task" size="1.5em"/></div>
-            <div class="col-10 q-pr-sm">Cancel orders from the exchange yourself after the task stops or deletes. </div>
+            <div class="col-10 q-pr-sm">Cancel orders from the exchange yourself if there is an error. </div>
           </div>
 
           <div class="q-gutter-md row justify-center q-pb-md">
