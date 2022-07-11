@@ -119,7 +119,7 @@ export default {
           imported_key,
           this.strToArrayBuffer(this.qs.localStorage.getItem("important_welcome_edec"))
         );
-        console.log(this.arrayBufferToString(decrypted))
+        // console.log(this.arrayBufferToString(decrypted))
       } catch (e) {
         console.log(e)
         return false
@@ -177,8 +177,8 @@ export default {
             login_api_secretKey: this.qs.localStorage.getItem('login_api_secretKey'),
           }
         })
-        console.log(res)
-        console.log(res.data)
+        // console.log(res)
+        // console.log(res.data)
 
         showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', "Task Status: " + res.data.message)
 

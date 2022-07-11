@@ -170,7 +170,7 @@ export default {
   },
   methods: {
     dataSaved() {
-      console.log('data saved ran')
+      // console.log('data saved ran')
       this.api_name = ''
       this.api_key = ''
       this.api_secret = ''
