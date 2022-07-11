@@ -37,7 +37,7 @@ export default {
   methods: {
     updateValue(event) {
       this.$emit('update:_selected_value', event)
-      console.log(event)
+      // console.log(event)
     }
   }
 }

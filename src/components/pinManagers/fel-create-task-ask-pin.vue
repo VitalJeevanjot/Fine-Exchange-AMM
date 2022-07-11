@@ -271,8 +271,8 @@ export default {
         let res = await this.$axios.post("http://localhost:3003/create_new", {
           body: constructPostObj
         })
-        console.log(res)
-        console.log(res.data)
+        // console.log(res)
+        // console.log(res.data)
 
         showDialog(this.qs, 'bg-grey-4 text-grey-10', '<span class="text-blue-grey text-caption text-bold">Server Response</span>', "Task Status: " + res.data)
 
