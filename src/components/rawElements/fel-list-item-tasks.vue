@@ -115,6 +115,7 @@ import felDeleteTaskAskPin from 'src/components/pinManagers/fel-delete-task-ask-
 export default {
   name: 'felListItem',
   components: {felDeleteTaskAskPin},
+  emits: ['commandToUpdate'],
   props: ['saved_data', 'show_delete'],
   setup () {
     const val_binding = {unique_id: 'hello'}

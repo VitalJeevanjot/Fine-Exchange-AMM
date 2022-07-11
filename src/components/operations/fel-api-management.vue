@@ -37,6 +37,7 @@ import felListItem from 'components/rawElements/fel-list-item-api.vue'
 import { ref } from "vue";
 export default {
   name: 'felApiManagement',
+  emits:['commandToUpdate'],
   components: {
     felAddNewApi,
     felListItem

@@ -42,6 +42,7 @@ import felApiDeleteDataAskPin from 'src/components/pinManagers/fel-api-delete-da
 export default {
   name: 'felListItem',
   components: {felApiDeleteDataAskPin},
+  emits: ['commandToUpdate'],
   props: ['saved_data', 'show_delete'],
   setup () {
     const val_binding = {unique_id: 'hello'}
