@@ -71,7 +71,7 @@ export default defineComponent({
             type: this.qs.localStorage.getItem('task_data_type_plain_pretext_' + uniq_id),
             amount: this.qs.localStorage.getItem('task_data_amount_plain_pretext_' + uniq_id),
             interval: this.qs.localStorage.getItem('task_data_interval_plain_pretext_' + uniq_id).toString(),
-            spread: this.qs.localStorage.getItem('task_data_spread_percent_plain_pretext_' + uniq_id).toString(),
+            spread: this.qs.localStorage.getItem('task_data_spread_percentage_plain_pretext_' + uniq_id).toString(),
             status: this.qs.localStorage.getItem('task_data_state_plain_pretext_' + uniq_id),
             date: this.qs.localStorage.getItem('task_data_date_plain_pretext_' + uniq_id),
             // "task id": qs.localStorage.getItem('task_data_id_plain_pretext_' + uniq_id),

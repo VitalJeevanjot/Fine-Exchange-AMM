@@ -82,7 +82,7 @@ export function getAPIs(qs) {
         qs.localStorage.set("task_data_type_plain_pretext_"+_data[index].taskID, _data[index].taskSide);
         qs.localStorage.set("task_data_amount_plain_pretext_"+_data[index].taskID, _data[index].taskAmount);
         qs.localStorage.set("task_data_interval_plain_pretext_"+_data[index].taskID, _data[index].taskInterval);
-        qs.localStorage.set("task_data_spread_percent_plain_pretext_"+_data[index].taskID, _data[index].taskSpread);
+        qs.localStorage.set("task_data_spread_percentage_plain_pretext_"+_data[index].taskID, _data[index].taskSpread);
         qs.localStorage.set("task_data_state_plain_pretext_"+_data[index].taskID, _data[index].taskStatus);
         qs.localStorage.set("task_data_date_plain_pretext_"+_data[index].taskID, _data[index].taskCreatedTime);
       }

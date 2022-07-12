@@ -262,7 +262,7 @@ export default {
         symbol: this.value3,
         type: 'limit',
         seconds_interval: this.value4,
-        spread_percent: this.value5,
+        spread_percentage: this.value5,
         amount: this.value8,
         task_uuid: this.value9
       }

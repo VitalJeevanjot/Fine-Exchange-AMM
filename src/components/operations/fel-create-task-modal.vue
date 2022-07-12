@@ -57,8 +57,8 @@
             />
           <!-- Add spread or if use custom basic equation (With e(price) e_low e_high etc parameters provided for basic arithmetic form fine exchnage) -->
           <felInput
-            v-model:_input_val="spread_percent"
-            v-bind="val_binding_spread_percent"
+            v-model:_input_val="spread_percentage"
+            v-bind="val_binding_spread_percentage"
           />
           <!-- use create task ask pin component for below button -->
           <felCreateTaskAskPin v-bind="val_binding_data_to_save" @savedCreatedTask="task_created" @beforeSavingData="update_date_now"/>
@@ -110,7 +110,7 @@ export default {
 
     const seconds_interval = ref('')
     const amount = ref('')
-    const spread_percent = ref('')
+    const spread_percentage = ref('')
 
     const disable_add_button = ref(true)
 
@@ -144,23 +144,23 @@ export default {
       _style: 'width: 20rem; min-width: 350px;',
       _mask: '',
       _type: 'number',
-      _label: 'Amount (per cent)',
+      _label: 'Amount (percentageage)',
       _hint: 'Enter how much amount you like to use.',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val >= 0.001 && val <= 100 || "Please add between 0.001 to 100 (per cent)!"],
+      _rules: [val => val >= 0.001 && val <= 100 || "Please add between 0.001 to 100 (percentageage)!"],
       _class: 'q-mt-sm'
     })
 
-    const val_binding_spread_percent = ref({
+    const val_binding_spread_percentage = ref({
       _style: 'width: 20rem; min-width: 350px;',
       _mask: '',
       _type: 'number',
-      _label: 'Spread (per cent)',
+      _label: 'Spread (percentageage)',
       _hint: 'Enter spread from sell or buy price.',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val >= 0.01 && val <= 2 || "Please add between 0.01 to 2 (percent)!"],
+      _rules: [val => val >= 0.01 && val <= 2 || "Please add between 0.01 to 2 (percentage)!"],
       _class: 'q-mt-sm'
     })
 
@@ -172,8 +172,8 @@ export default {
         show_dropdown_select_pair.value = true
         if(seconds_interval.value >= 10 // TODO: change from 10 to 400 min. seconds_interval
         && seconds_interval.value <= 10000 
-        && spread_percent.value >= 0.01 
-        && spread_percent.value <= 2 
+        && spread_percentage.value >= 0.01 
+        && spread_percentage.value <= 2 
         && amount.value >= 0.001 
         && amount.value <= 100
         && qs.localStorage.getItem('available_pairs').find(o => o.label === pair_selected.value.label) != undefined
@@ -189,8 +189,8 @@ export default {
             'value3': pair_selected,
             'key4': `task_data_interval_plain_pretext_${random_val_as_id.value}`,
             'value4': seconds_interval,
-            'key5': `task_data_spread_percent_plain_pretext_${random_val_as_id.value}`,
-            'value5': spread_percent,
+            'key5': `task_data_spread_percentage_plain_pretext_${random_val_as_id.value}`,
+            'value5': spread_percentage,
             'key6': `task_data_state_plain_pretext_${random_val_as_id.value}`,
             'value6': 'stopped',
             'key7': `task_data_date_plain_pretext_${random_val_as_id.value}`,
@@ -222,7 +222,7 @@ export default {
       disable_add_button,
       seconds_interval,
       amount,
-      spread_percent,
+      spread_percentage,
       show_dropdown_select_pair,
       random_val_as_id,
       updated_date,
@@ -230,7 +230,7 @@ export default {
       val_binding_apis_dropdown,
       val_binding_pairs_dropdown,
       val_binding_seconds_interval,
-      val_binding_spread_percent,
+      val_binding_spread_percentage,
       val_binding_data_to_save,
       val_binding_amount,
       create_new_task () {
@@ -247,7 +247,7 @@ export default {
       this.$emit('commandToUpdate')
       this.felCreateNewTaskDialog = false
       this.seconds_interval = ''
-      this.spread_percent = ''
+      this.spread_percentage = ''
     }
   }
 }
