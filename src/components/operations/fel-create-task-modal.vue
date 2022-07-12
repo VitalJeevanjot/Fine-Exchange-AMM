@@ -144,11 +144,11 @@ export default {
       _style: 'width: 20rem; min-width: 350px;',
       _mask: '',
       _type: 'number',
-      _label: 'Amount (percentageage)',
+      _label: 'Amount (percentage)',
       _hint: 'Enter how much amount you like to use.',
       _show_error: false,
       _error_msg: '',
-      _rules: [val => val >= 0.001 && val <= 100 || "Please add between 0.001 to 100 (percentageage)!"],
+      _rules: [val => val >= 0.001 && val <= 100 || "Please add between 0.001 to 100 (percentage)!"],
       _class: 'q-mt-sm'
     })
 
@@ -156,7 +156,7 @@ export default {
       _style: 'width: 20rem; min-width: 350px;',
       _mask: '',
       _type: 'number',
-      _label: 'Spread (percentageage)',
+      _label: 'Spread (percentage)',
       _hint: 'Enter spread from sell or buy price.',
       _show_error: false,
       _error_msg: '',
