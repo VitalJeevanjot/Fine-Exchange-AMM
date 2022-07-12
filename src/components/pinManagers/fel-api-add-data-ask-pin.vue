@@ -80,7 +80,7 @@ export default {
     const enter_button_disable = ref(true)
 
     const val_binding_pic = ref({
-      _style: 'width: 30vw', 
+      _style: 'width: 30vw; max-width: 400px', 
       _mask: 'X-X-X-X',
       _label: 'P.I.C.',
       _hint: 'Format: (X = 0-9/A-Z) X-X-X-X',

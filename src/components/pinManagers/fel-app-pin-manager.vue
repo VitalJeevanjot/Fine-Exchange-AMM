@@ -65,7 +65,7 @@ export default {
     const confirm_pic_error_msg = ref('')
 
     const val_binding_pic = ref({
-      _style: 'width: 30vw', 
+      _style: 'width: 30vw; max-width: 400px', 
       _mask: 'X-X-X-X',
       _label: 'P.I.C.',
       _hint: 'Format: (X = 0-9/A-Z) X-X-X-X',
@@ -75,7 +75,7 @@ export default {
     })
 
     const val_binding_confirm_pic = ref({
-      _style: 'width: 30vw', 
+      _style: 'width: 30vw; max-width: 400px', 
       _mask: 'X-X-X-X',
       _label: 'Confirm P.I.C.',
       _hint: 'Format: (X = 0-9/A-Z) X-X-X-X',
