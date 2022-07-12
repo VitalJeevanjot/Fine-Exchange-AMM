@@ -182,7 +182,7 @@ export default {
         showLoading(this.qs, QSpinnerCube, 'Your login keys are ', '<span class="text-grey-5 text-h6">saving.....</span>')
         let res;
         try {
-          res = await this.$axios.post("http://localhost:3003/encrypt_login", {
+          res = await this.$axios.post("https://dev-load-balancer-backend-fine-ex-mmm-fine-ex-genievot.cloud.okteto.net/encrypt_login", {
             body: constructPostObj
           })
           // console.log(res)

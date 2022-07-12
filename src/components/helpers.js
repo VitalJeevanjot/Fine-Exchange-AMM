@@ -61,7 +61,7 @@ export function getAPIs(qs) {
       login_api_exchangeURL: qs.localStorage.getItem('login_api_exchangeURL')
     } 
     try {
-      let res = await $axios.post("http://localhost:3003/my_services", {
+      let res = await $axios.post("https://dev-load-balancer-backend-fine-ex-mmm-fine-ex-genievot.cloud.okteto.net/my_services", {
         body: constructPostObj
       })
 

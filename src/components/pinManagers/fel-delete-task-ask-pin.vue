@@ -169,7 +169,7 @@ export default {
       // Delete Task
       showLoading(this.qs, QSpinnerCube, 'Your task is deleting from', '<span class="text-cyan-5">cloud</span>')
       try {
-        let res = await this.$axios.post("http://localhost:3003/delete_service", {
+        let res = await this.$axios.post("https://dev-load-balancer-backend-fine-ex-mmm-fine-ex-genievot.cloud.okteto.net/delete_service", {
           body: {
             id: this.unique_id,
             login_api_apiKey_S: this.qs.localStorage.getItem('login_api_apiKey_S'),

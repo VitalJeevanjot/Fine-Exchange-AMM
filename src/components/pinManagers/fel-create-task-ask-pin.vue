@@ -268,7 +268,7 @@ export default {
       }
       showLoading(this.qs, QSpinnerCube, 'Your task is running in ', '<span class="text-cyan-5">cloud</span>')
       try {
-        let res = await this.$axios.post("http://localhost:3003/create_new", {
+        let res = await this.$axios.post("https://dev-load-balancer-backend-fine-ex-mmm-fine-ex-genievot.cloud.okteto.net/create_new", {
           body: constructPostObj
         })
         // console.log(res)
