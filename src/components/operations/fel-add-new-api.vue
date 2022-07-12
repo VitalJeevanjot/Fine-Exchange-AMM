@@ -70,9 +70,9 @@ export default {
   setup () {
     const felAddNewApiDialog = ref(false)
 
-    const exchange_name = ref({
-          value: 'https://api.fine.exchange',
-          label: 'Fine Exchanges Mainnet'
+    const exchange_name = ref({ // TODO: change to mainnet
+          value: 'https://apitest.fine.exchange',
+          label: 'Fine Exchanges Testnet'
     })
 
     const api_name = ref('')

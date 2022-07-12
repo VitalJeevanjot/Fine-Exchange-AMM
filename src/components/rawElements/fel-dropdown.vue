@@ -116,13 +116,13 @@ export default {
     getExchanges() {
       if(!getAPIs(this.qs).length) {
         return [
-          // TODO: on official lounch, disable testnet
-          {
-            value: 'https://api.fine.exchange',
-            label: 'Fine Exchange Mainnet',
-            description: 'required first to sync tasks with cloud & unlock others',
-            disable: true
-          },
+          // TODO: on official lounch, disable testnet and enable mainnet
+          // {
+          //   value: 'https://api.fine.exchange',
+          //   label: 'Fine Exchange Mainnet',
+          //   description: 'required first to sync tasks with cloud & unlock others',
+          //   disable: true
+          // },
           {
             value: 'https://apitest.fine.exchange',
             label: 'Fine Exchange Testnet'
