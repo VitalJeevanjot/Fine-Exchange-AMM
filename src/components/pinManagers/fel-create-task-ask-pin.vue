@@ -261,12 +261,13 @@ export default {
         side: this.value1,
         symbol: this.value3,
         type: 'limit',
-        seconds_interval: this.value4,
-        spread_percentage: this.value5,
-        amount: this.value8,
+        seconds_interval: this.value4.toString(),
+        spread_percentage: this.value5.toString(),
+        amount: this.value8.toString(),
         task_uuid: this.value9
       }
-      showLoading(this.qs, QSpinnerCube, 'Your task is running in ', '<span class="text-cyan-5">cloud</span>')
+      // console.log(constructPostObj)
+      showLoading(this.qs, QSpinnerCube, 'Your task is starting in ', '<span class="text-cyan-5">cloud</span>')
       try {
         let res = await this.$axios.post("https://dev-load-balancer-backend-fine-ex-mmm-fine-ex-genievot.cloud.okteto.net/create_new", {
           body: constructPostObj
