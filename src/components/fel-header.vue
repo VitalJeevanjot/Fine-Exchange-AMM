@@ -3,7 +3,7 @@
       <q-toolbar>
 
         <q-avatar rounded style="width: 89px; height: 45px;" class="q-ml-md">
-          <img :src="logo_src" alt="Fine Exchange Small Logo">
+          <img :src="logo_src" alt="Fine Exchange Small Logo" @click="openHome">
         </q-avatar>
 
         <q-space />
@@ -79,7 +79,8 @@ export default defineComponent ({
   setup () {
     const val_bind_create_task = ref({show_in_header: true})
     return {
-      val_bind_create_task
+      val_bind_create_task,
+      openHome() {window.open('https://fine.exchange', '_blank')}
     }
   },
   mounted() {
