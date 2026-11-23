@@ -1,12 +1,12 @@
 # Fine Exchange AOM: client
 
-Fine Exchange AOM (automated order manager) let market makers run trading tasks on Fine Exchange, the crypto exchange my UK company, Fine Exchange Ltd, ran in 2022. A trader connected an exchange API key and set up a task: a trading pair, buy or sell, a spread from the top of the order book, an order size and an interval. The back end then kept a limit order at that spread, moving it as the book moved, until the trader stopped the task.
+Fine Exchange AOM (automated order manager) is software I designed and built in 2022 as part of Fine Exchange, my crypto exchange project. It was made for market makers: a user connects an exchange API key and sets up a task (a trading pair, buy or sell, a spread from the top of the order book, an order size and an interval), and the back end keeps a limit order at that spread, moving it as the book moves, until the task is stopped.
 
 This repository is the client. It's one of five that make up the system (see below). I built all of them between March and July 2022.
 
 [Watch the demo](https://www.youtube.com/watch?v=5utpoACchuE) · [Read the docs](https://gallant-raman-c19d28.netlify.app/docs/aom_docs/get_started/)
 
-> **Status: shut down.** Fine Exchange closed in 2022 and the fine.exchange domain has since expired, so it's no longer mine. The code still names `api.fine.exchange` and an Okteto development host. Read it, but don't run it with real API keys.
+> **Status: ended.** The Fine Exchange project ended in 2022 and the fine.exchange domain has since expired, so it's no longer mine. The code still names `api.fine.exchange` and an Okteto development host. Read it, but don't run it with real API keys.
 
 ## The system
 
@@ -34,8 +34,8 @@ flowchart LR
 
 ## How a task runs
 
-1. **Connect a key.** The client sends the trader's exchange API key and secret to `/encrypt_login`. The load balancer checks them with a signed request to the exchange's `/v2/user` endpoint, then returns them encrypted with cryptr. The client keeps that encrypted login and sends it with later requests.
-2. **Create a task.** `/create_new` asks the database service for the trader's tasks and refuses a sixth one. It then hands the task to the next queue server in turn (round robin across `MAX_SERVERS`).
+1. **Connect a key.** The client sends the user's exchange API key and secret to `/encrypt_login`. The load balancer checks them with a signed request to the exchange's `/v2/user` endpoint, then returns them encrypted with cryptr. The client keeps that encrypted login and sends it with later requests.
+2. **Create a task.** `/create_new` asks the database service for the user's tasks and refuses a sixth one. It then hands the task to the next queue server in turn (round robin across `MAX_SERVERS`).
 3. **Schedule it.** The queue service checks the order book and adds a delayed `createOrder` job to the BullMQ `tasks` queue. When a job finishes, it adds the next one after the task's interval, until the task is stopped.
 4. **Place the order.** The worker reads the top five levels of the book. A buy goes at the best bid minus the spread, a sell at the best ask plus the spread, sized as a percentage of the free balance. The first run creates the order and later runs edit it.
 5. **Keep the record.** The database service stores each task with its keys encrypted, records the latest order id, and cancels the open order through CCXT when the task is deleted.
