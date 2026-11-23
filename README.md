@@ -17,7 +17,7 @@ This repository is the client. It's one of five that make up the system (see bel
 | [fine-ex-amm-backend-queue-jobs-1](https://github.com/VitalJeevanjot/fine-ex-amm-backend-queue-jobs-1) | Queue service: schedules each task's runs as BullMQ jobs on Redis |
 | [fine-ex-amm-backend-worker-jobs-1](https://github.com/VitalJeevanjot/fine-ex-amm-backend-worker-jobs-1) | Worker: runs the jobs and places or moves the orders through CCXT |
 | [fine-ex-amm-backend](https://github.com/VitalJeevanjot/fine-ex-amm-backend) | Database service: stores tasks in PostgreSQL and cancels orders when a task is deleted |
-| [Fine-Exchange-docs](https://github.com/VitalJeevanjot/Fine-Exchange-docs) | The product and API docs site (Hugo) |
+| [Docs site](https://gallant-raman-c19d28.netlify.app/docs/aom_docs/introduction/) | The product and API docs, built with Hugo. Its source repository is private. |
 
 ```mermaid
 flowchart LR
